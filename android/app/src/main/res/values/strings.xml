@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Apiario</string>
+    <string name="title_activity_main">Apiario</string>
+    <string name="package_name">com.rhoff.apiario</string>
+    <string name="custom_url_scheme">com.rhoff.apiario</string>
+</resources>

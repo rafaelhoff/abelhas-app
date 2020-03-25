@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>    
+    <ion-title>
+      Geo Location
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-button (click)="requestPermissions()" color="primary">Geolocation.requestPermissions</ion-button>
+  <ion-button (click)="getCurrentPosition()" color="primary">Geolocation.getCurrentPosition</ion-button> 
+  <div>
+    Lat: {{singleCoords.latitude}} Long: {{singleCoords.longitude}}
+  </div>
+  <ion-button (click)="watchPosition()" color="primary">Geolocation.watchPosition</ion-button>
+  <div>
+    Lat: {{watchCoords.latitude}} Long: {{watchCoords.longitude}}
+  </div>
+  <ion-button (click)="clearWatch()" color="primary">Geolocation.clearWatch</ion-button>
+</ion-content>
