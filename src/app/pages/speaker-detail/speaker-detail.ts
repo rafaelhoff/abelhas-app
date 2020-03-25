@@ -19,7 +19,7 @@ export class SpeakerDetailPage {
     private route: ActivatedRoute,
     public actionSheetCtrl: ActionSheetController,
     public confData: ConferenceData
-  ) {}
+  ) { }
 
   ionViewWillEnter() {
     this.dataProvider.load().subscribe((data: any) => {
@@ -35,9 +35,9 @@ export class SpeakerDetailPage {
     });
   }
 
-  openExternalUrl(url: string) {
+  openExternalUrl(externalUrl: string) {
     Browser.open({
-      url: url,
+      url: externalUrl,
       windowName: '_blank'
     });
   }

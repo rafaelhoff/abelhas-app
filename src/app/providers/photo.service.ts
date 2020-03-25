@@ -104,6 +104,8 @@ export class PhotoService {
       return file.data;
     } else {
       // Fetch the photo, read as a blob, then convert to base64 format
+      // TODO: validate this tslint
+      // tslint:disable-next-line: no-non-null-assertion
       const response = await fetch(cameraPhoto.webPath!);
       const blob = await response.blob();
 
