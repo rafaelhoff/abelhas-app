@@ -1,13 +1,37 @@
 {
-  "cfg": {
-    "title": "Configuration",
-    "langList": {
-      "pt": "Portuguese",
-      "en": "English",
-      "es": "Spanish"
-    }
-  },
-  "tut": {
-    "skip": "Skip"
-  }
+	"cfg": {
+		"about": {
+			"label": "About",
+			"title": "About"
+		},
+		"basic": {
+			"lng": "Language",
+			"title": "Basic Configuration"
+		},
+		"display": {
+			"darkMode": "Dark Mode",
+			"title": "Display"
+		},
+		"langList": {
+			"en": "English",
+			"es": "Spanish",
+			"pt": "Portuguese"
+		},
+		"title": "Configuration",
+		"tutorial": {
+			"show": "Show Tutorial",
+			"title": "Tutorial"
+		}
+	},
+	"tut": {
+		"continue": "Continue",
+		"flow": "Flow",
+		"flowDesc": "<strong>Ionic Appflow</strong> is a powerful set of services and features built on top of Ionic Framework that brings a totally new level of app development agility to mobile dev teams.",
+		"ready": "Ready to Play?",
+		"skip": "Skip",
+		"welcome": "Welcome to <strong>Apiario</strong>",
+		"welcomeDesc": "The <strong>ionic conference app</strong> is a practical preview of the ionic framework in action, and a demonstration of proper code use.",
+		"what": "What?",
+		"whatDesc": "<strong>Ionic Framework</strong> is an open source SDK that enables developers to build high quality mobile apps with web technologies like HTML, CSS, and JavaScript."
+	}
 }

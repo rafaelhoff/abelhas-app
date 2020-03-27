@@ -8,38 +8,38 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-list-header>Basic Configuration</ion-list-header>
+  <ion-list *ngIf="data">
+    <ion-list-header>{{ 'cfg.basic.title' | translate }}</ion-list-header>
 
     <!--https://ionicframework.com/docs/api/select-->
     <ion-item>
-      <ion-label>Language</ion-label>
-      <ion-select value="brown" okText="Okay" cancelText="Dismiss">
-        <ion-select-option *ngFor="let lang of data?.languages">{{ 'cfg.langList.' + lang | translate }}
+      <ion-label>{{ 'cfg.basic.lng' | translate }}</ion-label>
+      <ion-select value="brown" okText="Okay" cancelText="Dismiss" [(ngModel)]="data.language"
+        (ionChange)="updateLanguage()">
+        <ion-select-option *ngFor="let lang of preData?.languages" value="{{lang}}">
+          {{ 'cfg.langList.' + lang | translate }}
         </ion-select-option>
       </ion-select>
     </ion-item>
 
-    <ion-list-header>Display</ion-list-header>
+    <ion-list-header>{{ 'cfg.display.title' | translate }}</ion-list-header>
 
     <ion-item>
       <ion-icon slot="start" name="moon-outline"></ion-icon>
-      <ion-label>
-        Dark Mode
-      </ion-label>
-      <ion-toggle [(ngModel)]="dark" (ionChange)="updateDarkMode()"></ion-toggle>
+      <ion-label>{{ 'cfg.display.darkMode' | translate }}</ion-label>
+      <ion-toggle [(ngModel)]="data.darkMode" (ionChange)="updateDarkMode()"></ion-toggle>
     </ion-item>
 
   </ion-list>
 
   <ion-list lines="none">
     <ion-list-header>
-      Tutorial
+      {{ 'cfg.tutorial.title' | translate }}
     </ion-list-header>
     <ion-menu-toggle autoHide="false">
       <ion-item button (click)="openTutorial()" detail="false">
         <ion-icon slot="start" name="hammer"></ion-icon>
-        <ion-label>Show Tutorial</ion-label>
+        <ion-label>{{ 'cfg.tutorial.show' | translate }}</ion-label>
       </ion-item>
     </ion-menu-toggle>
   </ion-list>
@@ -47,12 +47,12 @@
 
   <ion-list lines="none">
     <ion-list-header>
-      About
+      {{ 'cfg.about.title' | translate }}
     </ion-list-header>
     <ion-menu-toggle autoHide="false">
       <ion-item routerLink="/about" routerLinkActive="selected" routerDirection="root" detail="false">
         <ion-icon slot="start" name="information-circle-outline"></ion-icon>
-        <ion-label>About</ion-label>
+        <ion-label>{{ 'cfg.about.label' | translate }}</ion-label>
       </ion-item>
     </ion-menu-toggle>
   </ion-list>

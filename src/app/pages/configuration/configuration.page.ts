@@ -9,7 +9,7 @@ import { ConfigService } from 'src/app/providers/config-data';
   templateUrl: './configuration.page.html',
 })
 export class ConfigurationPage implements OnInit {
-  dark = false;
+  preData: any;
   data: any;
 
   constructor(
@@ -19,7 +19,8 @@ export class ConfigurationPage implements OnInit {
     private configService: ConfigService) { }
 
   ngOnInit() {
-    this.configService.load().subscribe((data: any) => this.data = data);
+    this.configService.loadPreData().subscribe((data: any) => this.preData = data);
+    this.configService.load().then(data => this.data = data);
   }
 
   openTutorial() {
@@ -29,6 +30,10 @@ export class ConfigurationPage implements OnInit {
   }
 
   updateDarkMode() {
-    this.configService.setDarkMode(this.dark);
+    this.configService.setDarkMode(this.data.darkMode);
+  }
+
+  updateLanguage() {
+    this.configService.setLanguage(this.data.language);
   }
 }

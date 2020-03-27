@@ -11,7 +11,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "webdriver-manager update --standalone false --gecko false"
+    "postinstall": "webdriver-manager update --standalone false --gecko false",
+    "lr": "ionic capacitor run android --livereload",
+    "extract-i18n": "ngx-translate-extract --input ./src --output ./src/assets/i18n/en.json --key-as-default-value --sort --format namespaced-json"
   },
   "repository": {
     "type": "git",
@@ -51,6 +53,7 @@
     "@angular/compiler": "^8.2.14",
     "@angular/compiler-cli": "^8.2.14",
     "@angular/language-service": "^8.2.14",
+    "@biesbjerg/ngx-translate-extract": "^6.0.3",
     "@capacitor/cli": "1.5.1",
     "@ionic/angular-toolkit": "^2.1.2",
     "@ionic/lab": "^2.0.19",

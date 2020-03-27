@@ -1,0 +1,37 @@
+{
+	"cfg": {
+		"about": {
+			"label": "Sobre o aplicativo",
+			"title": "Sobre o aplicativo"
+		},
+		"basic": {
+			"lng": "Língua",
+			"title": "Configuração básica"
+		},
+		"display": {
+			"darkMode": "Modo escuro",
+			"title": "Exibição"
+		},
+		"langList": {
+			"en": "Inglês",
+			"es": "Espanhol",
+			"pt": "Português"
+		},
+		"title": "Configuração",
+		"tutorial": {
+			"show": "Mostrar tutorial",
+			"title": "Tutorial"
+		}
+	},
+	"tut": {
+		"continue": "Continuar",
+		"flow": "Fluxo",
+		"flowDesc": "<strong>Ionic Appflow</strong> é um poderoso conjunto de serviços e recursos construídos sobre o Ionic Framework que traz um nível totalmente novo de agilidade no desenvolvimento de aplicativos para equipes de desenvolvimento móveis.",
+		"ready": "Pronto para jogar?",
+		"skip": "Pular",
+		"welcome": "Bem-vindo ao <strong>Apiario</strong>",
+		"welcomeDesc": "O <strong>aplicativo de conferência iônica</strong> é uma visualização prática da estrutura iônica em ação e uma demonstração do uso adequado do código.",
+		"what": "O que?",
+		"whatDesc": " O<strong>Ionic Framework</strong> é um SDK de código aberto que permite aos desenvolvedores criar aplicativos móveis de alta qualidade com tecnologias da web como HTML, CSS e JavaScript."
+	}
+}

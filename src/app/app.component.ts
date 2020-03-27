@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
-import { TranslateService } from '@ngx-translate/core';
 
 import { Platform, ToastController } from '@ionic/angular';
 
@@ -42,14 +41,9 @@ export class AppComponent implements OnInit {
     private userData: UserData,
     private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
-    private translate: TranslateService,
     private configService: ConfigService
   ) {
     this.initializeApp();
-    configService.darkMode$.subscribe((dM: boolean) => {
-      console.debug('got darkmode changed');
-      return this.dark = dM;
-    });
   }
 
   async ngOnInit() {
@@ -77,11 +71,17 @@ export class AppComponent implements OnInit {
     });
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.translate.setDefaultLang('en');
-      SplashScreen.hide();
+  async initializeApp() {
+    await this.platform.ready();
+    await this.configService.load();
+
+    this.configService.darkMode$.subscribe((dM: boolean) => {
+      console.debug('got darkmode changed');
+      return this.dark = dM;
     });
+
+    SplashScreen.hide();
+
   }
 
   checkLoginStatus() {
