@@ -84,25 +84,20 @@
             </ion-item>
           </ion-menu-toggle>
 
-          <ion-item>
-            <ion-icon slot="start" name="moon-outline"></ion-icon>
-            <ion-label>
-              Dark Mode
-            </ion-label>
-            <ion-toggle [(ngModel)]="dark"></ion-toggle>
-          </ion-item>
         </ion-list>
 
         <ion-list lines="none">
           <ion-list-header>
-            Tutorial
+            Configuration
           </ion-list-header>
+
           <ion-menu-toggle autoHide="false">
-            <ion-item button (click)="openTutorial()" detail="false">
-              <ion-icon slot="start" name="hammer"></ion-icon>
-              <ion-label>Show Tutorial</ion-label>
+            <ion-item routerLink="/configuration" routerLinkActive="active" routerDirection="root" detail="false">
+              <ion-icon slot="start" name="settings"></ion-icon>
+              <ion-label>Configuration</ion-label>
             </ion-item>
           </ion-menu-toggle>
+
         </ion-list>
 
         <ion-list lines="none">
@@ -118,20 +113,13 @@
           </ion-menu-toggle>
 
           <ion-menu-toggle autoHide="false">
-            <ion-item routerLink="/camera" routerLinkActive="active" routerDirection="root" detail="false">
-              <ion-icon slot="start" name="hammer"></ion-icon>
-              <ion-label>Camera</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-
-          <ion-menu-toggle autoHide="false">
             <ion-item routerLink="/cameraQR" routerLinkActive="active" routerDirection="root" detail="false">
               <ion-icon slot="start" name="hammer"></ion-icon>
               <ion-label>QR Code</ion-label>
             </ion-item>
-          </ion-menu-toggle>          
-          
-        </ion-list>        
+          </ion-menu-toggle>
+
+        </ion-list>
       </ion-content>
     </ion-menu>
 

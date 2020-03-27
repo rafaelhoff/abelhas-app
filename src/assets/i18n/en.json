@@ -1,4 +1,12 @@
 {
+  "cfg": {
+    "title": "Configuration",
+    "langList": {
+      "pt": "Portuguese",
+      "en": "English",
+      "es": "Spanish"
+    }
+  },
   "tut": {
     "skip": "Skip"
   }

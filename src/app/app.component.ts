@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 import { TranslateService } from '@ngx-translate/core';
 
-import { MenuController, Platform, ToastController } from '@ionic/angular';
-
-import { Storage } from '@ionic/storage';
+import { Platform, ToastController } from '@ionic/angular';
 
 import { UserData } from './providers/user-data';
+import { SplashScreen } from '@capacitor/core';
+import { ConfigService } from './providers/config-data';
 
 @Component({
   selector: 'app-root',
@@ -31,27 +31,25 @@ export class AppComponent implements OnInit {
       title: 'Map',
       url: '/app/tabs/map',
       icon: 'map'
-    },
-    {
-      title: 'About',
-      url: '/app/tabs/about',
-      icon: 'information-circle'
     }
   ];
   loggedIn = false;
   dark = false;
 
   constructor(
-    private menu: MenuController,
     private platform: Platform,
     private router: Router,
-    private storage: Storage,
     private userData: UserData,
     private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
     private translate: TranslateService,
+    private configService: ConfigService
   ) {
     this.initializeApp();
+    configService.darkMode$.subscribe((dM: boolean) => {
+      console.debug('got darkmode changed');
+      return this.dark = dM;
+    });
   }
 
   async ngOnInit() {
@@ -82,6 +80,7 @@ export class AppComponent implements OnInit {
   initializeApp() {
     this.platform.ready().then(() => {
       this.translate.setDefaultLang('en');
+      SplashScreen.hide();
     });
   }
 
@@ -117,9 +116,4 @@ export class AppComponent implements OnInit {
     });
   }
 
-  openTutorial() {
-    this.menu.enable(false);
-    this.storage.set('ion_did_tutorial', false);
-    this.router.navigateByUrl('/tutorial');
-  }
 }

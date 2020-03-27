@@ -3,7 +3,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { GeoLocationPage } from './geolocation.page';
 
-describe('CameraPage', () => {
+describe('GeoLocationPage', () => {
   let component: GeoLocationPage;
   let fixture: ComponentFixture<GeoLocationPage>;
 

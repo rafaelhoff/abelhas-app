@@ -29,6 +29,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tabs-page/tabs-page.module').then(m => m.TabsModule)
   },
   {
+    path: 'configuration',
+    loadChildren: () => import('./pages/configuration/configuration.module').then(m => m.ConfigurationPageModule)
+  },
+  {
+    path: 'about',
+    loadChildren: () => import('./pages/about/about.module').then(m => m.AboutModule)
+  },
+  {
     path: 'tutorial',
     loadChildren: () => import('./pages/tutorial/tutorial.module').then(m => m.TutorialModule),
     canLoad: [CheckTutorial]
@@ -36,10 +44,6 @@ const routes: Routes = [
   {
     path: 'geolocation',
     loadChildren: () => import('./pages/geolocation/geolocation.module').then(m => m.GeoLocationModule)
-  },
-  {
-    path: 'camera',
-    loadChildren: () => import('./pages/camera/camera.module').then(m => m.CameraModule)
   },
   {
     path: 'cameraQR',
@@ -51,4 +55,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

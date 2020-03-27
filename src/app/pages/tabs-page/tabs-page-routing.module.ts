@@ -49,11 +49,11 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'about',
+        path: 'pictures',
         children: [
           {
             path: '',
-            loadChildren: () => import('../about/about.module').then(m => m.AboutModule)
+            loadChildren: () => import('../pictures/picture.module').then(m => m.PictureModule)
           }
         ]
       },

@@ -3,13 +3,12 @@ import { ActionSheetController } from '@ionic/angular';
 import { PhotoService } from '../../providers/photo.service';
 
 @Component({
-  selector: 'app-camera',
-  templateUrl: 'camera.page.html',
-  styleUrls: ['camera.page.scss']
+  selector: 'app-picture',
+  templateUrl: 'picture.page.html'
 })
-export class CameraPage implements OnInit {
+export class PicturePage implements OnInit {
 
-  constructor(public photoService: PhotoService, public actionSheetController: ActionSheetController) {}
+  constructor(public photoService: PhotoService, public actionSheetController: ActionSheetController) { }
 
   ngOnInit() {
     this.photoService.loadSaved();
@@ -31,7 +30,7 @@ export class CameraPage implements OnInit {
         role: 'cancel',
         handler: () => {
           // Nothing to do, action sheet is automatically closed
-         }
+        }
       }]
     });
     await actionSheet.present();
