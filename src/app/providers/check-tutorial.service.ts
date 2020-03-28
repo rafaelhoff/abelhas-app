@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { CanLoad, Router } from '@angular/router';
-import { Storage } from '@ionic/storage';
+import { ConfigService } from './config-data';
+
 @Injectable({
   providedIn: 'root'
 })
 export class CheckTutorial implements CanLoad {
-  constructor(private storage: Storage, private router: Router) {}
+  constructor(private configService: ConfigService, private router: Router) { }
 
   canLoad() {
-    return this.storage.get('ion_did_tutorial').then(res => {
+    return this.configService.isTutorialDone().then(res => {
       if (res) {
         this.router.navigate(['/app', 'tabs', 'schedule']);
         return false;

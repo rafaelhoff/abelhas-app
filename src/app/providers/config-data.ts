@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage';
 import { Subject, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
-
+import { AppStorage } from '../util/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +14,8 @@ export class ConfigService {
 
   defaultConfiguration: any = {
     darkMode: false,
-    language: 'en'
+    language: 'en',
+    tutorialDone: false
   };
 
   private darkModeSource = new Subject<boolean>();
@@ -23,7 +23,7 @@ export class ConfigService {
 
   constructor(
     public http: HttpClient,
-    public storage: Storage,
+    public storage: AppStorage,
     private translate: TranslateService,
   ) { }
 
@@ -81,4 +81,13 @@ export class ConfigService {
     this.translate.setDefaultLang(this.data.language);
   }
 
+  setTutorialDone(tutorialDone: boolean) {
+    this.data.tutorialDone = tutorialDone;
+    this.save(this.data);
+  }
+
+  async isTutorialDone() {
+    await this.load();
+    return this.data.tutorialDone;
+  }
 }

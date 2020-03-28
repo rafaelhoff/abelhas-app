@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage';
+import { AppStorage } from '../util/storage';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserData {
+  readonly storageKey = 'username';
+  readonly HAS_LOGGED_IN = 'hasLoggedIn';
+
   favorites: string[] = [];
-  HAS_LOGGED_IN = 'hasLoggedIn';
-  HAS_SEEN_TUTORIAL = 'hasSeenTutorial';
 
   constructor(
-    public storage: Storage
+    public storage: AppStorage
   ) { }
 
   hasFavorite(sessionName: string): boolean {
@@ -43,20 +44,20 @@ export class UserData {
     });
   }
 
-  logout(): Promise<any> {
-    return this.storage.remove(this.HAS_LOGGED_IN).then(() => {
-      return this.storage.remove('username');
-    }).then(() => {
-      window.dispatchEvent(new CustomEvent('user:logout'));
-    });
+  async logout(): Promise<any> {
+    await this.storage.set(this.HAS_LOGGED_IN, null);
+    await this.storage.set(this.storageKey, null);
+
+    window.dispatchEvent(new CustomEvent('user:logout'));
+    return true;
   }
 
   setUsername(username: string): Promise<any> {
-    return this.storage.set('username', username);
+    return this.storage.set(this.storageKey, username);
   }
 
   getUsername(): Promise<string> {
-    return this.storage.get('username').then((value) => {
+    return this.storage.get(this.storageKey).then((value) => {
       return value;
     });
   }
@@ -67,9 +68,4 @@ export class UserData {
     });
   }
 
-  checkHasSeenTutorial(): Promise<string> {
-    return this.storage.get(this.HAS_SEEN_TUTORIAL).then((value) => {
-      return value;
-    });
-  }
 }

@@ -13,7 +13,7 @@ describe('CameraQRPage', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [CameraQRPage],
-      imports: [IonicModule.forRoot()],
+      imports: [IonicModule],
       providers: [
         { provide: BarcodeScanner, useValue: barcodeScannerSpy },
       ]

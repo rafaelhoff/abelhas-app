@@ -8,11 +8,12 @@ import { TutorialPage } from './tutorial';
 import { TranslateService } from '@ngx-translate/core';
 import { TranslatePipeMock } from './../../util/translatePipe.mock';
 
-import { IonicStorageModule } from '@ionic/storage';
+import { HttpClient } from '@angular/common/http';
 describe('TutorialPage', () => {
   let fixture, app;
 
   beforeEach(async(() => {
+    const httpClientSpy = jasmine.createSpyObj('Router', ['get']);
     const menuSpy = jasmine.createSpyObj('MenuController', [
       'toggle',
       'enable'
@@ -23,8 +24,8 @@ describe('TutorialPage', () => {
     TestBed.configureTestingModule({
       declarations: [TutorialPage, TranslatePipeMock],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [IonicStorageModule.forRoot()],
       providers: [
+        { provide: HttpClient, useValue: httpClientSpy },
         { provide: MenuController, useValue: menuSpy },
         { provide: Router, useValue: routerSpy },
         { provide: TranslateService, useValue: translateServiceSpy }
@@ -41,7 +42,7 @@ describe('TutorialPage', () => {
   });
 
   it('should check the tutorial status', async () => {
-    const didTuts = await app.storage.get('ion_did_tutorial');
+    const didTuts = await app.configService.isTutorialDone();
     expect(didTuts).toBeFalsy();
   });
 });

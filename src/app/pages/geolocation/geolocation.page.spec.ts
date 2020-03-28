@@ -10,7 +10,7 @@ describe('GeoLocationPage', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [GeoLocationPage],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(GeoLocationPage);

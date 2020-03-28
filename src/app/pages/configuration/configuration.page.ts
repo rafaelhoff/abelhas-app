@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
-import { Storage } from '@ionic/storage';
 import { ConfigService } from 'src/app/providers/config-data';
 
 @Component({
@@ -15,7 +14,6 @@ export class ConfigurationPage implements OnInit {
   constructor(
     private menu: MenuController,
     private router: Router,
-    private storage: Storage,
     private configService: ConfigService) { }
 
   ngOnInit() {
@@ -25,7 +23,7 @@ export class ConfigurationPage implements OnInit {
 
   openTutorial() {
     this.menu.enable(false);
-    this.storage.set('ion_did_tutorial', false);
+    this.configService.setTutorialDone(false);
     this.router.navigateByUrl('/tutorial');
   }
 

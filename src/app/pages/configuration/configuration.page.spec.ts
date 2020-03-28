@@ -2,21 +2,28 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ConfigurationPage } from './configuration.page';
-import { TranslateService } from '@ngx-translate/core';
 import { TranslatePipeMock } from 'src/app/util/translatePipe.mock';
+import { Router } from '@angular/router';
+import { ConfigService } from 'src/app/providers/config-data';
+import { Observable } from 'rxjs';
 
 describe('ConfigurationPage', () => {
   let component: ConfigurationPage;
   let fixture: ComponentFixture<ConfigurationPage>;
 
   beforeEach(async(() => {
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['instant', 'setDefaultLang', 'get', 'subscribe']);
+    const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
+    const configServiceSpy = jasmine.createSpyObj('ConfigService', {
+      loadPreData: new Observable(),
+      load: Promise.resolve()
+    });
 
     TestBed.configureTestingModule({
       declarations: [ConfigurationPage, TranslatePipeMock],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
-        { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: ConfigService, useValue: configServiceSpy },
+        { provide: Router, useValue: routerSpy }
       ]
     })
       .compileComponents();

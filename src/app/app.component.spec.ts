@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { UserData } from './providers/user-data';
 
 import { TranslateService } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
 
 describe('AppComponent', () => {
   let menuSpy,
@@ -29,12 +30,14 @@ describe('AppComponent', () => {
     platformReadySpy = Promise.resolve();
     platformSpy = jasmine.createSpyObj('Platform', { ready: platformReadySpy });
     translateServiceSpy = jasmine.createSpyObj('TranslateService', ['instant', 'setDefaultLang']);
+    const httpClientSpy = jasmine.createSpyObj('Router', ['get']);
 
     TestBed.configureTestingModule({
       declarations: [AppComponent],
       imports: [IonicStorageModule.forRoot()],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
+        { provide: HttpClient, useValue: httpClientSpy },
         { provide: MenuController, useValue: menuSpy },
         { provide: Router, useValue: routerSpy },
         { provide: UserData, useValue: userDataSpy },
