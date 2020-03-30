@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "ionic-conference-app",
+  "appId": "com.rhoff.apiario",
+  "appName": "apiario",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

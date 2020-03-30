@@ -19,7 +19,7 @@ describe('TutorialPage', () => {
       'enable'
     ]);
     const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['instant', 'setDefaultLang', 'get', 'subscribe']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['instant', 'setDefaultLang', 'get', 'subscribe', 'use']);
 
     TestBed.configureTestingModule({
       declarations: [TutorialPage, TranslatePipeMock],

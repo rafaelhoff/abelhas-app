@@ -14,6 +14,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -39,7 +40,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     })
   ],
   declarations: [AppComponent],
-  providers: [BarcodeScanner],
+  providers: [BarcodeScanner, PhotoLibrary],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

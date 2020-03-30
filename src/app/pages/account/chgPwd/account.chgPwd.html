@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ 'account.chgPwd.title' | translate }}</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="dismiss()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <form #pwdChangeForm="ngForm" novalidate>
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked" color="primary">{{ 'account.chgPwd.old' | translate }}</ion-label>
+        <ion-input [(ngModel)]="changePassword.oldPassword" name="oldPassword" type="password" #oldPassword="ngModel"
+          required>
+        </ion-input>
+      </ion-item>
+
+      <ion-text color="danger">
+        <p [hidden]="oldPassword.valid || submitted == false" class="ion-padding-start">
+          {{ 'account.chgPwd.oldReq' | translate }}
+        </p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">{{ 'account.chgPwd.new' | translate }}</ion-label>
+        <ion-input [(ngModel)]="changePassword.password" name="password" type="password" #password="ngModel" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-text color="danger">
+        <p [hidden]="password.valid || submitted == false" class="ion-padding-start">
+          {{ 'account.chgPwd.newReq' | translate }}
+        </p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">{{ 'account.chgPwd.new2' | translate }}</ion-label>
+        <ion-input [(ngModel)]="changePassword.password2" name="password2" type="password" #password2="ngModel"
+          required>
+        </ion-input>
+      </ion-item>
+
+      <ion-text color="danger">
+        <p [hidden]="password2.valid || submitted == false" class="ion-padding-start">
+          {{ 'account.chgPwd.new2Req' | translate }}
+        </p>
+      </ion-text>
+
+    </ion-list>
+
+    <ion-button (click)="passwordChange(pwdChangeForm)" color="light" expand="block">
+      {{ 'account.chgPwd.change' | translate }}
+    </ion-button>
+  </form>
+</ion-content>

@@ -1,4 +1,27 @@
 {
+	"account": {
+		"chgPwd": {
+			"change": "Change",
+			"confirm": "Password is changed.",
+			"new": "New Password",
+			"new2": "Repeat new Password",
+			"new2Req": "Repeat new Password is required",
+			"newReq": "New Password is required",
+			"old": "Old Password",
+			"oldReq": "Old Password is required",
+			"title": "Change Password"
+		},
+		"chgpic": "Change Picture",
+		"fromLibrary": "From Library",
+		"logout": "Logout",
+		"name": "Name",
+		"takePhoto": "Take Photo",
+		"username": "Username"
+	},
+	"basic": {
+		"cancel": "Cancel",
+		"ok": "OK"
+	},
 	"cfg": {
 		"about": {
 			"label": "About",
@@ -26,12 +49,12 @@
 	"tut": {
 		"continue": "Continue",
 		"flow": "Flow",
-		"flowDesc": "<strong>Ionic Appflow</strong> is a powerful set of services and features built on top of Ionic Framework that brings a totally new level of app development agility to mobile dev teams.",
+		"flowDesc": "<strong>ABC</strong> is a ...",
 		"ready": "Ready to Play?",
 		"skip": "Skip",
 		"welcome": "Welcome to <strong>Apiario</strong>",
-		"welcomeDesc": "The <strong>ionic conference app</strong> is a practical preview of the ionic framework in action, and a demonstration of proper code use.",
+		"welcomeDesc": "The <strong>Apiario</strong> is a ....",
 		"what": "What?",
-		"whatDesc": "<strong>Ionic Framework</strong> is an open source SDK that enables developers to build high quality mobile apps with web technologies like HTML, CSS, and JavaScript."
+		"whatDesc": "<strong>XYZ</strong> is an ..."
 	}
 }

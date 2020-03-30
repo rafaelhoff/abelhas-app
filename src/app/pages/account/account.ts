@@ -1,9 +1,13 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AlertController } from '@ionic/angular';
+import { AlertController, ActionSheetController, ModalController } from '@ionic/angular';
 
 import { UserData } from '../../providers/user-data';
+import { TranslateService } from '@ngx-translate/core';
+import { ChangePasswordModalPage } from './chgPwd/account.chgPwd';
+import { PhotoService } from 'src/app/providers/photo.service';
+import { PhotoLibraryModalPage } from './photoLibrary/account.photoLibrary';
 
 
 @Component({
@@ -12,20 +16,45 @@ import { UserData } from '../../providers/user-data';
   styleUrls: ['./account.scss'],
 })
 export class AccountPage implements AfterViewInit {
-  username: string;
+  user: any;
 
   constructor(
+    public actionSheetController: ActionSheetController,
     public alertCtrl: AlertController,
+    public modalController: ModalController,
+    public photoService: PhotoService,
     public router: Router,
-    public userData: UserData
+    public userData: UserData,
+    public translateService: TranslateService
   ) { }
 
   ngAfterViewInit() {
-    this.getUsername();
+    this.getUser();
   }
 
-  updatePicture() {
-    console.log('Clicked to update picture');
+  async updatePicture() {
+    const actionSheet = await this.actionSheetController.create({
+      header: this.translateService.instant('account.chgpic'),
+      buttons: [{
+        text: this.translateService.instant('account.takePhoto'),
+        icon: 'share',
+        handler: () => {
+          // TODO: deal with the Picture.
+          this.photoService.addNewToGallery();
+        }
+      }, {
+        text: this.translateService.instant('account.fromLibrary'),
+        icon: 'arrow-dropright-circle',
+        handler: () => {
+          this.getPhoto();
+        }
+      }, {
+        text: this.translateService.instant('basic.cancel'),
+        icon: 'close',
+        role: 'cancel'
+      }]
+    });
+    await actionSheet.present();
   }
 
   // Present an alert with the current username populated
@@ -40,7 +69,7 @@ export class AccountPage implements AfterViewInit {
           text: 'Ok',
           handler: (data: any) => {
             this.userData.setUsername(data.username);
-            this.getUsername();
+            this.getUser();
           }
         }
       ],
@@ -48,7 +77,7 @@ export class AccountPage implements AfterViewInit {
         {
           type: 'text',
           name: 'username',
-          value: this.username,
+          value: this.user.username,
           placeholder: 'username'
         }
       ]
@@ -56,14 +85,15 @@ export class AccountPage implements AfterViewInit {
     await alert.present();
   }
 
-  getUsername() {
-    this.userData.getUsername().then((username) => {
-      this.username = username;
-    });
+  async getUser() {
+    this.user = await this.userData.getUser();
   }
 
-  changePassword() {
-    console.log('Clicked to change password');
+  async changePassword() {
+    const modal = await this.modalController.create({
+      component: ChangePasswordModalPage
+    });
+    return await modal.present();
   }
 
   logout() {
@@ -71,7 +101,10 @@ export class AccountPage implements AfterViewInit {
     this.router.navigateByUrl('/login');
   }
 
-  support() {
-    this.router.navigateByUrl('/support');
+  async getPhoto() {
+    const modal = await this.modalController.create({
+      component: PhotoLibraryModalPage
+    });
+    return await modal.present();
   }
 }

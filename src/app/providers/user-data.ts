@@ -53,13 +53,15 @@ export class UserData {
   }
 
   setUsername(username: string): Promise<any> {
-    return this.storage.set(this.storageKey, username);
+    return this.storage.set(this.storageKey, {
+      // TODO: change the avatar code.
+      avatar: 'https://www.gravatar.com/avatar?d=mm&s=140',
+      username
+    });
   }
 
-  getUsername(): Promise<string> {
-    return this.storage.get(this.storageKey).then((value) => {
-      return value;
-    });
+  async getUser(): Promise<any> {
+    return this.storage.get(this.storageKey);
   }
 
   isLoggedIn(): Promise<boolean> {
@@ -68,4 +70,23 @@ export class UserData {
     });
   }
 
+  async changePassword(options: ChangePasswordOptions): Promise<boolean> {
+    // TODO: do the actual change.
+    return true;
+  }
+
 }
+
+export interface ChangePasswordOptions {
+  oldPassword: string;
+  password: string;
+  password2: string;
+}
+
+
+export interface UserOptions {
+  username: string;
+  password: string;
+}
+
+

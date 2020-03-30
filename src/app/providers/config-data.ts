@@ -5,18 +5,15 @@ import { map } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { AppStorage } from '../util/storage';
 
+import { Plugins, DeviceLanguageCodeResult } from '@capacitor/core';
+const { Device } = Plugins;
+
 @Injectable({
   providedIn: 'root'
 })
 export class ConfigService {
   preSetData: any;
   data: any;
-
-  defaultConfiguration: any = {
-    darkMode: false,
-    language: 'en',
-    tutorialDone: false
-  };
 
   private darkModeSource = new Subject<boolean>();
   darkMode$ = this.darkModeSource.asObservable();
@@ -25,7 +22,22 @@ export class ConfigService {
     public http: HttpClient,
     public storage: AppStorage,
     private translate: TranslateService,
-  ) { }
+  ) {
+    this.translate.setDefaultLang('en');
+  }
+
+  async getInitialConfiguation(): Promise<any> {
+    const langRes: DeviceLanguageCodeResult = await Device.getLanguageCode();
+    let lang = 'en';
+    lang = langRes.value.startsWith('pt') ? 'pt' : lang;
+    lang = langRes.value.startsWith('es') ? 'es' : lang;
+
+    return {
+      darkMode: false,
+      language: lang,
+      tutorialDone: false
+    };
+  }
 
   loadPreData(): any {
     if (this.preSetData) {
@@ -47,7 +59,7 @@ export class ConfigService {
       // First-time load.
       this.data = await this.storage.get('configuration');
       if (!this.data) {
-        this.data = this.defaultConfiguration;
+        this.data = await this.getInitialConfiguation();
       }
       this.updateAppLanguage();
       this.updateDarkMode();
@@ -78,7 +90,7 @@ export class ConfigService {
   }
 
   private updateAppLanguage() {
-    this.translate.setDefaultLang(this.data.language);
+    this.translate.use(this.data.language);
   }
 
   setTutorialDone(tutorialDone: boolean) {

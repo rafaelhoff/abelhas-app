@@ -29,7 +29,7 @@ describe('AppComponent', () => {
     swUpdateSpy = jasmine.createSpyObj('SwUpdate', ['available', 'activateUpdate']);
     platformReadySpy = Promise.resolve();
     platformSpy = jasmine.createSpyObj('Platform', { ready: platformReadySpy });
-    translateServiceSpy = jasmine.createSpyObj('TranslateService', ['instant', 'setDefaultLang']);
+    translateServiceSpy = jasmine.createSpyObj('TranslateService', ['instant', 'setDefaultLang', 'use']);
     const httpClientSpy = jasmine.createSpyObj('Router', ['get']);
 
     TestBed.configureTestingModule({

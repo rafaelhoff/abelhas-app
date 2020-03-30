@@ -8,16 +8,28 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="username" class="ion-padding-top ion-text-center">
-    <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
-    <h2>{{username}}</h2>
+  <div *ngIf="user" class="ion-padding-top ion-text-center">
+    <img src="{{user.avatar}}" alt="avatar">
+    <br>
+    <ion-button style="text-transform:none" fill="clear" (click)="updatePicture()">{{ 'account.chgpic' | translate }}
+    </ion-button>
 
-    <ion-list inset>
-      <ion-item (click)="updatePicture()">Update Picture</ion-item>
-      <ion-item (click)="changeUsername()">Change Username</ion-item>
-      <ion-item (click)="changePassword()">Change Password</ion-item>
-      <ion-item (click)="support()">Support</ion-item>
-      <ion-item (click)="logout()">Logout</ion-item>
-    </ion-list>
+    <ion-item>
+      <ion-label>{{ 'account.name' | translate }}</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+
+    <!-- Inputs with labels -->
+    <ion-item>
+      <ion-label>{{ 'account.username' | translate }}</ion-label>
+      <ion-input>{{user.username}}</ion-input>
+    </ion-item>
+
+    <ion-button style="text-transform:none" fill="clear" (click)="changePassword()">
+      {{ 'account.chgPwd.title' | translate }}
+    </ion-button>
+    <br>
+    <ion-button style="text-transform:none" fill="clear" (click)="logout()">{{ 'account.logout' | translate }}
+    </ion-button>
   </div>
 </ion-content>

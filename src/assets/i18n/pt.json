@@ -1,4 +1,27 @@
 {
+	"account": {
+		"chgPwd": {
+			"change": "Alterar",
+			"confirm": "A senha foi alterada.",
+			"new": "Nova senha",
+			"new2": "Repita a nova senha",
+			"new2Req": "",
+			"newReq": "",
+			"old": "Senha Antiga",
+			"oldReq": "",
+			"title": "Alterar senha"
+		},
+		"chgpic": "Alterar imagem",
+		"fromLibrary": "Buscar da Biblioteca",
+		"logout": "Deslogar",
+		"name": "Nome",
+		"takePhoto": "Tirar Foto",
+		"username": "Nome do Usuário"
+	},
+	"basic": {
+		"cancel": "Cancelar",
+		"ok": "OK"
+	},
 	"cfg": {
 		"about": {
 			"label": "Sobre o aplicativo",
@@ -26,12 +49,12 @@
 	"tut": {
 		"continue": "Continuar",
 		"flow": "Fluxo",
-		"flowDesc": "<strong>Ionic Appflow</strong> é um poderoso conjunto de serviços e recursos construídos sobre o Ionic Framework que traz um nível totalmente novo de agilidade no desenvolvimento de aplicativos para equipes de desenvolvimento móveis.",
-		"ready": "Pronto para jogar?",
+		"flowDesc": "<strong>ABC</strong> é um ....",
+		"ready": "Pronto para iniciar?",
 		"skip": "Pular",
 		"welcome": "Bem-vindo ao <strong>Apiario</strong>",
-		"welcomeDesc": "O <strong>aplicativo de conferência iônica</strong> é uma visualização prática da estrutura iônica em ação e uma demonstração do uso adequado do código.",
+		"welcomeDesc": "O <strong>Apiario</strong> é um ....",
 		"what": "O que?",
-		"whatDesc": " O<strong>Ionic Framework</strong> é um SDK de código aberto que permite aos desenvolvedores criar aplicativos móveis de alta qualidade com tecnologias da web como HTML, CSS e JavaScript."
+		"whatDesc": " O<strong>XYZ</strong> é um ..."
 	}
 }
