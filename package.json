@@ -40,6 +40,7 @@
     "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-photo-library": "^2.2.1",
     "core-js": "^3.6.4",
+    "ngx-logger": "^4.1.2",
     "phonegap-plugin-barcodescanner": "^8.1.0",
     "rxjs": "^6.5.4",
     "sw-toolbox": "3.6.0",

@@ -4,6 +4,7 @@ import { ConferenceData } from '../../providers/conference-data';
 import { ActionSheetController } from '@ionic/angular';
 
 import { Plugins } from '@capacitor/core';
+import { NGXLogger } from 'ngx-logger';
 const { Browser } = Plugins;
 
 @Component({
@@ -16,6 +17,7 @@ export class SpeakerDetailPage {
 
   constructor(
     private dataProvider: ConferenceData,
+    private logger: NGXLogger,
     private route: ActivatedRoute,
     public actionSheetCtrl: ActionSheetController,
     public confData: ConferenceData
@@ -49,7 +51,7 @@ export class SpeakerDetailPage {
         {
           text: 'Copy Link',
           handler: () => {
-            console.log(
+            this.logger.log(
               'Copy link clicked on https://twitter.com/' + speaker.twitter
             );
             if (

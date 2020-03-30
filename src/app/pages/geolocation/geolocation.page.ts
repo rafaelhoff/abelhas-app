@@ -3,6 +3,7 @@ import {
   Plugins,
   CallbackID
 } from '@capacitor/core';
+import { NGXLogger } from 'ngx-logger';
 
 @Component({
   selector: 'app-geolocation',
@@ -22,44 +23,42 @@ export class GeoLocationPage {
 
   watchId: CallbackID;
 
-  constructor(private zone: NgZone) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad GeolocationPage');
+  constructor(
+    private logger: NGXLogger,
+    private zone: NgZone) {
   }
 
   async requestPermissions() {
     const permResult = await Plugins.Geolocation.requestPermissions();
-    console.log('Perm request result: ', permResult);
+    this.logger.log('Perm request result: ', permResult);
   }
 
   async getCurrentPosition() {
     try {
       const coordinates = await Plugins.Geolocation.getCurrentPosition();
-      console.log('Current', coordinates);
+      this.logger.log('Current', coordinates);
       this.zone.run(() => {
         this.singleCoords = coordinates.coords;
       });
     } catch (e) {
       alert('WebView geo error');
-      console.error(e);
+      this.logger.error(e);
     }
   }
 
   watchPosition() {
     try {
       this.watchId = Plugins.Geolocation.watchPosition({}, (position, err) => {
-        console.log('Watch', position);
+        this.logger.log('Watch', position);
         this.zone.run(() => {
           this.watchCoords = position.coords;
         });
       });
 
-      console.log('Got watch', this.watchId);
+      this.logger.log('Got watch', this.watchId);
     } catch (e) {
       alert('WebView geo error');
-      console.error(e);
+      this.logger.error(e);
     }
   }
 

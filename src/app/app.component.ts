@@ -7,6 +7,7 @@ import { Platform, ToastController } from '@ionic/angular';
 import { UserData } from './providers/user-data';
 import { SplashScreen } from '@capacitor/core';
 import { ConfigService } from './providers/config-data';
+import { NGXLogger } from 'ngx-logger';
 
 @Component({
   selector: 'app-root',
@@ -36,6 +37,7 @@ export class AppComponent implements OnInit {
   dark = false;
 
   constructor(
+    private logger: NGXLogger,
     private platform: Platform,
     private router: Router,
     private userData: UserData,
@@ -76,7 +78,7 @@ export class AppComponent implements OnInit {
     await this.configService.load();
 
     this.configService.darkMode$.subscribe((dM: boolean) => {
-      console.debug('got darkmode changed');
+      this.logger.debug('got darkmode changed');
       return this.dark = dM;
     });
 

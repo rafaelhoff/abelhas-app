@@ -16,6 +16,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 
+import { NgxLoggerLevel, LoggerModule } from 'ngx-logger';
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -37,6 +39,11 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
+    }),
+    LoggerModule.forRoot({
+      level: !environment.production ? NgxLoggerLevel.DEBUG : NgxLoggerLevel.ERROR,
+      // serverLogLevel
+      serverLogLevel: NgxLoggerLevel.OFF
     })
   ],
   declarations: [AppComponent],

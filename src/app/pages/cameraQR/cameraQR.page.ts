@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { BarcodeScanner, BarcodeScannerOptions, BarcodeScanResult } from '@ionic-native/barcode-scanner/ngx';
+import { NGXLogger } from 'ngx-logger';
 
 
 @Component({
@@ -11,7 +12,11 @@ import { BarcodeScanner, BarcodeScannerOptions, BarcodeScanResult } from '@ionic
 export class CameraQRPage {
   // Example found here: https://enappd.com/blog/ionic-4-qr-code-barcode-scanning/82/
 
-  constructor(public barcodeScanner: BarcodeScanner, public actionSheetController: ActionSheetController) {}
+  constructor(
+    private actionSheetController: ActionSheetController,
+    public barcodeScanner: BarcodeScanner,
+    private logger: NGXLogger
+  ) { }
 
   public async testQR() {
     try {
@@ -27,9 +32,9 @@ export class CameraQRPage {
       };
 
       const barcodeData: BarcodeScanResult = await this.barcodeScanner.scan(options);
-      console.log('Barcode data', JSON.stringify(barcodeData));
+      this.logger.log('Barcode data', JSON.stringify(barcodeData));
     } catch (error) {
-      console.log('Error is', error);
+      this.logger.log('Error is', error);
     }
     return true;
   }
@@ -50,7 +55,7 @@ export class CameraQRPage {
         role: 'cancel',
         handler: () => {
           // Nothing to do, action sheet is automatically closed
-         }
+        }
       }]
     });
     await actionSheet.present();
