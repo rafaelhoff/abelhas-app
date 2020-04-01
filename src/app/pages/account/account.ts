@@ -1,22 +1,21 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AlertController, ActionSheetController, ModalController } from '@ionic/angular';
 
-import { UserData } from '../../providers/user-data';
+import { UserDataService } from '../../providers/user-data';
 import { TranslateService } from '@ngx-translate/core';
 import { ChangePasswordModalPage } from './chgPwd/account.chgPwd';
-import { PhotoService } from 'src/app/providers/photo.service';
+import { PhotoService, Photo } from 'src/app/providers/photo.service';
 import { PhotoLibraryModalPage } from './photoLibrary/account.photoLibrary';
-
+import { CameraPhoto } from '@capacitor/core';
 
 @Component({
   selector: 'page-account',
   templateUrl: 'account.html',
   styleUrls: ['./account.scss'],
 })
-export class AccountPage implements AfterViewInit {
-  user: any;
+export class AccountPage implements OnInit {
 
   constructor(
     public actionSheetController: ActionSheetController,
@@ -24,12 +23,12 @@ export class AccountPage implements AfterViewInit {
     public modalController: ModalController,
     public photoService: PhotoService,
     public router: Router,
-    public userData: UserData,
+    public userDataService: UserDataService,
     public translateService: TranslateService
   ) { }
 
-  ngAfterViewInit() {
-    this.getUser();
+  ngOnInit(): void {
+    this.userDataService.getUser();
   }
 
   async updatePicture() {
@@ -38,9 +37,15 @@ export class AccountPage implements AfterViewInit {
       buttons: [{
         text: this.translateService.instant('account.takePhoto'),
         icon: 'share',
-        handler: () => {
+        handler: async () => {
           // TODO: deal with the Picture.
-          this.photoService.addNewToGallery();
+          const camPhoto: CameraPhoto = await this.photoService.capturePhoto();
+          const photo: Photo = await this.photoService.savePicture(camPhoto, 'profile.jpg');
+
+          // this.userDataService.userData.avatarPath = await this.photoService.readBase64Photo(photo.filepath);
+          this.userDataService.userData.avatarPath = photo.webviewPath;
+          // Web platform only: Save the photo into the base64 field
+          this.userDataService.save();
         }
       }, {
         text: this.translateService.instant('account.fromLibrary'),
@@ -68,8 +73,8 @@ export class AccountPage implements AfterViewInit {
         {
           text: 'Ok',
           handler: (data: any) => {
-            this.userData.setUsername(data.username);
-            this.getUser();
+            this.userDataService.userData.username = data.username;
+            this.userDataService.save();
           }
         }
       ],
@@ -77,16 +82,12 @@ export class AccountPage implements AfterViewInit {
         {
           type: 'text',
           name: 'username',
-          value: this.user.username,
+          value: this.userDataService.userData.username,
           placeholder: 'username'
         }
       ]
     });
     await alert.present();
-  }
-
-  async getUser() {
-    this.user = await this.userData.getUser();
   }
 
   async changePassword() {
@@ -97,7 +98,7 @@ export class AccountPage implements AfterViewInit {
   }
 
   logout() {
-    this.userData.logout();
+    this.userDataService.logout();
     this.router.navigateByUrl('/login');
   }
 

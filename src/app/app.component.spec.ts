@@ -5,7 +5,7 @@ import { TestBed, async } from '@angular/core/testing';
 
 import { MenuController, Platform } from '@ionic/angular';
 import { AppComponent } from './app.component';
-import { UserData } from './providers/user-data';
+import { UserDataService } from './providers/user-data';
 
 import { TranslateService } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
@@ -25,7 +25,7 @@ describe('AppComponent', () => {
   beforeEach(async(() => {
     menuSpy = jasmine.createSpyObj('MenuController', ['toggle', 'enable']);
     routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
-    userDataSpy = jasmine.createSpyObj('UserData', ['isLoggedIn', 'logout']);
+    userDataSpy = jasmine.createSpyObj('UserDataService', ['isLoggedIn', 'logout']);
     swUpdateSpy = jasmine.createSpyObj('SwUpdate', ['available', 'activateUpdate']);
     platformReadySpy = Promise.resolve();
     platformSpy = jasmine.createSpyObj('Platform', { ready: platformReadySpy });
@@ -42,7 +42,7 @@ describe('AppComponent', () => {
         { provide: NGXLogger, useValue: loggerSpy },
         { provide: MenuController, useValue: menuSpy },
         { provide: Router, useValue: routerSpy },
-        { provide: UserData, useValue: userDataSpy },
+        { provide: UserDataService, useValue: userDataSpy },
         { provide: SwUpdate, useValue: swUpdateSpy },
         { provide: Platform, useValue: platformSpy },
         { provide: TranslateService, useValue: translateServiceSpy }

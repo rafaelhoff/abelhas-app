@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { UserData, UserOptions } from '../../providers/user-data';
+import { UserDataService, UserOptions } from '../../providers/user-data';
 
 
 
@@ -17,14 +17,14 @@ export class SignupPage {
 
   constructor(
     public router: Router,
-    public userData: UserData
+    public userDataService: UserDataService
   ) { }
 
   onSignup(form: NgForm) {
     this.submitted = true;
 
     if (form.valid) {
-      this.userData.signup(this.signup.username);
+      this.userDataService.signup(this.signup.username);
       this.router.navigateByUrl('/app/tabs/schedule');
     }
   }

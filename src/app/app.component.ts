@@ -4,7 +4,7 @@ import { SwUpdate } from '@angular/service-worker';
 
 import { Platform, ToastController } from '@ionic/angular';
 
-import { UserData } from './providers/user-data';
+import { UserDataService } from './providers/user-data';
 import { SplashScreen } from '@capacitor/core';
 import { ConfigService } from './providers/config-data';
 import { NGXLogger } from 'ngx-logger';
@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
     private logger: NGXLogger,
     private platform: Platform,
     private router: Router,
-    private userData: UserData,
+    private userDataService: UserDataService,
     private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
     private configService: ConfigService
@@ -87,7 +87,7 @@ export class AppComponent implements OnInit {
   }
 
   checkLoginStatus() {
-    return this.userData.isLoggedIn().then(loggedIn => {
+    return this.userDataService.isLoggedIn().then(loggedIn => {
       return this.updateLoggedInStatus(loggedIn);
     });
   }
@@ -113,7 +113,7 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
-    this.userData.logout().then(() => {
+    this.userDataService.logout().then(() => {
       return this.router.navigateByUrl('/app/tabs/schedule');
     });
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { PhotoService } from '../../providers/photo.service';
+import { GalleryService } from 'src/app/providers/gallery.service';
 
 @Component({
   selector: 'app-picture',
@@ -8,10 +9,13 @@ import { PhotoService } from '../../providers/photo.service';
 })
 export class PicturePage implements OnInit {
 
-  constructor(public photoService: PhotoService, public actionSheetController: ActionSheetController) { }
+  constructor(
+    public galleryService: GalleryService,
+    public actionSheetController: ActionSheetController
+  ) { }
 
   ngOnInit() {
-    this.photoService.loadSaved();
+    this.galleryService.loadSaved();
   }
 
   public async showActionSheet(photo, position) {
@@ -22,7 +26,7 @@ export class PicturePage implements OnInit {
         role: 'destructive',
         icon: 'trash',
         handler: () => {
-          this.photoService.deletePicture(photo, position);
+          this.galleryService.deletePicture(photo, position);
         }
       }, {
         text: 'Cancel',

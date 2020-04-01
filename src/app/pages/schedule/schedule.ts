@@ -7,7 +7,7 @@ import {
 
 import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
 import { ConferenceData } from '../../providers/conference-data';
-import { UserData } from '../../providers/user-data';
+import { UserDataService } from '../../providers/user-data';
 
 @Component({
   selector: 'page-schedule',
@@ -36,7 +36,7 @@ export class SchedulePage implements OnInit {
     public router: Router,
     public routerOutlet: IonRouterOutlet,
     public toastCtrl: ToastController,
-    public user: UserData,
+    public userDataService: UserDataService,
     public config: Config
   ) { }
 
@@ -75,12 +75,12 @@ export class SchedulePage implements OnInit {
   }
 
   async addFavorite(slidingItem: IonItemSliding, sessionData: any) {
-    if (this.user.hasFavorite(sessionData.name)) {
+    if (this.userDataService.hasFavorite(sessionData.name)) {
       // Prompt to remove favorite
       this.removeFavorite(slidingItem, sessionData, 'Favorite already added');
     } else {
       // Add as a favorite
-      this.user.addFavorite(sessionData.name);
+      this.userDataService.addFavorite(sessionData.name);
 
       // Close the open item
       slidingItem.close();
@@ -118,7 +118,7 @@ export class SchedulePage implements OnInit {
           text: 'Remove',
           handler: () => {
             // they want to remove this session from their favorites
-            this.user.removeFavorite(sessionData.name);
+            this.userDataService.removeFavorite(sessionData.name);
             this.updateSchedule();
 
             // close the sliding item and hide the option buttons

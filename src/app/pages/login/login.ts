@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { UserData, UserOptions } from '../../providers/user-data';
+import { UserDataService, UserOptions } from '../../providers/user-data';
 
 
 @Component({
@@ -15,7 +15,7 @@ export class LoginPage {
   submitted = false;
 
   constructor(
-    public userData: UserData,
+    public userDataService: UserDataService,
     public router: Router
   ) { }
 
@@ -23,7 +23,7 @@ export class LoginPage {
     this.submitted = true;
 
     if (form.valid) {
-      this.userData.login(this.login.username);
+      this.userDataService.login(this.login.username);
       this.router.navigateByUrl('/app/tabs/schedule');
     }
   }

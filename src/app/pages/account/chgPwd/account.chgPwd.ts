@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { NavParams, ModalController, AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { NgForm } from '@angular/forms';
-import { ChangePasswordOptions, UserData } from 'src/app/providers/user-data';
+import { ChangePasswordOptions, UserDataService } from 'src/app/providers/user-data';
 
 @Component({
   selector: 'app-chgPwd',
@@ -16,7 +16,7 @@ export class ChangePasswordModalPage {
     private alertController: AlertController,
     private modalCtrl: ModalController,
     private translateService: TranslateService,
-    private userDta: UserData
+    private userDataService: UserDataService
   ) {
 
   }
@@ -31,7 +31,7 @@ export class ChangePasswordModalPage {
     this.submitted = true;
 
     if (form.valid) {
-      const res = await this.userDta.changePassword(this.changePassword);
+      const res = await this.userDataService.changePassword(this.changePassword);
 
       let alert = null;
       if (res) {

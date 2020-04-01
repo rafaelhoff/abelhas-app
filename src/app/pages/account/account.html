@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="user" class="ion-padding-top ion-text-center">
-    <img src="{{user.avatar}}" alt="avatar">
+  <div *ngIf="userDataService.userData" class="ion-padding-top ion-text-center">
+    <img src="{{userDataService.userData.avatarPath}}" alt="avatar">
     <br>
     <ion-button style="text-transform:none" fill="clear" (click)="updatePicture()">{{ 'account.chgpic' | translate }}
     </ion-button>
@@ -22,7 +22,7 @@
     <!-- Inputs with labels -->
     <ion-item>
       <ion-label>{{ 'account.username' | translate }}</ion-label>
-      <ion-input>{{user.username}}</ion-input>
+      <ion-input>{{userDataService.userData.username}}</ion-input>
     </ion-item>
 
     <ion-button style="text-transform:none" fill="clear" (click)="changePassword()">

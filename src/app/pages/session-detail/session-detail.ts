@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { ConferenceData } from '../../providers/conference-data';
 import { ActivatedRoute } from '@angular/router';
-import { UserData } from '../../providers/user-data';
+import { UserDataService } from '../../providers/user-data';
 
 @Component({
   selector: 'page-session-detail',
@@ -16,7 +16,7 @@ export class SessionDetailPage {
 
   constructor(
     private dataProvider: ConferenceData,
-    private userProvider: UserData,
+    private userDataService: UserDataService,
     private route: ActivatedRoute
   ) { }
 
@@ -30,7 +30,7 @@ export class SessionDetailPage {
               if (session && session.id === sessionId) {
                 this.session = session;
 
-                this.isFavorite = this.userProvider.hasFavorite(
+                this.isFavorite = this.userDataService.hasFavorite(
                   this.session.name
                 );
 
@@ -52,11 +52,11 @@ export class SessionDetailPage {
   }
 
   toggleFavorite() {
-    if (this.userProvider.hasFavorite(this.session.name)) {
-      this.userProvider.removeFavorite(this.session.name);
+    if (this.userDataService.hasFavorite(this.session.name)) {
+      this.userDataService.removeFavorite(this.session.name);
       this.isFavorite = false;
     } else {
-      this.userProvider.addFavorite(this.session.name);
+      this.userDataService.addFavorite(this.session.name);
       this.isFavorite = true;
     }
   }

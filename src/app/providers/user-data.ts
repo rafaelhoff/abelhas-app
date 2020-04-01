@@ -5,11 +5,12 @@ import { AppStorage } from '../util/storage';
 @Injectable({
   providedIn: 'root'
 })
-export class UserData {
+export class UserDataService {
   readonly storageKey = 'username';
   readonly HAS_LOGGED_IN = 'hasLoggedIn';
 
   favorites: string[] = [];
+  public userData: UserData = null;
 
   constructor(
     public storage: AppStorage
@@ -30,18 +31,27 @@ export class UserData {
     }
   }
 
-  login(username: string): Promise<any> {
-    return this.storage.set(this.HAS_LOGGED_IN, true).then(() => {
-      this.setUsername(username);
-      return window.dispatchEvent(new CustomEvent('user:login'));
-    });
+  async login(username: string): Promise<any> {
+    await this.storage.set(this.HAS_LOGGED_IN, true);
+    this.userData = {
+      username,
+      // TODO: change the avatar code.
+      avatarPath: '/assets/img/profile.png',
+    };
+    this.save();
+
+    return window.dispatchEvent(new CustomEvent('user:login'));
   }
 
-  signup(username: string): Promise<any> {
-    return this.storage.set(this.HAS_LOGGED_IN, true).then(() => {
-      this.setUsername(username);
-      return window.dispatchEvent(new CustomEvent('user:signup'));
-    });
+  async signup(username: string): Promise<any> {
+    await this.storage.set(this.HAS_LOGGED_IN, true);
+    this.userData = {
+      username,
+      // TODO: change the avatar code.
+      avatarPath: '/assets/img/profile.png',
+    };
+    this.save();
+    return window.dispatchEvent(new CustomEvent('user:signup'));
   }
 
   async logout(): Promise<any> {
@@ -52,16 +62,15 @@ export class UserData {
     return true;
   }
 
-  setUsername(username: string): Promise<any> {
-    return this.storage.set(this.storageKey, {
-      // TODO: change the avatar code.
-      avatar: 'https://www.gravatar.com/avatar?d=mm&s=140',
-      username
-    });
+  save(): Promise<any> {
+    return this.storage.set(this.storageKey, this.userData);
   }
 
-  async getUser(): Promise<any> {
-    return this.storage.get(this.storageKey);
+  async getUser(): Promise<UserData> {
+    if (!this.userData) {
+      this.userData = await this.storage.get(this.storageKey);
+    }
+    return this.userData;
   }
 
   isLoggedIn(): Promise<boolean> {
@@ -81,6 +90,11 @@ export interface ChangePasswordOptions {
   oldPassword: string;
   password: string;
   password2: string;
+}
+
+export interface UserData {
+  username: string;
+  avatarPath: string;
 }
 
 
