@@ -24,8 +24,6 @@ export class PhotoService {
       width: 200
     });
 
-    console.log(JSON.stringify(capturedPhoto));
-
     return capturedPhoto;
   }
 

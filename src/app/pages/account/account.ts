@@ -32,7 +32,7 @@ export class AccountPage implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userDataService.getUser().then(d => console.log(JSON.stringify(d)));
+    this.userDataService.getUser(); // .then(d => console.log(JSON.stringify(d)));
   }
 
   async updatePicture() {
@@ -112,7 +112,7 @@ export class AccountPage implements OnInit {
   async takePicture() {
     // TODO: deal with the Picture.
     const photo: CameraPhoto = await this.photoService.capturePhoto();
-    //const photo: Photo = await this.photoService.savePicture(camPhoto, 'profile.jpg');
+    // const photo: Photo = await this.photoService.savePicture(camPhoto, 'profile.jpg');
 
     this.userDataService.userData.avatarPath = photo.webPath;
     this.userDataService.save();
