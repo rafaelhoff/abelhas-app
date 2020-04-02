@@ -14,7 +14,6 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 
 import { NgxLoggerLevel, LoggerModule } from 'ngx-logger';
 
@@ -47,7 +46,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     })
   ],
   declarations: [AppComponent],
-  providers: [BarcodeScanner, PhotoLibrary],
+  providers: [BarcodeScanner],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

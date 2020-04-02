@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { Plugins, CameraResultType, Capacitor, FilesystemDirectory, CameraPhoto, CameraSource } from '@capacitor/core';
 import { Platform } from '@ionic/angular';
 
-const { Camera, Filesystem, Storage } = Plugins;
+const { Camera, Filesystem } = Plugins;
 
 @Injectable({
   providedIn: 'root'
 })
 export class PhotoService {
+  // API Documentation: https://capacitor.ionicframework.com/docs/apis/camera/
 
   constructor(
     private platform: Platform) { }
@@ -17,8 +18,13 @@ export class PhotoService {
     const capturedPhoto: CameraPhoto = await Camera.getPhoto({
       resultType: CameraResultType.Uri, // file-based data; provides best performance
       source: CameraSource.Camera, // automatically take a new photo with the camera
-      quality: 100 // highest quality (0 to 100)
+      quality: 100, // highest quality (0 to 100),
+      // correctOrientation: false,
+      height: 200,
+      width: 200
     });
+
+    console.log(JSON.stringify(capturedPhoto));
 
     return capturedPhoto;
   }
@@ -84,7 +90,6 @@ export class PhotoService {
       };
     }
   }
-
 
   convertBlobToBase64 = (blob: Blob) => new Promise((resolve, reject) => {
     const reader = new FileReader();

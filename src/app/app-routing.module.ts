@@ -43,11 +43,15 @@ const routes: Routes = [
   },
   {
     path: 'geolocation',
-    loadChildren: () => import('./pages/geolocation/geolocation.module').then(m => m.GeoLocationModule)
+    loadChildren: () => import('./test/geolocation/geolocation.module').then(m => m.GeoLocationModule)
   },
   {
     path: 'cameraQR',
     loadChildren: () => import('./pages/cameraQR/cameraQR.module').then(m => m.CameraQRModule)
+  },
+  {
+    path: 'camera',
+    loadChildren: () => import('./test/camera/camera.module').then(m => m.CameraPageModule)
   }
 ];
 

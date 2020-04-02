@@ -7,8 +7,11 @@ import { UserDataService } from '../../providers/user-data';
 import { TranslateService } from '@ngx-translate/core';
 import { ChangePasswordModalPage } from './chgPwd/account.chgPwd';
 import { PhotoService, Photo } from 'src/app/providers/photo.service';
-import { PhotoLibraryModalPage } from './photoLibrary/account.photoLibrary';
-import { CameraPhoto } from '@capacitor/core';
+import { Plugins, CameraPhoto, CameraSource, CameraResultType, Capacitor } from '@capacitor/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
+const { Camera } = Plugins;
+
 
 @Component({
   selector: 'page-account',
@@ -24,11 +27,12 @@ export class AccountPage implements OnInit {
     public photoService: PhotoService,
     public router: Router,
     public userDataService: UserDataService,
-    public translateService: TranslateService
+    public translateService: TranslateService,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
-    this.userDataService.getUser();
+    this.userDataService.getUser().then(d => console.log(JSON.stringify(d)));
   }
 
   async updatePicture() {
@@ -38,14 +42,7 @@ export class AccountPage implements OnInit {
         text: this.translateService.instant('account.takePhoto'),
         icon: 'share',
         handler: async () => {
-          // TODO: deal with the Picture.
-          const camPhoto: CameraPhoto = await this.photoService.capturePhoto();
-          const photo: Photo = await this.photoService.savePicture(camPhoto, 'profile.jpg');
-
-          // this.userDataService.userData.avatarPath = await this.photoService.readBase64Photo(photo.filepath);
-          this.userDataService.userData.avatarPath = photo.webviewPath;
-          // Web platform only: Save the photo into the base64 field
-          this.userDataService.save();
+          this.takePicture();
         }
       }, {
         text: this.translateService.instant('account.fromLibrary'),
@@ -103,9 +100,22 @@ export class AccountPage implements OnInit {
   }
 
   async getPhoto() {
-    const modal = await this.modalController.create({
-      component: PhotoLibraryModalPage
+    const photo: CameraPhoto = await Camera.getPhoto({
+      source: CameraSource.Photos,
+      resultType: CameraResultType.Uri
     });
-    return await modal.present();
+
+    this.userDataService.userData.avatarPath = photo.webPath;
+    this.userDataService.save();
+  }
+
+  async takePicture() {
+    // TODO: deal with the Picture.
+    const photo: CameraPhoto = await this.photoService.capturePhoto();
+    //const photo: Photo = await this.photoService.savePicture(camPhoto, 'profile.jpg');
+
+    this.userDataService.userData.avatarPath = photo.webPath;
+    this.userDataService.save();
+
   }
 }

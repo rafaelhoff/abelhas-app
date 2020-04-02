@@ -7,8 +7,6 @@ import { AccountPageRoutingModule } from './account-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { ChangePasswordModalPage } from './chgPwd/account.chgPwd';
 import { FormsModule } from '@angular/forms';
-import { PhotoLibraryModalPage } from './photoLibrary/account.photoLibrary';
-import { CDVPhotoLibraryPipe } from './cdvphotolibrary.pipe';
 
 @NgModule({
   imports: [
@@ -19,8 +17,8 @@ import { CDVPhotoLibraryPipe } from './cdvphotolibrary.pipe';
     TranslateModule
   ],
   declarations: [
-    AccountPage, ChangePasswordModalPage, PhotoLibraryModalPage, CDVPhotoLibraryPipe
+    AccountPage, ChangePasswordModalPage
   ],
-  entryComponents: [ChangePasswordModalPage, PhotoLibraryModalPage]
+  entryComponents: [ChangePasswordModalPage]
 })
 export class AccountModule { }

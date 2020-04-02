@@ -9,7 +9,7 @@
 
 <ion-content>
   <div *ngIf="userDataService.userData" class="ion-padding-top ion-text-center">
-    <img src="{{userDataService.userData.avatarPath}}" alt="avatar">
+    <img [src]="userDataService.userData.avatarPath" alt="avatar" class="imgAvatar">
     <br>
     <ion-button style="text-transform:none" fill="clear" (click)="updatePicture()">{{ 'account.chgpic' | translate }}
     </ion-button>

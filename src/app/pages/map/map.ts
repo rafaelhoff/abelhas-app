@@ -1,7 +1,6 @@
 import { Component, ElementRef, Inject, ViewChild, AfterViewInit } from '@angular/core';
 import { ConferenceData } from '../../providers/conference-data';
-import { Platform } from '@ionic/angular';
-import { DOCUMENT} from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 
 import { darkStyle } from './map-dark-style';
 
@@ -15,8 +14,8 @@ export class MapPage implements AfterViewInit {
 
   constructor(
     @Inject(DOCUMENT) private doc: Document,
-    public confData: ConferenceData,
-    public platform: Platform) {}
+    public confData: ConferenceData
+  ) { }
 
   async ngAfterViewInit() {
     const appEl = this.doc.querySelector('ion-app');
@@ -68,9 +67,9 @@ export class MapPage implements AfterViewInit {
           const el = mutation.target as HTMLElement;
           isDark = el.classList.contains('dark-theme');
           if (map && isDark) {
-            map.setOptions({styles: darkStyle});
+            map.setOptions({ styles: darkStyle });
           } else if (map) {
-            map.setOptions({styles: []});
+            map.setOptions({ styles: [] });
           }
         }
       });

@@ -20,10 +20,9 @@ export class TutorialPage {
     public configService: ConfigService
   ) { }
 
-  startApp() {
-    this.router
-      .navigateByUrl('/app/tabs/schedule', { replaceUrl: true })
-      .then(() => this.configService.setTutorialDone(true));
+  async startApp() {
+    await this.router.navigateByUrl('/app/tabs/schedule', { replaceUrl: true });
+    this.configService.setTutorialDone(true);
   }
 
   onSlideChangeStart(event) {
