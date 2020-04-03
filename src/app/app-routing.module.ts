@@ -52,6 +52,10 @@ const routes: Routes = [
   {
     path: 'camera',
     loadChildren: () => import('./test/camera/camera.module').then(m => m.CameraPageModule)
+  },
+  {
+    path: 'voice',
+    loadChildren: () => import('./test/voicerecording/voicerecording.module').then(m => m.VoiceRecordingModule)
   }
 ];
 

@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Voice Recording
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <h2>MOBILE / WEB</h2>
+
+  <ion-list>
+    <ion-item *ngFor="let record of records">
+      <ion-button (click)="play(record.audio)" color="primary">
+        <ion-icon name="play"></ion-icon>
+      </ion-button>
+      <ion-label>{{record.recordedAt}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <div *ngIf="!recording">
+    <ion-button (click)="start()" color="primary">
+      <ion-icon name="mic"></ion-icon>
+    </ion-button>
+  </div>
+
+  <div *ngIf="recording">
+    <ion-button (click)="stop(false)" color="primary">
+      <ion-icon name="close-circle"></ion-icon>
+    </ion-button>
+
+    {{timer}}
+
+    <ion-button (click)="stop(true)" color="primary">
+      <ion-icon name="checkmark-circle"></ion-icon>
+    </ion-button>
+  </div>
+
+</ion-content>
