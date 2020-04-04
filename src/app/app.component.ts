@@ -75,15 +75,14 @@ export class AppComponent implements OnInit {
 
   async initializeApp() {
     await this.platform.ready();
+    SplashScreen.hide();
+
     await this.configService.load();
 
     this.configService.darkMode$.subscribe((dM: boolean) => {
       this.logger.debug('got darkmode changed');
       return this.dark = dM;
     });
-
-    SplashScreen.hide();
-
   }
 
   checkLoginStatus() {

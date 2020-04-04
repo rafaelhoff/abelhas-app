@@ -11,7 +11,7 @@ import { UserDataService, UserOptions } from '../../providers/user-data';
   styleUrls: ['./login.scss'],
 })
 export class LoginPage {
-  login: UserOptions = { username: '', password: '' };
+  credentials: UserOptions = { username: '', password: '' };
   submitted = false;
 
   constructor(
@@ -22,9 +22,13 @@ export class LoginPage {
   onLogin(form: NgForm) {
     this.submitted = true;
 
-    if (form.valid) {
-      this.userDataService.login(this.login.username);
-      this.router.navigateByUrl('/app/tabs/schedule');
+    try {
+      if (form.valid) {
+        this.userDataService.login(this.credentials);
+        this.router.navigateByUrl('/app/tabs/schedule');
+      }
+    } catch (error) {
+      // TODO: show error...
     }
   }
 

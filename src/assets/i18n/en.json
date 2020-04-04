@@ -18,6 +18,14 @@
 		"takePhoto": "Take Photo",
 		"username": "Username"
 	},
+	"auth": {
+		"email": "E-mail",
+		"emailReq": "E-mail is required",
+		"login": "Login",
+		"pwd": "Password",
+		"pwdReq": "Password is required",
+		"signup": "Signup"
+	},
 	"basic": {
 		"cancel": "Cancel",
 		"ok": "OK"

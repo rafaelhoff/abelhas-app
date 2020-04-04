@@ -4,11 +4,11 @@
 			"change": "Alterar",
 			"confirm": "A senha foi alterada.",
 			"new": "Nova senha",
-			"new2": "Repita a nova senha",
-			"new2Req": "",
-			"newReq": "",
+			"new2": "Repita nova senha",
+			"new2Req": "Repita nova senha é obrigatória",
+			"newReq": "Nova senha é obrigatória",
 			"old": "Senha Antiga",
-			"oldReq": "",
+			"oldReq": "Senha Antiga é obrigatória",
 			"title": "Alterar senha"
 		},
 		"chgpic": "Alterar imagem",
@@ -17,6 +17,14 @@
 		"name": "Nome",
 		"takePhoto": "Tirar Foto",
 		"username": "Nome do Usuário"
+	},
+	"auth": {
+		"email": "E-mail",
+		"emailReq": "E-mail é obrigatório",
+		"login": "Login",
+		"pwd": "Senha",
+		"pwdReq": "Senha é obrigatória",
+		"signup": "Cadastrar"
 	},
 	"basic": {
 		"cancel": "Cancelar",
