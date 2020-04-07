@@ -47,7 +47,7 @@ const routes: Routes = [
   },
   {
     path: 'cameraQR',
-    loadChildren: () => import('./pages/cameraQR/cameraQR.module').then(m => m.CameraQRModule)
+    loadChildren: () => import('./test/cameraQR/cameraQR.module').then(m => m.CameraQRModule)
   },
   {
     path: 'camera',
