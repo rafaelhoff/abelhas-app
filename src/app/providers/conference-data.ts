@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { UserDataService } from './user-data';
+import { UserDataService } from './UserData.service';
 
 @Injectable({
   providedIn: 'root'

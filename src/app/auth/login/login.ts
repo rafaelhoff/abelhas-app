@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Plugins } from '@capacitor/core';
 const { Modals } = Plugins;
 
-import { UserDataService, UserLoginParams } from '../../providers/user-data';
+import { UserDataService, UserLoginParams } from '../../providers/UserData.service';
 
 
 @Component({

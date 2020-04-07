@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AppStorage } from '../util/storage';
-// import { Auth } from 'aws-amplify';
-// import { ISignUpResult, CognitoUser } from 'amazon-cognito-identity-js';
+import { Auth } from 'aws-amplify';
+import { ISignUpResult, CognitoUser } from 'amazon-cognito-identity-js';
 
 
 @Injectable({
@@ -9,10 +9,10 @@ import { AppStorage } from '../util/storage';
 })
 export class UserDataService {
   readonly storageKey = 'username';
-  readonly HAS_LOGGED_IN = 'hasLoggedIn';
 
   favorites: string[] = [];
   public userData: UserData = null;
+  private cognitoUser: CognitoUser;
 
   constructor(
     public storage: AppStorage
@@ -35,10 +35,11 @@ export class UserDataService {
 
   async login(user: UserLoginParams): Promise<any> {
 
-    // const signInData: CognitoUser = await Auth.signIn(user);
-    // console.log(signInData);
+    this.cognitoUser = await Auth.signIn(user);
+    console.log(this.cognitoUser);
 
-    await this.storage.set(this.HAS_LOGGED_IN, true);
+    // TODO: read the avatarpicture and download it.
+
     this.userData = {
       username: user.username,
       // TODO: change the avatar code.
@@ -51,10 +52,9 @@ export class UserDataService {
 
   async signup(user: UserLoginParams): Promise<any> {
 
-    // const signUpData: ISignUpResult = await Auth.signUp(user);
-    // console.log(signUpData);
+    const signUpData: ISignUpResult = await Auth.signUp(user);
+    console.log(signUpData);
 
-    await this.storage.set(this.HAS_LOGGED_IN, true);
     this.userData = {
       username: user.username,
       // TODO: change the avatar code.
@@ -65,14 +65,14 @@ export class UserDataService {
   }
 
   async logout(): Promise<any> {
-    await this.storage.set(this.HAS_LOGGED_IN, null);
+    await Auth.signOut();
     await this.storage.set(this.storageKey, null);
 
     window.dispatchEvent(new CustomEvent('user:logout'));
     return true;
   }
 
-  save(): Promise<any> {
+  private save(): Promise<any> {
     return this.storage.set(this.storageKey, this.userData);
   }
 
@@ -83,15 +83,12 @@ export class UserDataService {
     return this.userData;
   }
 
-  isLoggedIn(): Promise<boolean> {
-    return this.storage.get(this.HAS_LOGGED_IN).then((value) => {
-      return value === true;
-    });
+  isLoggedIn(): boolean {
+    return (this.userData != null);
   }
 
   async changePassword(options: ChangePasswordOptions): Promise<boolean> {
-    // TODO: do the actual change.
-    // Auth.changePassword();
+    await Auth.changePassword(this.cognitoUser, options.oldPassword, options.newPpassword);
 
     return true;
   }

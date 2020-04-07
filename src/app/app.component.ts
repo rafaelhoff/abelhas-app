@@ -4,7 +4,7 @@ import { SwUpdate } from '@angular/service-worker';
 
 import { Platform, ToastController } from '@ionic/angular';
 
-import { UserDataService } from './providers/user-data';
+import { UserDataService } from './providers/UserData.service';
 import { SplashScreen } from '@capacitor/core';
 import { ConfigService } from './providers/config-data';
 import { NGXLogger } from 'ngx-logger';
@@ -86,9 +86,7 @@ export class AppComponent implements OnInit {
   }
 
   checkLoginStatus() {
-    return this.userDataService.isLoggedIn().then(loggedIn => {
-      return this.updateLoggedInStatus(loggedIn);
-    });
+    return this.updateLoggedInStatus(this.userDataService.isLoggedIn());
   }
 
   updateLoggedInStatus(loggedIn: boolean) {

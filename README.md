@@ -95,3 +95,4 @@ See [CONTRIBUTING.md](https://github.com/ionic-team/ionic-conference-app/blob/ma
 [ ] Add Angular Animations
   - https://angular.io/guide/animations
   - https://medium.com/ngconf/animating-angulars-ngif-and-ngfor-32a6ff26ed2d
+[ ] Fix Geolocation Problem

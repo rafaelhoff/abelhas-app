@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { UserDataService, UserLoginParams } from '../../providers/user-data';
+import { UserDataService, UserLoginParams } from '../../providers/UserData.service';
 
 @Component({
   selector: 'page-signup',

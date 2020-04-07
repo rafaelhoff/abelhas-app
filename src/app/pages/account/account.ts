@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { AlertController, ActionSheetController, ModalController } from '@ionic/angular';
 
-import { UserDataService } from '../../providers/user-data';
+import { UserDataService } from '../../providers/UserData.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ChangePasswordModalPage } from '../../auth/chgPwd/account.chgPwd';
 import { PhotoService, Photo } from 'src/app/providers/photo.service';

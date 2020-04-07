@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { NavParams, ModalController, AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { NgForm } from '@angular/forms';
-import { ChangePasswordOptions, UserDataService } from 'src/app/providers/user-data';
+import { ChangePasswordOptions, UserDataService } from 'src/app/providers/UserData.service';
 
 @Component({
   selector: 'app-chgPwd',

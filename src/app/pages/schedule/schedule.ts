@@ -7,7 +7,7 @@ import {
 
 import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
 import { ConferenceData } from '../../providers/conference-data';
-import { UserDataService } from '../../providers/user-data';
+import { UserDataService } from '../../providers/UserData.service';
 
 @Component({
   selector: 'page-schedule',
