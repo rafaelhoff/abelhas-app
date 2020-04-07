@@ -12,7 +12,7 @@
   <form #pwdChangeForm="ngForm" novalidate>
     <ion-list>
       <ion-item>
-        <ion-label position="stacked" color="primary">{{ 'account.chgPwd.old' | translate }}</ion-label>
+        <ion-label position="floating" color="primary">{{ 'account.chgPwd.old' | translate }}</ion-label>
         <ion-input [(ngModel)]="changePassword.oldPassword" name="oldPassword" type="password" #oldPassword="ngModel"
           required>
         </ion-input>
@@ -25,7 +25,7 @@
       </ion-text>
 
       <ion-item>
-        <ion-label position="stacked" color="primary">{{ 'account.chgPwd.new' | translate }}</ion-label>
+        <ion-label position="floating" color="primary">{{ 'account.chgPwd.new' | translate }}</ion-label>
         <ion-input [(ngModel)]="changePassword.newPpassword" name="password" type="password" #password="ngModel"
           required validateEqual="password2">
         </ion-input>
@@ -38,7 +38,7 @@
       </ion-text>
 
       <ion-item>
-        <ion-label position="stacked" color="primary">{{ 'account.chgPwd.new2' | translate }}</ion-label>
+        <ion-label position="floating" color="primary">{{ 'account.chgPwd.new2' | translate }}</ion-label>
         <ion-input name="password2" type="password" #password2="ngModel" required validateEqual="password">
         </ion-input>
       </ion-item>

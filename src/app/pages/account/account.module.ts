@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { AccountPage } from './account';
 import { AccountPageRoutingModule } from './account-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { ChangePasswordModalPage } from './chgPwd/account.chgPwd';
+import { ChangePasswordModalPage } from '../../auth/chgPwd/account.chgPwd';
 import { FormsModule } from '@angular/forms';
 import { EqualValidator } from 'src/app/providers/equalPassword.directive';
 

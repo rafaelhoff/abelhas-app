@@ -8,15 +8,14 @@
 </ion-header>
 
 <ion-content>
-
   <div class="signup-logo">
     <img src="assets/img/appicon.svg" alt="Ionic Logo">
   </div>
 
   <form #signupForm="ngForm" novalidate>
-    <ion-list lines="none">
+    <ion-list>
       <ion-item>
-        <ion-label position="stacked" color="primary">{{ 'auth.email' | translate }}</ion-label>
+        <ion-label position="floating" color="primary">{{ 'auth.email' | translate }}</ion-label>
         <ion-input [(ngModel)]="signup.username" name="username" type="email" #username="ngModel" required email>
         </ion-input>
       </ion-item>
@@ -31,7 +30,7 @@
       </ion-text>
 
       <ion-item>
-        <ion-label position="stacked" color="primary">{{ 'auth.pwd' | translate }}</ion-label>
+        <ion-label position="floating" color="primary">{{ 'auth.pwd' | translate }}</ion-label>
         <ion-input [(ngModel)]="signup.password" name="password" type="password" #password="ngModel" minlength="8"
           required app-password>
         </ion-input>
@@ -49,7 +48,7 @@
         </ion-text>
       </div>
 
-      <ion-item>
+      <ion-item lines="none">
         <!--TODO: fix the terms and conditions-->
         <p>By creating your account, you agree to the <a [routerLink]="" (click)="openTermsConditions()">Terms and
             Conditions</a>.</p>

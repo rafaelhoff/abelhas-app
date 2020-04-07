@@ -5,7 +5,7 @@ import { AlertController, ActionSheetController, ModalController } from '@ionic/
 
 import { UserDataService } from '../../providers/user-data';
 import { TranslateService } from '@ngx-translate/core';
-import { ChangePasswordModalPage } from './chgPwd/account.chgPwd';
+import { ChangePasswordModalPage } from '../../auth/chgPwd/account.chgPwd';
 import { PhotoService, Photo } from 'src/app/providers/photo.service';
 import { Plugins, CameraPhoto, CameraSource, CameraResultType, Capacitor } from '@capacitor/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
