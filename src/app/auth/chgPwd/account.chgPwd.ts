@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { NavParams, ModalController, AlertController } from '@ionic/angular';
+import { Component } from '@angular/core';
+import { ModalController, AlertController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { NgForm } from '@angular/forms';
 import { ChangePasswordOptions, UserDataService } from 'src/app/providers/UserData.service';
@@ -9,11 +9,12 @@ import { ChangePasswordOptions, UserDataService } from 'src/app/providers/UserDa
   templateUrl: 'account.chgPwd.html',
 })
 export class ChangePasswordModalPage {
-  changePassword: ChangePasswordOptions = { oldPassword: '', newPpassword: '' };
+  changePassword: ChangePasswordOptions = { oldPassword: '', newPassword: '', newPasswordRep: '' };
 
   constructor(
     private alertController: AlertController,
     private modalCtrl: ModalController,
+    private toastController: ToastController,
     private translateService: TranslateService,
     private userDataService: UserDataService
   ) {
@@ -31,36 +32,23 @@ export class ChangePasswordModalPage {
     if (form.valid) {
       const res = await this.userDataService.changePassword(this.changePassword);
 
-      let alert = null;
       if (res) {
-        alert = await this.createOKAlert(() => this.dismiss());
+        const message = this.translateService.instant('auth.chgPwdConfirm');
+        const toast = await this.toastController.create({
+          message,
+          duration: 2000
+        });
+        toast.present();
+        this.dismiss();
       } else {
         // TODO: fix error
-        alert = await this.createErrorAlert('Something went wrong.');
+        const alert = await this.alertController.create({
+          header: 'ERROR',
+          message: 'Something went wrong.',
+          buttons: ['OK']
+        });
+        await alert.present();
       }
-
-      await alert.present();
     }
-  }
-
-  private async createOKAlert(f) {
-    const alert = await this.alertController.create({
-      header: this.translateService.instant('account.chgPwd.title'),
-      message: this.translateService.instant('account.chgPwd.confirm'),
-      buttons: [{
-        text: this.translateService.instant('basic.ok'),
-        handler: f
-      }]
-    });
-    return alert;
-  }
-
-  private async createErrorAlert(errMsg) {
-    const alert = await this.alertController.create({
-      header: 'ERROR',
-      message: errMsg,
-      buttons: ['OK']
-    });
-    return alert;
   }
 }

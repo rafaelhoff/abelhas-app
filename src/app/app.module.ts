@@ -33,6 +33,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       enabled: environment.production
     }),
     TranslateModule.forRoot({
+      defaultLanguage: 'en',
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,

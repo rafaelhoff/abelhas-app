@@ -1,16 +1,5 @@
 {
 	"account": {
-		"chgPwd": {
-			"change": "Change",
-			"confirm": "Password is changed.",
-			"new": "New Password",
-			"new2": "Repeat new Password",
-			"new2Req": "Repeat new Password is required",
-			"newReq": "New Password is required",
-			"old": "Old Password",
-			"oldReq": "Old Password is required",
-			"title": "Change Password"
-		},
 		"chgpic": "Change Picture",
 		"fromLibrary": "From Library",
 		"logout": "Logout",
@@ -19,11 +8,19 @@
 		"username": "Username"
 	},
 	"auth": {
-		"create": "Create",
+		"chgPwdConfirm": "Password is changed.",
+		"chgPwdTitle": "Change Password",
 		"email": "E-mail",
 		"emailReq": "E-mail is required",
 		"emailValid": "E-mail must be valid",
 		"login": "Login",
+		"new": "New Password",
+		"new2": "Repeat new Password",
+		"new2Req": "Repeat new Password is required",
+		"newPwdMatch": "Repeat must match",
+		"newReq": "New Password is required",
+		"old": "Old Password",
+		"oldReq": "Old Password is required",
 		"pwd": "Password",
 		"pwdComp": "Minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and one special character",
 		"pwdReq": "Password is required",
@@ -31,6 +28,8 @@
 	},
 	"basic": {
 		"cancel": "Cancel",
+		"change": "Change",
+		"create": "Create",
 		"ok": "OK"
 	},
 	"cfg": {

@@ -1,16 +1,5 @@
 {
 	"account": {
-		"chgPwd": {
-			"change": "Alterar",
-			"confirm": "A senha foi alterada.",
-			"new": "Nova senha",
-			"new2": "Repita nova senha",
-			"new2Req": "Repita nova senha é obrigatória",
-			"newReq": "Nova senha é obrigatória",
-			"old": "Senha Antiga",
-			"oldReq": "Senha Antiga é obrigatória",
-			"title": "Alterar senha"
-		},
 		"chgpic": "Alterar imagem",
 		"fromLibrary": "Buscar da Biblioteca",
 		"logout": "Deslogar",
@@ -19,11 +8,19 @@
 		"username": "Nome do Usuário"
 	},
 	"auth": {
-		"create": "Criar",
+		"chgPwdConfirm": "A senha foi alterada.",
+		"chgPwdTitle": "Alterar senha",
 		"email": "E-mail",
 		"emailReq": "E-mail é obrigatório",
 		"emailValid": "E-mail deve ser valido",
 		"login": "Login",
+		"new": "Nova senha",
+		"new2": "Repita nova senha",
+		"new2Req": "Repita nova senha é obrigatória",
+		"newPwdMatch": "Novas senhas devem corresponder",
+		"newReq": "Nova senha é obrigatória",
+		"old": "Senha Antiga",
+		"oldReq": "Senha Antiga é obrigatória",
 		"pwd": "Senha",
 		"pwdComp": "Mínimo 8 caracteres, ao menos uma maiúscula, uma minúscula, um número e um caractere especial",
 		"pwdReq": "Senha é obrigatória",
@@ -31,6 +28,8 @@
 	},
 	"basic": {
 		"cancel": "Cancelar",
+		"change": "Alterar",
+		"create": "Criar",
 		"ok": "OK"
 	},
 	"cfg": {

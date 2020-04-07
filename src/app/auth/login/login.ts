@@ -29,7 +29,7 @@ export class LoginPage {
     } catch (error) {
       // TODO: show error...
       console.log(error);
-      let alertRet = await Modals.alert({
+      const alertRet = await Modals.alert({
         title: 'Error',
         message: error.message
       });

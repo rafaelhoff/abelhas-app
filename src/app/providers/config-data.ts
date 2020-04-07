@@ -22,9 +22,7 @@ export class ConfigService {
     public http: HttpClient,
     public storage: AppStorage,
     private translate: TranslateService,
-  ) {
-    this.translate.setDefaultLang('en');
-  }
+  ) { }
 
   async getInitialConfiguation(): Promise<any> {
     const langRes: DeviceLanguageCodeResult = await Device.getLanguageCode();

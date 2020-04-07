@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AppStorage } from '../util/storage';
 import { Auth } from 'aws-amplify';
 import { ISignUpResult, CognitoUser } from 'amazon-cognito-identity-js';
+import { environment } from '../../environments/environment';
+import { AppLogger } from '../util/logger';
 
 
 @Injectable({
@@ -15,6 +17,7 @@ export class UserDataService {
   private cognitoUser: CognitoUser;
 
   constructor(
+    private logger: AppLogger,
     public storage: AppStorage
   ) { }
 
@@ -35,8 +38,12 @@ export class UserDataService {
 
   async login(user: UserLoginParams): Promise<any> {
 
-    this.cognitoUser = await Auth.signIn(user);
-    console.log(this.cognitoUser);
+    if (environment.connectToCognito) {
+      this.cognitoUser = await Auth.signIn(user);
+      this.logger.trace(this.cognitoUser);
+    } else {
+      this.logger.debug('skipping Cognito');
+    }
 
     // TODO: read the avatarpicture and download it.
 
@@ -52,8 +59,12 @@ export class UserDataService {
 
   async signup(user: UserLoginParams): Promise<any> {
 
-    const signUpData: ISignUpResult = await Auth.signUp(user);
-    console.log(signUpData);
+    if (environment.connectToCognito) {
+      const signUpData: ISignUpResult = await Auth.signUp(user);
+      this.logger.trace(signUpData);
+    } else {
+      this.logger.debug('skipping Cognito');
+    }
 
     this.userData = {
       username: user.username,
@@ -65,14 +76,19 @@ export class UserDataService {
   }
 
   async logout(): Promise<any> {
-    await Auth.signOut();
+    if (environment.connectToCognito) {
+      await Auth.signOut();
+    } else {
+      this.logger.debug('skipping Cognito');
+    }
+
     await this.storage.set(this.storageKey, null);
 
     window.dispatchEvent(new CustomEvent('user:logout'));
     return true;
   }
 
-  private save(): Promise<any> {
+  save(): Promise<any> {
     return this.storage.set(this.storageKey, this.userData);
   }
 
@@ -83,12 +99,17 @@ export class UserDataService {
     return this.userData;
   }
 
-  isLoggedIn(): boolean {
+  async isLoggedIn(): Promise<boolean> {
+    await this.getUser();
     return (this.userData != null);
   }
 
   async changePassword(options: ChangePasswordOptions): Promise<boolean> {
-    await Auth.changePassword(this.cognitoUser, options.oldPassword, options.newPpassword);
+    if (environment.connectToCognito) {
+      await Auth.changePassword(this.cognitoUser, options.oldPassword, options.newPassword);
+    } else {
+      this.logger.debug('skipping Cognito');
+    }
 
     return true;
   }
@@ -97,7 +118,8 @@ export class UserDataService {
 
 export interface ChangePasswordOptions {
   oldPassword: string;
-  newPpassword: string;
+  newPassword: string;
+  newPasswordRep: string;
 }
 
 export interface UserData {

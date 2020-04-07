@@ -1,19 +1,17 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 
 import { TutorialPage } from './tutorial';
 import { TutorialPageRoutingModule } from './tutorial-routing.module';
-import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
-    CommonModule,
     IonicModule,
     TutorialPageRoutingModule,
-    TranslateModule
+    SharedModule
   ],
   declarations: [TutorialPage],
   entryComponents: [TutorialPage],
 })
-export class TutorialModule {}
+export class TutorialModule { }
