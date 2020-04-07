@@ -5,16 +5,20 @@ import { IonicModule } from '@ionic/angular';
 
 import { SignupPage } from './signup';
 import { SignupPageRoutingModule } from './signup-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { EqualValidator } from 'src/app/providers/equalPassword.directive';
+import { PasswordValidator } from 'src/app/providers/password.directive';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SignupPageRoutingModule
+    SignupPageRoutingModule,
+    TranslateModule
   ],
   declarations: [
-    SignupPage,
+    SignupPage, EqualValidator, PasswordValidator
   ]
 })
 export class SignUpModule { }

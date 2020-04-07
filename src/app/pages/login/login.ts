@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { UserDataService, UserOptions } from '../../providers/user-data';
+import { Plugins } from '@capacitor/core';
+const { Modals } = Plugins;
+
+import { UserDataService, UserLoginParams } from '../../providers/user-data';
 
 
 @Component({
@@ -11,24 +14,25 @@ import { UserDataService, UserOptions } from '../../providers/user-data';
   styleUrls: ['./login.scss'],
 })
 export class LoginPage {
-  credentials: UserOptions = { username: '', password: '' };
-  submitted = false;
+  credentials: UserLoginParams = { username: '', password: '' };
 
   constructor(
     public userDataService: UserDataService,
     public router: Router
   ) { }
 
-  onLogin(form: NgForm) {
-    this.submitted = true;
+  async onLogin(form: NgForm) {
 
     try {
-      if (form.valid) {
-        this.userDataService.login(this.credentials);
-        this.router.navigateByUrl('/app/tabs/schedule');
-      }
+      await this.userDataService.login(this.credentials);
+      this.router.navigateByUrl('/app');
     } catch (error) {
       // TODO: show error...
+      console.log(error);
+      let alertRet = await Modals.alert({
+        title: 'Error',
+        message: error.message
+      });
     }
   }
 

@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
 
-    <ion-title>Login</ion-title>
+    <ion-title>{{ 'auth.login' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -17,14 +17,16 @@
     <ion-list>
       <ion-item>
         <ion-label position="stacked" color="primary">{{ 'auth.email' | translate }}</ion-label>
-        <ion-input [(ngModel)]="credentials.email" name="username" type="text" #username="ngModel" spellcheck="false"
-          autocapitalize="off" required>
+        <ion-input [(ngModel)]="credentials.username" name="username" type="email" #username="ngModel" required email>
         </ion-input>
       </ion-item>
 
-      <ion-text color="danger">
-        <p [hidden]="username.valid || submitted == false" class="ion-padding-start">
+      <ion-text color="danger" *ngIf="username.invalid && (username.dirty && username.touched)">
+        <p *ngIf="username.errors.required" class="ion-padding-start">
           {{ 'auth.emailReq' | translate }}
+        </p>
+        <p *ngIf="username.errors.email" class="ion-padding-start">
+          {{ 'auth.emailValid' | translate }}
         </p>
       </ion-text>
 
@@ -34,8 +36,8 @@
         </ion-input>
       </ion-item>
 
-      <ion-text color="danger">
-        <p [hidden]="password.valid || submitted == false" class="ion-padding-start">
+      <ion-text color="danger" *ngIf="password.invalid && (password.dirty && password.touched)">
+        <p *ngIf="password.errors.required" class="ion-padding-start">
           {{ 'auth.pwdReq' | translate }}
         </p>
       </ion-text>
@@ -43,7 +45,8 @@
 
     <ion-row>
       <ion-col>
-        <ion-button (click)="onLogin(loginForm)" type="submit" expand="block">{{ 'auth.login' | translate }}
+        <ion-button (click)="onLogin(loginForm)" type="submit" expand="block" [disabled]="loginForm.invalid">
+          {{ 'auth.login' | translate }}
         </ion-button>
       </ion-col>
       <ion-col>

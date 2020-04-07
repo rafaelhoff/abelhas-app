@@ -19,10 +19,13 @@
 		"username": "Nome do Usuário"
 	},
 	"auth": {
+		"create": "Criar",
 		"email": "E-mail",
 		"emailReq": "E-mail é obrigatório",
+		"emailValid": "E-mail deve ser valido",
 		"login": "Login",
 		"pwd": "Senha",
+		"pwdComp": "Mínimo 8 caracteres, ao menos uma maiúscula, uma minúscula, um número e um caractere especial",
 		"pwdReq": "Senha é obrigatória",
 		"signup": "Cadastrar"
 	},

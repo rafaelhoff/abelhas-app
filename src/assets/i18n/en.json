@@ -19,10 +19,13 @@
 		"username": "Username"
 	},
 	"auth": {
+		"create": "Create",
 		"email": "E-mail",
 		"emailReq": "E-mail is required",
+		"emailValid": "E-mail must be valid",
 		"login": "Login",
 		"pwd": "Password",
+		"pwdComp": "Minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and one special character",
 		"pwdReq": "Password is required",
 		"signup": "Signup"
 	},

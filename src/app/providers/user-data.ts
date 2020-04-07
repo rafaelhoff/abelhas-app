@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AppStorage } from '../util/storage';
+// import { Auth } from 'aws-amplify';
+// import { ISignUpResult, CognitoUser } from 'amazon-cognito-identity-js';
 
 
 @Injectable({
@@ -31,10 +33,14 @@ export class UserDataService {
     }
   }
 
-  async login(username: string): Promise<any> {
+  async login(user: UserLoginParams): Promise<any> {
+
+    // const signInData: CognitoUser = await Auth.signIn(user);
+    // console.log(signInData);
+
     await this.storage.set(this.HAS_LOGGED_IN, true);
     this.userData = {
-      username,
+      username: user.username,
       // TODO: change the avatar code.
       avatarPath: '/assets/img/profile.png',
     };
@@ -43,10 +49,14 @@ export class UserDataService {
     return window.dispatchEvent(new CustomEvent('user:login'));
   }
 
-  async signup(username: string): Promise<any> {
+  async signup(user: UserLoginParams): Promise<any> {
+
+    // const signUpData: ISignUpResult = await Auth.signUp(user);
+    // console.log(signUpData);
+
     await this.storage.set(this.HAS_LOGGED_IN, true);
     this.userData = {
-      username,
+      username: user.username,
       // TODO: change the avatar code.
       avatarPath: '/assets/img/profile.png',
     };
@@ -81,6 +91,8 @@ export class UserDataService {
 
   async changePassword(options: ChangePasswordOptions): Promise<boolean> {
     // TODO: do the actual change.
+    // Auth.changePassword();
+
     return true;
   }
 
@@ -88,8 +100,7 @@ export class UserDataService {
 
 export interface ChangePasswordOptions {
   oldPassword: string;
-  password: string;
-  password2: string;
+  newPpassword: string;
 }
 
 export interface UserData {
@@ -98,9 +109,9 @@ export interface UserData {
 }
 
 
-export interface UserOptions {
+export interface UserLoginParams {
   username: string;
   password: string;
+  attributes?: object;
 }
-
 

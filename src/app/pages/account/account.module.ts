@@ -7,6 +7,7 @@ import { AccountPageRoutingModule } from './account-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { ChangePasswordModalPage } from './chgPwd/account.chgPwd';
 import { FormsModule } from '@angular/forms';
+import { EqualValidator } from 'src/app/providers/equalPassword.directive';
 
 @NgModule({
   imports: [
@@ -17,7 +18,7 @@ import { FormsModule } from '@angular/forms';
     TranslateModule
   ],
   declarations: [
-    AccountPage, ChangePasswordModalPage
+    AccountPage, ChangePasswordModalPage, EqualValidator
   ],
   entryComponents: [ChangePasswordModalPage]
 })

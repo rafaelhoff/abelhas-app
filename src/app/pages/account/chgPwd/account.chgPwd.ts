@@ -9,8 +9,7 @@ import { ChangePasswordOptions, UserDataService } from 'src/app/providers/user-d
   templateUrl: 'account.chgPwd.html',
 })
 export class ChangePasswordModalPage {
-  changePassword: ChangePasswordOptions = { oldPassword: '', password: '', password2: '' };
-  submitted = false;
+  changePassword: ChangePasswordOptions = { oldPassword: '', newPpassword: '' };
 
   constructor(
     private alertController: AlertController,
@@ -28,7 +27,6 @@ export class ChangePasswordModalPage {
   }
 
   async passwordChange(form: NgForm) {
-    this.submitted = true;
 
     if (form.valid) {
       const res = await this.userDataService.changePassword(this.changePassword);

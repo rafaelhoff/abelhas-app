@@ -26,7 +26,8 @@
 
       <ion-item>
         <ion-label position="stacked" color="primary">{{ 'account.chgPwd.new' | translate }}</ion-label>
-        <ion-input [(ngModel)]="changePassword.password" name="password" type="password" #password="ngModel" required>
+        <ion-input [(ngModel)]="changePassword.newPpassword" name="password" type="password" #password="ngModel"
+          required validateEqual="password2">
         </ion-input>
       </ion-item>
 
@@ -38,20 +39,21 @@
 
       <ion-item>
         <ion-label position="stacked" color="primary">{{ 'account.chgPwd.new2' | translate }}</ion-label>
-        <ion-input [(ngModel)]="changePassword.password2" name="password2" type="password" #password2="ngModel"
-          required>
+        <ion-input name="password2" type="password" #password2="ngModel" required validateEqual="password">
         </ion-input>
       </ion-item>
 
-      <ion-text color="danger">
-        <p [hidden]="password2.valid || submitted == false" class="ion-padding-start">
+      <ion-text color="danger" *ngIf="password2.invalid && (password2.dirty && password2.touched)">
+        <p *ngIf="password2.errors.required" class="ion-padding-start">
           {{ 'account.chgPwd.new2Req' | translate }}
         </p>
+        <p *ngIf="password2.errors.validateEqual" class="ion-padding-start">
+          not a valid password
+        </p>
       </ion-text>
-
     </ion-list>
 
-    <ion-button (click)="passwordChange(pwdChangeForm)" color="light" expand="block">
+    <ion-button (click)="passwordChange(pwdChangeForm)" color="light" expand="block" [disabled]="pwdChangeForm.invalid">
       {{ 'account.chgPwd.change' | translate }}
     </ion-button>
   </form>

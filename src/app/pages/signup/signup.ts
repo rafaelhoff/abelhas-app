@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { UserDataService, UserOptions } from '../../providers/user-data';
-
-
+import { UserDataService, UserLoginParams } from '../../providers/user-data';
 
 @Component({
   selector: 'page-signup',
@@ -12,20 +10,26 @@ import { UserDataService, UserOptions } from '../../providers/user-data';
   styleUrls: ['./signup.scss'],
 })
 export class SignupPage {
-  signup: UserOptions = { username: '', password: '' };
-  submitted = false;
+  signup: UserLoginParams = { username: '', password: '' };
 
   constructor(
     public router: Router,
     public userDataService: UserDataService
   ) { }
 
-  onSignup(form: NgForm) {
-    this.submitted = true;
+  async onSignup(form: NgForm) {
 
-    if (form.valid) {
-      this.userDataService.signup(this.signup.username);
+    try {
+      await this.userDataService.signup(this.signup);
       this.router.navigateByUrl('/app/tabs/schedule');
+    } catch (error) {
+      // TODO: fix the error
+      console.log(error);
     }
+  }
+
+  openTermsConditions() {
+    // TODO: fix the terms and conditions
+    console.log('opened');
   }
 }
