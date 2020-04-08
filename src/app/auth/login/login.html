@@ -35,7 +35,8 @@
         <ion-label position="floating" color="primary">{{ 'auth.pwd' | translate }} <ion-text color="danger">*
           </ion-text>
         </ion-label>
-        <ion-input [(ngModel)]="credentials.password" name="password" type="password" #password="ngModel" required>
+        <ion-input [(ngModel)]="credentials.password" name="password" type="password" #password="ngModel" required
+          clearOnEdit="false">
         </ion-input>
       </ion-item>
 
@@ -47,7 +48,7 @@
 
       <ion-item lines="none">
         <ion-button style="text-transform:none" fill="clear" (click)="forgotPassword()">
-          Forgot Password?
+          {{ 'auth.forgot' | translate }}
         </ion-button>
       </ion-item>
 

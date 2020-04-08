@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { ConferenceData } from '../../providers/conference-data';
 import { ActivatedRoute } from '@angular/router';
-import { UserDataService } from '../../providers/UserData.service';
+import { UserDataService } from '../../providers/userData.service';
 
 @Component({
   selector: 'page-session-detail',

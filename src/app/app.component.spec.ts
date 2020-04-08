@@ -5,7 +5,7 @@ import { TestBed, async } from '@angular/core/testing';
 
 import { MenuController, Platform } from '@ionic/angular';
 import { AppComponent } from './app.component';
-import { UserDataService } from './providers/UserData.service';
+import { UserDataService } from './providers/userData.service';
 
 import { TranslateService } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';

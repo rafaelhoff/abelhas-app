@@ -15,7 +15,9 @@
   <form #signupForm="ngForm" novalidate>
     <ion-list>
       <ion-item>
-        <ion-label position="floating" color="primary">{{ 'auth.email' | translate }}</ion-label>
+        <ion-label position="floating" color="primary">{{ 'auth.email' | translate }} <ion-text color="danger">*
+          </ion-text>
+        </ion-label>
         <ion-input [(ngModel)]="signup.username" name="username" type="email" #username="ngModel" required email>
         </ion-input>
       </ion-item>
@@ -30,9 +32,11 @@
       </ion-text>
 
       <ion-item>
-        <ion-label position="floating" color="primary">{{ 'auth.pwd' | translate }}</ion-label>
+        <ion-label position="floating" color="primary">{{ 'auth.pwd' | translate }} <ion-text color="danger">*
+          </ion-text>
+        </ion-label>
         <ion-input [(ngModel)]="signup.password" name="password" type="password" #password="ngModel" minlength="8"
-          required app-password>
+          required app-password clearOnEdit="false">
         </ion-input>
       </ion-item>
 

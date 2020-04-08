@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Plugins, CameraResultType, Capacitor, FilesystemDirectory, CameraPhoto, CameraSource } from '@capacitor/core';
+import { Plugins, CameraResultType, Capacitor, FilesystemDirectory, CameraPhoto as CameraPhotoCapacitor, CameraSource } from '@capacitor/core';
 import { Platform } from '@ionic/angular';
 
 const { Camera, Filesystem } = Plugins;
@@ -25,6 +25,15 @@ export class PhotoService {
     });
 
     return capturedPhoto;
+  }
+
+  public async getFromLibrary(): Promise<CameraPhoto> {
+    const photo: CameraPhoto = await Camera.getPhoto({
+      source: CameraSource.Photos,
+      resultType: CameraResultType.Uri
+    });
+
+    return photo;
   }
 
   // Save picture to file on device
@@ -107,6 +116,10 @@ export class PhotoService {
     // Web platform only: Save the photo into the base64 field
     return `data:image/jpeg;base64,${readFile.data}`;
   }
+}
+
+export interface CameraPhoto extends CameraPhotoCapacitor {
+
 }
 
 export interface Photo {

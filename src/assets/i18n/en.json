@@ -10,9 +10,17 @@
 	"auth": {
 		"chgPwdConfirm": "Password is changed.",
 		"chgPwdTitle": "Change Password",
+		"confirm": {
+			"code": "Code",
+			"codeReq": "Code is required",
+			"confirmed": "Confirm Code is valid",
+			"desc": "An e-mail was sent to <strong>{{email}}</strong>. Please open the e-mail, copy the security code and enter in the input below.",
+			"title": "Confirm Code"
+		},
 		"email": "E-mail",
 		"emailReq": "E-mail is required",
 		"emailValid": "E-mail must be valid",
+		"forgot": "Forgot Password?",
 		"login": "Login",
 		"new": "New Password",
 		"new2": "Repeat new Password",
@@ -29,6 +37,7 @@
 	"basic": {
 		"cancel": "Cancel",
 		"change": "Change",
+		"confirm": "Confirm",
 		"create": "Create",
 		"ok": "OK"
 	},

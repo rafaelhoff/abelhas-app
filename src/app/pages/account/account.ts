@@ -1,16 +1,12 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AlertController, ActionSheetController, ModalController } from '@ionic/angular';
 
-import { UserDataService } from '../../providers/UserData.service';
+import { UserDataService } from '../../providers/userData.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ChangePasswordModalPage } from '../../auth/chgPwd/account.chgPwd';
-import { PhotoService, Photo } from 'src/app/providers/photo.service';
-import { Plugins, CameraPhoto, CameraSource, CameraResultType, Capacitor } from '@capacitor/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-
-const { Camera } = Plugins;
+import { PhotoService, CameraPhoto } from 'src/app/providers/photo.service';
 
 
 @Component({
@@ -27,8 +23,7 @@ export class AccountPage implements OnInit {
     public photoService: PhotoService,
     public router: Router,
     public userDataService: UserDataService,
-    public translateService: TranslateService,
-    private sanitizer: DomSanitizer
+    public translateService: TranslateService
   ) { }
 
   ngOnInit(): void {
@@ -94,17 +89,13 @@ export class AccountPage implements OnInit {
     return await modal.present();
   }
 
-  logout() {
-    this.userDataService.logout();
+  async logout() {
+    await this.userDataService.logout();
     this.router.navigateByUrl('/login');
   }
 
   async getPhoto() {
-    const photo: CameraPhoto = await Camera.getPhoto({
-      source: CameraSource.Photos,
-      resultType: CameraResultType.Uri
-    });
-
+    const photo: CameraPhoto = await this.photoService.getFromLibrary();
     this.userDataService.userData.avatarPath = photo.webPath;
     this.userDataService.save();
   }

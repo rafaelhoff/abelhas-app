@@ -4,7 +4,7 @@ import { SwUpdate } from '@angular/service-worker';
 
 import { Platform, ToastController } from '@ionic/angular';
 
-import { UserDataService } from './providers/UserData.service';
+import { UserDataService } from './providers/userData.service';
 import { SplashScreen } from '@capacitor/core';
 import { ConfigService } from './providers/config-data';
 import { NGXLogger } from 'ngx-logger';
@@ -109,11 +109,4 @@ export class AppComponent implements OnInit {
       this.updateLoggedInStatus(false);
     });
   }
-
-  logout() {
-    this.userDataService.logout().then(() => {
-      return this.router.navigateByUrl('/app/tabs/schedule');
-    });
-  }
-
 }

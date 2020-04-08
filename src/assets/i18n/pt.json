@@ -10,9 +10,17 @@
 	"auth": {
 		"chgPwdConfirm": "A senha foi alterada.",
 		"chgPwdTitle": "Alterar senha",
+		"confirm": {
+			"code": "Código",
+			"codeReq": "Código é obrigatório",
+			"confirmed": "Código de confirmação é valido.",
+			"desc": "auth.confirm.desc",
+			"title": "Código de confirmação"
+		},
 		"email": "E-mail",
 		"emailReq": "E-mail é obrigatório",
 		"emailValid": "E-mail deve ser valido",
+		"forgot": "Esqueceu a senha?",
 		"login": "Login",
 		"new": "Nova senha",
 		"new2": "Repita nova senha",
@@ -29,6 +37,7 @@
 	"basic": {
 		"cancel": "Cancelar",
 		"change": "Alterar",
+		"confirm": "Confirmar",
 		"create": "Criar",
 		"ok": "OK"
 	},

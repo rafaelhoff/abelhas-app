@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Plugins } from '@capacitor/core';
 const { Modals } = Plugins;
 
-import { UserDataService, UserLoginParams } from '../../providers/UserData.service';
+import { UserDataService, UserLoginParams } from '../../providers/userData.service';
 
 
 @Component({
@@ -25,7 +25,7 @@ export class LoginPage {
 
     try {
       await this.userDataService.login(this.credentials);
-      this.router.navigateByUrl('/app');
+      this.router.navigateByUrl('/app/tabs/schedule');
     } catch (error) {
       // TODO: show error...
       console.log(error);

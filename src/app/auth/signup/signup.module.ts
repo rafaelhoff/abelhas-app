@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { SignupPage } from './signup';
 import { SignupPageRoutingModule } from './signup-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ConfirmCodeModalPage } from '../confirmCode/confirmCode';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SignupPageRoutingModule,
     SharedModule
   ],
-  declarations: [SignupPage]
+  declarations: [SignupPage, ConfirmCodeModalPage],
+  entryComponents: [ConfirmCodeModalPage]
 })
 export class SignUpModule { }

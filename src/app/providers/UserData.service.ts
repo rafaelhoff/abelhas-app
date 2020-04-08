@@ -66,8 +66,18 @@ export class UserDataService {
       this.logger.debug('skipping Cognito');
     }
 
+    return true;
+  }
+
+  async confirmCode(username: string, code: string): Promise<boolean> {
+    if (environment.connectToCognito) {
+      await Auth.confirmSignUp(username, code);
+    } else {
+      this.logger.debug('skipping Cognito');
+    }
+
     this.userData = {
-      username: user.username,
+      username,
       // TODO: change the avatar code.
       avatarPath: '/assets/img/profile.png',
     };

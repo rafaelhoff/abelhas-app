@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ 'auth.confirm.title' | translate }}</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="dismiss(false)">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <p [innerHTML]="'auth.confirm.desc' | translate:param"></p>
+  <form #confirmForm="ngForm" novalidate>
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating" color="primary">{{ 'auth.confirm.code' | translate }} <ion-text color="danger">*
+          </ion-text>
+        </ion-label>
+        <ion-input [(ngModel)]="code" name="codeCtrl" type="text" #codeCtrl="ngModel" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-text color="danger" *ngIf="codeCtrl.invalid && (codeCtrl.dirty && codeCtrl.touched)">
+        <p *ngIf="codeCtrl.errors.required" class="ion-padding-start">
+          {{ 'auth.confirm.codeReq' | translate }}
+        </p>
+      </ion-text>
+
+    </ion-list>
+
+    <ion-button (click)="confirmCode(confirmForm)" color="light" expand="block" [disabled]="confirmForm.invalid">
+      {{ 'basic.confirm' | translate }}
+    </ion-button>
+  </form>
+</ion-content>
