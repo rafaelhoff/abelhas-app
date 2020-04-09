@@ -3,18 +3,18 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { LoginPage } from './login';
-import { LoginPageRoutingModule } from './login-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { RouterModule } from '@angular/router';
+import { AuthenticationModule } from '../auth.module';
 
 @NgModule({
   imports: [
+    AuthenticationModule,
     FormsModule,
     IonicModule,
-    LoginPageRoutingModule,
+    RouterModule.forChild([{ path: '', component: LoginPage }]),
     SharedModule
   ],
-  declarations: [
-    LoginPage,
-  ]
+  declarations: [LoginPage]
 })
 export class LoginModule { }

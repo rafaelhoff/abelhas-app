@@ -3,18 +3,18 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { SignupPage } from './signup';
-import { SignupPageRoutingModule } from './signup-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ConfirmCodeModalPage } from '../confirmCode/confirmCode';
+import { RouterModule } from '@angular/router';
+import { AuthenticationModule } from '../auth.module';
 
 @NgModule({
   imports: [
+    AuthenticationModule,
     FormsModule,
     IonicModule,
-    SignupPageRoutingModule,
+    RouterModule.forChild([{ path: '', component: SignupPage }]),
     SharedModule
   ],
-  declarations: [SignupPage, ConfirmCodeModalPage],
-  entryComponents: [ConfirmCodeModalPage]
+  declarations: [SignupPage]
 })
 export class SignUpModule { }

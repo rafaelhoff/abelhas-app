@@ -2,21 +2,19 @@ import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
 import { AccountPage } from './account';
-import { AccountPageRoutingModule } from './account-routing.module';
-import { ChangePasswordModalPage } from '../../auth/chgPwd/account.chgPwd';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { RouterModule } from '@angular/router';
+import { AuthenticationModule } from 'src/app/auth/auth.module';
 
 @NgModule({
   imports: [
+    AuthenticationModule,
     FormsModule,
     IonicModule,
-    AccountPageRoutingModule,
+    RouterModule.forChild([{ path: '', component: AccountPage }]),
     SharedModule
   ],
-  declarations: [
-    AccountPage, ChangePasswordModalPage
-  ],
-  entryComponents: [ChangePasswordModalPage]
+  declarations: [AccountPage]
 })
 export class AccountModule { }

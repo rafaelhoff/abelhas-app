@@ -7,18 +7,11 @@ import { IonicModule } from '@ionic/angular';
 import { ConfigurationPage } from './configuration.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-const routes: Routes = [
-  {
-    path: '',
-    component: ConfigurationPage
-  }
-];
-
 @NgModule({
   imports: [
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
+    RouterModule.forChild([{ path: '', component: ConfigurationPage }]),
     SharedModule
   ],
   declarations: [ConfigurationPage]

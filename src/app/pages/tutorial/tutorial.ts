@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { MenuController, IonSlides } from '@ionic/angular';
 import { ConfigService } from 'src/app/providers/config-data';
+import { UserLoginParams } from 'src/app/providers/userData.service';
 
 @Component({
   selector: 'page-tutorial',
@@ -11,6 +12,7 @@ import { ConfigService } from 'src/app/providers/config-data';
 })
 export class TutorialPage {
   showSkip = true;
+  credentials: UserLoginParams = { username: '', password: '' };
 
   @ViewChild('slides', { static: true }) slides: IonSlides;
 
@@ -20,15 +22,16 @@ export class TutorialPage {
     public configService: ConfigService
   ) { }
 
-  async startApp() {
-    await this.router.navigateByUrl('/app/tabs/schedule', { replaceUrl: true });
-    this.configService.setTutorialDone(true);
+  async goToLogin() {
+    const lastSlide: number = await this.slides.length();
+    this.slides.slideTo(lastSlide - 1);
   }
 
-  onSlideChangeStart(event) {
-    event.target.isEnd().then(isEnd => {
-      this.showSkip = !isEnd;
-    });
+  async onSlideChangeStart(event) {
+    const activeIndex: number = await event.target.getActiveIndex();
+    const lastSlide: number = await this.slides.length();
+    this.showSkip = (activeIndex < (lastSlide - 2));
+    return true;
   }
 
   ionViewWillEnter() {

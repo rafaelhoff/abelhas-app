@@ -12,58 +12,6 @@
     <img src="assets/img/appicon.svg" alt="Ionic logo">
   </div>
 
-  <form #loginForm="ngForm" novalidate>
-    <ion-list>
-      <ion-item>
-        <ion-label position="floating" color="primary">{{ 'auth.email' | translate }} <ion-text color="danger">*
-          </ion-text>
-        </ion-label>
-        <ion-input [(ngModel)]="credentials.username" name="username" type="email" #username="ngModel" required email>
-        </ion-input>
-      </ion-item>
-
-      <ion-text color="danger" *ngIf="username.invalid && (username.dirty && username.touched)">
-        <p *ngIf="username.errors.required" class="ion-padding-start">
-          {{ 'auth.emailReq' | translate }}
-        </p>
-        <p *ngIf="username.errors.email" class="ion-padding-start">
-          {{ 'auth.emailValid' | translate }}
-        </p>
-      </ion-text>
-
-      <ion-item>
-        <ion-label position="floating" color="primary">{{ 'auth.pwd' | translate }} <ion-text color="danger">*
-          </ion-text>
-        </ion-label>
-        <ion-input [(ngModel)]="credentials.password" name="password" type="password" #password="ngModel" required
-          clearOnEdit="false">
-        </ion-input>
-      </ion-item>
-
-      <ion-text color="danger" *ngIf="password.invalid && (password.dirty && password.touched)">
-        <p *ngIf="password.errors.required" class="ion-padding-start">
-          {{ 'auth.pwdReq' | translate }}
-        </p>
-      </ion-text>
-
-      <ion-item lines="none">
-        <ion-button style="text-transform:none" fill="clear" (click)="forgotPassword()">
-          {{ 'auth.forgot' | translate }}
-        </ion-button>
-      </ion-item>
-
-    </ion-list>
-
-    <ion-row>
-      <ion-col>
-        <ion-button (click)="onLogin(loginForm)" type="submit" expand="block" [disabled]="loginForm.invalid">
-          {{ 'auth.login' | translate }}
-        </ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-button (click)="onSignup()" color="light" expand="block">{{ 'auth.signup' | translate }}</ion-button>
-      </ion-col>
-    </ion-row>
-  </form>
+  <pm-login></pm-login>
 
 </ion-content>

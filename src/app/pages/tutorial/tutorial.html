@@ -1,7 +1,7 @@
 <ion-header no-border>
   <ion-toolbar>
     <ion-buttons slot="end">
-      <ion-button color='primary' (click)="startApp()" [hidden]="!showSkip">{{ 'tut.skip' | translate }}</ion-button>
+      <ion-button color='primary' (click)="goToLogin()" [hidden]="!showSkip">{{ 'tut.skip' | translate }}</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -29,10 +29,14 @@
     <ion-slide>
       <img src="assets/img/tutorial-img-4.png" class="slide-image" />
       <h2 class="slide-title" [innerHTML]="'tut.ready' | translate"></h2>
-      <ion-button fill="clear" (click)="startApp()">
+      <ion-button fill="clear" (click)="goToLogin()">
         {{ 'tut.continue' | translate }}
         <ion-icon slot="end" name="arrow-forward"></ion-icon>
       </ion-button>
+    </ion-slide>
+
+    <ion-slide>
+      <pm-login></pm-login>
     </ion-slide>
   </ion-slides>
 </ion-content>
