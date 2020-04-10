@@ -37,7 +37,12 @@
     "pwd": "Senha",
     "pwdComp": "Mínimo 8 caracteres, ao menos uma maiúscula, uma minúscula, um número e um caractere especial",
     "pwdReq": "Senha é obrigatória",
-    "signup": "Cadastrar"
+    "signup": "Cadastrar",
+    "terms": {
+      "descPos": ".",
+      "descPre": "Ao criar a sua conta, voce concorda com os",
+      "title": "Termos e condições"
+    }
   },
   "basic": {
     "cancel": "Cancelar",

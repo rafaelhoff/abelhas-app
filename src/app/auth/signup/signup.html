@@ -54,8 +54,9 @@
 
       <ion-item lines="none">
         <!--TODO: fix the terms and conditions-->
-        <p>By creating your account, you agree to the <a [routerLink]="" (click)="openTermsConditions()">Terms and
-            Conditions</a>.</p>
+        <p>{{ 'auth.terms.descPre' | translate }} <a [routerLink]=""
+            (click)="openTermsConditions()">{{ 'auth.terms.title' | translate }}</a>{{ 'auth.terms.descPos' | translate }}
+        </p>
       </ion-item>
 
     </ion-list>

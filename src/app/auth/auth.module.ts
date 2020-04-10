@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { ForgotPasswordModalPage } from './forgotPassword/forgotPassword';
+import { TermsConditionsModalPage } from './termsConditions/termsConditions';
 
 @NgModule({
   imports: [
@@ -13,8 +14,8 @@ import { ForgotPasswordModalPage } from './forgotPassword/forgotPassword';
     IonicModule,
     SharedModule
   ],
-  declarations: [ChangePasswordModalPage, ConfirmCodeModalPage, ForgotPasswordModalPage, LoginComponent],
-  exports: [ChangePasswordModalPage, ConfirmCodeModalPage, ForgotPasswordModalPage, LoginComponent],
-  entryComponents: [ChangePasswordModalPage, ForgotPasswordModalPage, ConfirmCodeModalPage]
+  declarations: [ChangePasswordModalPage, ConfirmCodeModalPage, ForgotPasswordModalPage, LoginComponent, TermsConditionsModalPage],
+  exports: [ChangePasswordModalPage, ConfirmCodeModalPage, ForgotPasswordModalPage, LoginComponent, TermsConditionsModalPage],
+  entryComponents: [ChangePasswordModalPage, ForgotPasswordModalPage, ConfirmCodeModalPage, TermsConditionsModalPage]
 })
 export class AuthenticationModule { }

@@ -107,6 +107,8 @@ export class AppComponent implements OnInit {
 
     window.addEventListener('user:logout', () => {
       this.updateLoggedInStatus(false);
+      this.configService.setTutorialDone(false);
+      this.router.navigateByUrl('/tutorial');
     });
   }
 }

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UserDataService, UserLoginParams } from '../../providers/userData.service';
 import { ModalController } from '@ionic/angular';
 import { ConfirmCodeModalPage } from '../confirmCode/confirmCode';
+import { TermsConditionsModalPage } from '../termsConditions/termsConditions';
 
 @Component({
   selector: 'page-signup',
@@ -35,9 +36,11 @@ export class SignupPage {
     }
   }
 
-  openTermsConditions() {
-    // TODO: fix the terms and conditions
-    console.log('opened');
+  async openTermsConditions() {
+    const modal = await this.modalController.create({
+      component: TermsConditionsModalPage,
+    });
+    await modal.present();
   }
 
   async showConfirmCode(): Promise<boolean> {

@@ -91,7 +91,6 @@ export class AccountPage implements OnInit {
 
   async logout() {
     await this.userDataService.logout();
-    this.router.navigateByUrl('/login');
   }
 
   async getPhoto() {
