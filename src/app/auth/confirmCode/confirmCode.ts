@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ModalController, AlertController, NavParams } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
 import { UserDataService } from 'src/app/providers/userData.service';
 import { ModalsService } from 'src/app/shared/modals.service';
@@ -15,7 +15,6 @@ export class ConfirmCodeModalPage {
   public param: any;
 
   constructor(
-    private alertController: AlertController,
     private modalCtrl: ModalController,
     private modalService: ModalsService,
     private userDataService: UserDataService,
@@ -33,19 +32,14 @@ export class ConfirmCodeModalPage {
   async confirmCode(form: NgForm) {
 
     if (form.valid) {
-      const res = await this.userDataService.confirmCode(this.username, this.code);
+      try {
+        const res = await this.userDataService.confirmCode(this.username, this.code);
 
-      if (res) {
         await this.modalService.createToast('auth.confirm.confirmed');
         this.dismiss(true);
-      } else {
-        // TODO: fix error
-        const alert = await this.alertController.create({
-          header: 'ERROR',
-          message: 'Something went wrong.',
-          buttons: ['OK']
-        });
-        await alert.present();
+
+      } catch (error) {
+        await this.modalService.createCognitoErrorAlert(error);
       }
     }
   }

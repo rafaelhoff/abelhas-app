@@ -44,11 +44,18 @@
       "title": "Terms and Conditions"
     }
   },
+  "aws": {
+    "CodeMismatchException": "Invalid verification code provided, please try again.",
+    "UsernameExistsException": "An account with the given email already exists.",
+    "UserNotFoundException": "E-mail not found.",
+    "basicError": "An error has occurred."
+  },
   "basic": {
     "cancel": "Cancel",
     "change": "Change",
     "confirm": "Confirm",
     "create": "Create",
+    "error": "Error",
     "ok": "OK",
     "request": "Request"
   },

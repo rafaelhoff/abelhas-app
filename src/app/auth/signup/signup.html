@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>{{ 'auth.signup' | translate }}</ion-title>
   </ion-toolbar>
@@ -53,7 +53,6 @@
       </div>
 
       <ion-item lines="none">
-        <!--TODO: fix the terms and conditions-->
         <p>{{ 'auth.terms.descPre' | translate }} <a [routerLink]=""
             (click)="openTermsConditions()">{{ 'auth.terms.title' | translate }}</a>{{ 'auth.terms.descPos' | translate }}
         </p>

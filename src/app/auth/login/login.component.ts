@@ -2,12 +2,10 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { Plugins } from '@capacitor/core';
-const { Modals } = Plugins;
-
 import { UserDataService, UserLoginParams } from '../../providers/userData.service';
 import { ModalController } from '@ionic/angular';
 import { ForgotPasswordModalPage } from '../forgotPassword/forgotPassword';
+import { ModalsService } from 'src/app/shared/modals.service';
 
 
 @Component({
@@ -20,6 +18,7 @@ export class LoginComponent {
 
   constructor(
     private modalController: ModalController,
+    private modalService: ModalsService,
     public userDataService: UserDataService,
     public router: Router
   ) { }
@@ -28,14 +27,8 @@ export class LoginComponent {
 
     try {
       await this.userDataService.login(this.credentials);
-      this.router.navigateByUrl('/app/tabs/schedule');
     } catch (error) {
-      // TODO: show error...
-      console.log(error);
-      const alertRet = await Modals.alert({
-        title: 'Error',
-        message: error.message
-      });
+      this.modalService.createCognitoErrorAlert(error);
     }
   }
 
