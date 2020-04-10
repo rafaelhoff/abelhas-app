@@ -6,6 +6,8 @@ import { Plugins } from '@capacitor/core';
 const { Modals } = Plugins;
 
 import { UserDataService, UserLoginParams } from '../../providers/userData.service';
+import { ModalController } from '@ionic/angular';
+import { ForgotPasswordModalPage } from '../forgotPassword/forgotPassword';
 
 
 @Component({
@@ -17,6 +19,7 @@ export class LoginComponent {
   credentials: UserLoginParams = { username: '', password: '' };
 
   constructor(
+    private modalController: ModalController,
     public userDataService: UserDataService,
     public router: Router
   ) { }
@@ -40,7 +43,13 @@ export class LoginComponent {
     this.router.navigateByUrl('/signup');
   }
 
-  forgotPassword() {
-    console.log('forgot');
+  async forgotPassword(): Promise<boolean> {
+    const modal = await this.modalController.create({
+      component: ForgotPasswordModalPage
+    });
+    await modal.present();
+    await modal.onWillDismiss();
+
+    return true;
   }
 }

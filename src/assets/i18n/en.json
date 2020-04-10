@@ -1,79 +1,85 @@
 {
-	"account": {
-		"chgpic": "Change Picture",
-		"fromLibrary": "From Library",
-		"logout": "Logout",
-		"name": "Name",
-		"takePhoto": "Take Photo",
-		"username": "Username"
-	},
-	"auth": {
-		"chgPwdConfirm": "Password is changed.",
-		"chgPwdTitle": "Change Password",
-		"confirm": {
-			"code": "Code",
-			"codeReq": "Code is required",
-			"confirmed": "Confirm Code is valid",
-			"desc": "An e-mail was sent to <strong>{{email}}</strong>. Please open the e-mail, copy the security code and enter in the input below.",
-			"title": "Confirm Code"
-		},
-		"email": "E-mail",
-		"emailReq": "E-mail is required",
-		"emailValid": "E-mail must be valid",
-		"forgot": "Forgot Password?",
-		"login": "Login",
-		"new": "New Password",
-		"new2": "Repeat new Password",
-		"new2Req": "Repeat new Password is required",
-		"newPwdMatch": "Repeat must match",
-		"newReq": "New Password is required",
-		"old": "Old Password",
-		"oldReq": "Old Password is required",
-		"pwd": "Password",
-		"pwdComp": "Minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and one special character",
-		"pwdReq": "Password is required",
-		"signup": "Signup"
-	},
-	"basic": {
-		"cancel": "Cancel",
-		"change": "Change",
-		"confirm": "Confirm",
-		"create": "Create",
-		"ok": "OK"
-	},
-	"cfg": {
-		"about": {
-			"label": "About",
-			"title": "About"
-		},
-		"basic": {
-			"lng": "Language",
-			"title": "Basic Configuration"
-		},
-		"display": {
-			"darkMode": "Dark Mode",
-			"title": "Display"
-		},
-		"langList": {
-			"en": "English",
-			"es": "Spanish",
-			"pt": "Portuguese"
-		},
-		"title": "Configuration",
-		"tutorial": {
-			"show": "Show Tutorial",
-			"title": "Tutorial"
-		}
-	},
-	"tut": {
-		"continue": "Continue",
-		"flow": "Flow",
-		"flowDesc": "<strong>ABC</strong> is a ...",
-		"ready": "Ready to Play?",
-		"skip": "Skip",
-		"welcome": "Welcome to <strong>Apiario</strong>",
-		"welcomeDesc": "The <strong>Apiario</strong> is a ....",
-		"what": "What?",
-		"whatDesc": "<strong>XYZ</strong> is an ..."
-	}
+  "account": {
+    "chgpic": "Change Picture",
+    "fromLibrary": "From Library",
+    "logout": "Logout",
+    "name": "Name",
+    "takePhoto": "Take Photo",
+    "username": "Username"
+  },
+  "auth": {
+    "chgPwdConfirm": "Password is changed.",
+    "chgPwdTitle": "Change Password",
+    "confirm": {
+      "code": "Code",
+      "codeReq": "Code is required",
+      "confirmed": "Confirm Code is valid",
+      "desc": "An e-mail was sent to <strong>{{email}}</strong>. Please open the e-mail, copy the security code and enter in the input below.",
+      "title": "Confirm Code"
+    },
+    "email": "E-mail",
+    "emailReq": "E-mail is required",
+    "emailValid": "E-mail must be valid",
+    "forgot": {
+      "changed": "Your password was changed.",
+      "desc": "An e-mail was sent to <strong>{{email}}</strong> with a security code to change the password. Please open the e-mail, copy the security code and enter in the input below.",
+      "question": "Forgot Password?",
+      "title": "Forgot Password"
+    },
+    "login": "Login",
+    "new": "New Password",
+    "new2": "Repeat new Password",
+    "new2Req": "Repeat new Password is required",
+    "newPwdMatch": "Repeat must match",
+    "newReq": "New Password is required",
+    "old": "Old Password",
+    "oldReq": "Old Password is required",
+    "pwd": "Password",
+    "pwdComp": "Minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and one special character",
+    "pwdReq": "Password is required",
+    "signup": "Signup"
+  },
+  "basic": {
+    "cancel": "Cancel",
+    "change": "Change",
+    "confirm": "Confirm",
+    "create": "Create",
+    "ok": "OK",
+    "request": "Request"
+  },
+  "cfg": {
+    "about": {
+      "label": "About",
+      "title": "About"
+    },
+    "basic": {
+      "lng": "Language",
+      "title": "Basic Configuration"
+    },
+    "display": {
+      "darkMode": "Dark Mode",
+      "title": "Display"
+    },
+    "langList": {
+      "en": "English",
+      "es": "Spanish",
+      "pt": "Portuguese"
+    },
+    "title": "Configuration",
+    "tutorial": {
+      "show": "Show Tutorial",
+      "title": "Tutorial"
+    }
+  },
+  "tut": {
+    "continue": "Continue",
+    "flow": "Flow",
+    "flowDesc": "<strong>ABC</strong> is a ...",
+    "ready": "Ready to Play?",
+    "skip": "Skip",
+    "welcome": "Welcome to <strong>Apiario</strong>",
+    "welcomeDesc": "The <strong>Apiario</strong> is a ....",
+    "what": "What?",
+    "whatDesc": "<strong>XYZ</strong> is an ..."
+  }
 }

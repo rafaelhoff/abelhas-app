@@ -1,15 +1,15 @@
 import { Component, Input } from '@angular/core';
-import { ModalController, AlertController, ToastController, NavParams } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
+import { ModalController, AlertController, NavParams } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
 import { UserDataService } from 'src/app/providers/userData.service';
+import { ModalsService } from 'src/app/shared/modals.service';
 
 @Component({
   selector: 'app-confirmCode',
   templateUrl: 'confirmCode.html',
 })
 export class ConfirmCodeModalPage {
-  code: string = '';
+  code = '';
 
   @Input() username: string;
   public param: any;
@@ -17,8 +17,7 @@ export class ConfirmCodeModalPage {
   constructor(
     private alertController: AlertController,
     private modalCtrl: ModalController,
-    private toastController: ToastController,
-    private translateService: TranslateService,
+    private modalService: ModalsService,
     private userDataService: UserDataService,
     private navParams: NavParams
   ) {
@@ -37,12 +36,7 @@ export class ConfirmCodeModalPage {
       const res = await this.userDataService.confirmCode(this.username, this.code);
 
       if (res) {
-        const message = this.translateService.instant('auth.confirm.confirmed');
-        const toast = await this.toastController.create({
-          message,
-          duration: 2000
-        });
-        toast.present();
+        await this.modalService.createToast('auth.confirm.confirmed');
         this.dismiss(true);
       } else {
         // TODO: fix error

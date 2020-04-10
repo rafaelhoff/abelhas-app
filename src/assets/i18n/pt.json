@@ -1,79 +1,85 @@
 {
-	"account": {
-		"chgpic": "Alterar imagem",
-		"fromLibrary": "Buscar da Biblioteca",
-		"logout": "Deslogar",
-		"name": "Nome",
-		"takePhoto": "Tirar Foto",
-		"username": "Nome do Usuário"
-	},
-	"auth": {
-		"chgPwdConfirm": "A senha foi alterada.",
-		"chgPwdTitle": "Alterar senha",
-		"confirm": {
-			"code": "Código",
-			"codeReq": "Código é obrigatório",
-			"confirmed": "Código de confirmação é valido.",
-			"desc": "auth.confirm.desc",
-			"title": "Código de confirmação"
-		},
-		"email": "E-mail",
-		"emailReq": "E-mail é obrigatório",
-		"emailValid": "E-mail deve ser valido",
-		"forgot": "Esqueceu a senha?",
-		"login": "Login",
-		"new": "Nova senha",
-		"new2": "Repita nova senha",
-		"new2Req": "Repita nova senha é obrigatória",
-		"newPwdMatch": "Novas senhas devem corresponder",
-		"newReq": "Nova senha é obrigatória",
-		"old": "Senha Antiga",
-		"oldReq": "Senha Antiga é obrigatória",
-		"pwd": "Senha",
-		"pwdComp": "Mínimo 8 caracteres, ao menos uma maiúscula, uma minúscula, um número e um caractere especial",
-		"pwdReq": "Senha é obrigatória",
-		"signup": "Cadastrar"
-	},
-	"basic": {
-		"cancel": "Cancelar",
-		"change": "Alterar",
-		"confirm": "Confirmar",
-		"create": "Criar",
-		"ok": "OK"
-	},
-	"cfg": {
-		"about": {
-			"label": "Sobre o aplicativo",
-			"title": "Sobre o aplicativo"
-		},
-		"basic": {
-			"lng": "Língua",
-			"title": "Configuração básica"
-		},
-		"display": {
-			"darkMode": "Modo escuro",
-			"title": "Exibição"
-		},
-		"langList": {
-			"en": "Inglês",
-			"es": "Espanhol",
-			"pt": "Português"
-		},
-		"title": "Configuração",
-		"tutorial": {
-			"show": "Mostrar tutorial",
-			"title": "Tutorial"
-		}
-	},
-	"tut": {
-		"continue": "Continuar",
-		"flow": "Fluxo",
-		"flowDesc": "<strong>ABC</strong> é um ....",
-		"ready": "Pronto para iniciar?",
-		"skip": "Pular",
-		"welcome": "Bem-vindo ao <strong>Apiario</strong>",
-		"welcomeDesc": "O <strong>Apiario</strong> é um ....",
-		"what": "O que?",
-		"whatDesc": " O<strong>XYZ</strong> é um ..."
-	}
+  "account": {
+    "chgpic": "Alterar imagem",
+    "fromLibrary": "Buscar da Biblioteca",
+    "logout": "Deslogar",
+    "name": "Nome",
+    "takePhoto": "Tirar Foto",
+    "username": "Nome do Usuário"
+  },
+  "auth": {
+    "chgPwdConfirm": "A senha foi alterada.",
+    "chgPwdTitle": "Alterar senha",
+    "confirm": {
+      "code": "Código",
+      "codeReq": "Código é obrigatório",
+      "confirmed": "Código de confirmação é valido.",
+      "desc": "Um e-mail foi enviado para <strong>{{email}}</strong>. Por favor, abra o e-mail, copie o código de confirmação e coloque no campo abaixo.",
+      "title": "Código de confirmação"
+    },
+    "email": "E-mail",
+    "emailReq": "E-mail é obrigatório",
+    "emailValid": "E-mail deve ser valido",
+    "forgot": {
+      "changed": "A senha foi alterada.",
+      "desc": "Um e-mail foi enviado para <strong>{{email}}</strong> para a alteração de senha. Por favor, abra o e-mail, copie o código de confirmação e coloque no campo abaixo.",
+      "question": "Esqueceu a senha?",
+      "title": "Esqueceu a senha"
+    },
+    "login": "Login",
+    "new": "Nova senha",
+    "new2": "Repita nova senha",
+    "new2Req": "Repita nova senha é obrigatória",
+    "newPwdMatch": "Novas senhas devem corresponder",
+    "newReq": "Nova senha é obrigatória",
+    "old": "Senha Antiga",
+    "oldReq": "Senha Antiga é obrigatória",
+    "pwd": "Senha",
+    "pwdComp": "Mínimo 8 caracteres, ao menos uma maiúscula, uma minúscula, um número e um caractere especial",
+    "pwdReq": "Senha é obrigatória",
+    "signup": "Cadastrar"
+  },
+  "basic": {
+    "cancel": "Cancelar",
+    "change": "Alterar",
+    "confirm": "Confirmar",
+    "create": "Criar",
+    "ok": "OK",
+    "request": "Requisitar"
+  },
+  "cfg": {
+    "about": {
+      "label": "Sobre o aplicativo",
+      "title": "Sobre o aplicativo"
+    },
+    "basic": {
+      "lng": "Língua",
+      "title": "Configuração básica"
+    },
+    "display": {
+      "darkMode": "Modo escuro",
+      "title": "Exibição"
+    },
+    "langList": {
+      "en": "Inglês",
+      "es": "Espanhol",
+      "pt": "Português"
+    },
+    "title": "Configuração",
+    "tutorial": {
+      "show": "Mostrar tutorial",
+      "title": "Tutorial"
+    }
+  },
+  "tut": {
+    "continue": "Continuar",
+    "flow": "Fluxo",
+    "flowDesc": "<strong>ABC</strong> é um ....",
+    "ready": "Pronto para iniciar?",
+    "skip": "Pular",
+    "welcome": "Bem-vindo ao <strong>Apiario</strong>",
+    "welcomeDesc": "O <strong>Apiario</strong> é um ....",
+    "what": "O que?",
+    "whatDesc": " O<strong>XYZ</strong> é um ..."
+  }
 }

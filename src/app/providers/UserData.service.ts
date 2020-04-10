@@ -124,6 +124,25 @@ export class UserDataService {
     return true;
   }
 
+  async forgotPassword(username: string): Promise<any> {
+    if (environment.connectToCognito) {
+      await Auth.forgotPassword(username);
+    } else {
+      this.logger.debug('skipping Cognito');
+    }
+
+    return true;
+  }
+
+  async confirmCodePassword(username: string, code: string, password: string): Promise<boolean> {
+    if (environment.connectToCognito) {
+      await Auth.forgotPasswordSubmit(username, code, password);
+    } else {
+      this.logger.debug('skipping Cognito');
+    }
+
+    return true;
+  }
 }
 
 export interface ChangePasswordOptions {

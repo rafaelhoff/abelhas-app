@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { ModalController, AlertController, ToastController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
+import { ModalController, AlertController } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
 import { ChangePasswordOptions, UserDataService } from 'src/app/providers/userData.service';
+import { ModalsService } from 'src/app/shared/modals.service';
 
 @Component({
-  selector: 'app-chgPwd',
-  templateUrl: 'account.chgPwd.html',
+  selector: 'app-changePassword',
+  templateUrl: 'changePassword.html',
 })
 export class ChangePasswordModalPage {
   changePassword: ChangePasswordOptions = { oldPassword: '', newPassword: '', newPasswordRep: '' };
@@ -14,8 +14,7 @@ export class ChangePasswordModalPage {
   constructor(
     private alertController: AlertController,
     private modalCtrl: ModalController,
-    private toastController: ToastController,
-    private translateService: TranslateService,
+    private modalService: ModalsService,
     private userDataService: UserDataService
   ) {
 
@@ -33,12 +32,7 @@ export class ChangePasswordModalPage {
       const res = await this.userDataService.changePassword(this.changePassword);
 
       if (res) {
-        const message = this.translateService.instant('auth.chgPwdConfirm');
-        const toast = await this.toastController.create({
-          message,
-          duration: 2000
-        });
-        toast.present();
+        await this.modalService.createToast('auth.chgPwdConfirm');
         this.dismiss();
       } else {
         // TODO: fix error

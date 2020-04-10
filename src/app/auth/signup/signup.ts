@@ -18,7 +18,7 @@ export class SignupPage {
   constructor(
     public router: Router,
     public userDataService: UserDataService,
-    private modalController: ModalController,
+    private modalController: ModalController
   ) { }
 
   async onSignup(form: NgForm) {
