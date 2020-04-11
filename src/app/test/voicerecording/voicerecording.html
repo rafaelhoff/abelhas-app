@@ -17,6 +17,9 @@
       <ion-button (click)="play(record.audio)" color="primary">
         <ion-icon name="play"></ion-icon>
       </ion-button>
+      <ion-button (click)="saveToS3(record)" color="primary">
+        <ion-icon name="save"></ion-icon>
+      </ion-button>
       <ion-label>{{record.recordedAt}}</ion-label>
     </ion-item>
   </ion-list>

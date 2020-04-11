@@ -5,6 +5,8 @@ import { Plugins, Capacitor } from '@capacitor/core';
 // not mandatory, only for code completion
 import { RecordingData, GenericResponse } from 'capacitor-voice-recorder';
 
+import { Auth, Storage } from 'aws-amplify';
+
 // without types
 const { VoiceRecorder } = Plugins;
 
@@ -85,10 +87,11 @@ export class VoiceRecordingPage {
 
       this.mediaRecorder.addEventListener('stop', () => {
         if (this.saveAudio) {
-          const audioBlob = new Blob(audioChunks);
+          const audioBlob = new Blob(audioChunks, { type: 'audio/ogg; codecs=opus' });
+
           this.records.push({
             audio: new Audio(URL.createObjectURL(audioBlob)),
-            recordedAt: new Date()
+            recordedAt: new Date().toISOString()
           });
         }
       });
@@ -142,6 +145,19 @@ export class VoiceRecordingPage {
       this.timer++;
     }, 1000);
     return interval;
+  }
+
+  async saveToS3(record: any) {
+    if (record) {
+      try {
+        const audio: HTMLAudioElement = record.audio;
+        let blob = await fetch(audio.src).then(r => r.blob());
+
+        await Storage.put(record.recordedAt + '.ogg', blob);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
 
 }
