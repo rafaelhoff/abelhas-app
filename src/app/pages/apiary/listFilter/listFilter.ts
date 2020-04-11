@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Config, ModalController, NavParams } from '@ionic/angular';
-import { ConferenceData } from 'src/app/providers/conference-data';
+import { ApiaryDataService } from 'src/app/providers/apiaryData.service';
 
 
 @Component({
@@ -14,7 +14,7 @@ export class ApiaryListFilterPage {
   tracks: { name: string, icon: string, isChecked: boolean }[] = [];
 
   constructor(
-    public confData: ConferenceData,
+    public confData: ApiaryDataService,
     private config: Config,
     public modalCtrl: ModalController,
     public navParams: NavParams

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
-import { ConferenceData } from 'src/app/providers/conference-data';
 import { UserDataService } from 'src/app/providers/userData.service';
+import { ApiaryDataService } from 'src/app/providers/apiaryData.service';
 
 @Component({
   selector: 'page-apiary-info',
@@ -15,13 +15,13 @@ export class ApiaryInfoPage {
   defaultHref = '';
 
   constructor(
-    private dataProvider: ConferenceData,
+    private confData: ApiaryDataService,
     private userDataService: UserDataService,
     private route: ActivatedRoute
   ) { }
 
   ionViewWillEnter() {
-    this.dataProvider.load().subscribe((data: any) => {
+    this.confData.load().subscribe((data: any) => {
       if (data && data.schedule && data.schedule[0] && data.schedule[0].groups) {
         const sessionId = this.route.snapshot.paramMap.get('sessionId');
         for (const group of data.schedule[0].groups) {

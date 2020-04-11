@@ -5,9 +5,9 @@ import {
   ModalController, ToastController, Config, IonFab, IonItemSliding
 } from '@ionic/angular';
 
-import { ConferenceData } from '../../../providers/conference-data';
 import { UserDataService } from '../../../providers/userData.service';
 import { ApiaryListFilterPage } from '../listFilter/listFilter';
+import { ApiaryDataService } from 'src/app/providers/apiaryData.service';
 
 @Component({
   selector: 'page-apiary',
@@ -30,7 +30,7 @@ export class ApiaryPage implements OnInit {
 
   constructor(
     public alertCtrl: AlertController,
-    public confData: ConferenceData,
+    public confData: ApiaryDataService,
     public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
     public router: Router,

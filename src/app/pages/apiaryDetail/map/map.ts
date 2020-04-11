@@ -2,7 +2,7 @@ import { Component, ElementRef, Inject, ViewChild, AfterViewInit } from '@angula
 import { DOCUMENT } from '@angular/common';
 
 import { darkStyle } from './map-dark-style';
-import { ConferenceData } from 'src/app/providers/conference-data';
+import { ApiaryDataService } from 'src/app/providers/apiaryData.service';
 
 @Component({
   selector: 'page-apiary-map',
@@ -15,7 +15,7 @@ export class ApiaryMapPage implements AfterViewInit {
 
   constructor(
     @Inject(DOCUMENT) private doc: Document,
-    public confData: ConferenceData
+    public confData: ApiaryDataService
   ) { }
 
   ionViewDidEnter() {

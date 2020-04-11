@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ConferenceData } from '../../providers/conference-data';
+import { ConferenceData } from '../conference-data';
 import { ActivatedRoute } from '@angular/router';
 import { UserDataService } from '../../providers/userData.service';
 

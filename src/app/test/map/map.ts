@@ -1,5 +1,5 @@
 import { Component, ElementRef, Inject, ViewChild, AfterViewInit } from '@angular/core';
-import { ConferenceData } from '../../providers/conference-data';
+import { ConferenceData } from '../conference-data';
 import { DOCUMENT } from '@angular/common';
 
 import { darkStyle } from './map-dark-style';

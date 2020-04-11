@@ -1,45 +1,61 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CheckTutorial } from './providers/check-tutorial.service';
+import { CheckTutorialService } from './providers/checkTutorial.service';
+import { LoggedInService } from './providers/loggedIn.service';
 
 const routes: Routes = [
   {
     path: '',
+    redirectTo: '/apiary',
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
     redirectTo: '/tutorial',
     pathMatch: 'full'
   },
   {
     path: 'account',
-    loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule)
+    loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule),
+    canLoad: [LoggedInService]
+  },
+  {
+    path: 'apiary',
+    loadChildren: () => import('./pages/apiary/apiary.module').then(m => m.ApiaryModule),
+    canLoad: [LoggedInService]
+  },
+  {
+    path: 'apiary-detail',
+    loadChildren: () => import('./pages/apiaryDetail/apiaryDetail.module').then(m => m.ApiaryDetailModule)
   },
   {
     path: 'support',
-    loadChildren: () => import('./pages/support/support.module').then(m => m.SupportModule)
+    loadChildren: () => import('./pages/support/support.module').then(m => m.SupportModule),
+    canLoad: [LoggedInService]
   },
   {
-    path: 'login',
-    loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule)
+    path: 'configuration',
+    loadChildren: () => import('./pages/configuration/configuration.module').then(m => m.ConfigurationPageModule),
+    canLoad: [LoggedInService]
   },
   {
     path: 'signup',
     loadChildren: () => import('./auth/signup/signup.module').then(m => m.SignUpModule)
   },
   {
-    path: 'app',
-    loadChildren: () => import('./pages/tabs-page/tabs-page.module').then(m => m.TabsModule)
+    path: 'tutorial',
+    loadChildren: () => import('./pages/tutorial/tutorial.module').then(m => m.TutorialModule),
+    canLoad: [CheckTutorialService]
   },
+
+  // THESE ARE THE TEST ROUTES FROM HERE ON...
   {
-    path: 'configuration',
-    loadChildren: () => import('./pages/configuration/configuration.module').then(m => m.ConfigurationPageModule)
+    path: 'app',
+    loadChildren: () => import('./test/tabs-page/tabs-page.module').then(m => m.TabsModule)
   },
   {
     path: 'about',
     loadChildren: () => import('./pages/about/about.module').then(m => m.AboutModule)
-  },
-  {
-    path: 'tutorial',
-    loadChildren: () => import('./pages/tutorial/tutorial.module').then(m => m.TutorialModule),
-    canLoad: [CheckTutorial]
   },
   {
     path: 'geolocation',

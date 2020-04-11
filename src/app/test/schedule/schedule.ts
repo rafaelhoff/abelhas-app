@@ -6,7 +6,7 @@ import {
 } from '@ionic/angular';
 
 import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
-import { ConferenceData } from '../../providers/conference-data';
+import { ConferenceData } from '../conference-data';
 import { UserDataService } from '../../providers/userData.service';
 
 @Component({

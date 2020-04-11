@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ConferenceData } from '../../providers/conference-data';
+import { ConferenceData } from '../conference-data';
 
 @Component({
   selector: 'page-speaker-list',
@@ -9,7 +9,7 @@ import { ConferenceData } from '../../providers/conference-data';
 export class SpeakerListPage {
   speakers: any[] = [];
 
-  constructor(public confData: ConferenceData) {}
+  constructor(public confData: ConferenceData) { }
 
   ionViewDidEnter() {
     this.confData.getSpeakers().subscribe((speakers: any[]) => {

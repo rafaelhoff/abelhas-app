@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Config, ModalController, NavParams } from '@ionic/angular';
 
-import { ConferenceData } from '../../providers/conference-data';
+import { ConferenceData } from '../conference-data';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { ConferenceData } from '../../providers/conference-data';
 export class ScheduleFilterPage {
   ios: boolean;
 
-  tracks: {name: string, icon: string, isChecked: boolean}[] = [];
+  tracks: { name: string, icon: string, isChecked: boolean }[] = [];
 
   constructor(
     public confData: ConferenceData,
