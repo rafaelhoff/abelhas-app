@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { TabsPage } from './tabs-page';
 import { TabsPageRoutingModule } from './tabs-page-routing.module';
 
-import { AboutModule } from '../about/about.module';
+import { AboutModule } from '../../pages/about/about.module';
 import { MapModule } from '../map/map.module';
 import { ScheduleModule } from '../schedule/schedule.module';
 import { SessionDetailModule } from '../session-detail/session-detail.module';

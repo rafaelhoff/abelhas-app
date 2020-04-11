@@ -7,6 +7,15 @@
     "takePhoto": "Take Photo",
     "username": "Username"
   },
+  "apiary": {
+    "header": {
+      "all": "All",
+      "fav": "Favorites",
+      "filter": "Filter"
+    },
+    "notFound": "No apiary found.",
+    "title": "Apiaries"
+  },
   "auth": {
     "chgPwdConfirm": "Password is changed.",
     "chgPwdTitle": "Change Password",
@@ -46,8 +55,8 @@
   },
   "aws": {
     "CodeMismatchException": "Invalid verification code provided, please try again.",
-    "UsernameExistsException": "An account with the given email already exists.",
     "UserNotFoundException": "E-mail not found.",
+    "UsernameExistsException": "An account with the given email already exists.",
     "basicError": "An error has occurred."
   },
   "basic": {
@@ -56,7 +65,9 @@
     "confirm": "Confirm",
     "create": "Create",
     "error": "Error",
+    "favorite": "Favorite",
     "ok": "OK",
+    "remove": "Remove",
     "request": "Request"
   },
   "cfg": {

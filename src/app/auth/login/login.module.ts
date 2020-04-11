@@ -18,3 +18,5 @@ import { AuthenticationModule } from '../auth.module';
   declarations: [LoginPage]
 })
 export class LoginModule { }
+
+// TODO: remove? not in use

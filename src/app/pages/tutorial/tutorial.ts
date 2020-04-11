@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { MenuController, IonSlides } from '@ionic/angular';
+import { IonSlides } from '@ionic/angular';
 import { ConfigService } from 'src/app/providers/config-data';
 import { UserLoginParams } from 'src/app/providers/userData.service';
 
@@ -17,7 +17,6 @@ export class TutorialPage {
   @ViewChild('slides', { static: true }) slides: IonSlides;
 
   constructor(
-    public menu: MenuController,
     public router: Router,
     public configService: ConfigService
   ) { }
@@ -40,12 +39,5 @@ export class TutorialPage {
         this.router.navigateByUrl('/app/tabs/schedule', { replaceUrl: true });
       }
     });
-
-    this.menu.enable(false);
-  }
-
-  ionViewDidLeave() {
-    // enable the root left menu when leaving the tutorial page
-    this.menu.enable(true);
   }
 }

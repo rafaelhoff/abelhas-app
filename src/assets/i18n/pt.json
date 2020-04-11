@@ -7,6 +7,15 @@
     "takePhoto": "Tirar Foto",
     "username": "Nome do Usuário"
   },
+  "apiary": {
+    "header": {
+      "all": "Todos",
+      "fav": "Favoritos",
+      "filter": "Filtrar"
+    },
+    "notFound": "Nenhum apiário encontrado.",
+    "title": "Apiários"
+  },
   "auth": {
     "chgPwdConfirm": "A senha foi alterada.",
     "chgPwdTitle": "Alterar senha",
@@ -46,8 +55,8 @@
   },
   "aws": {
     "CodeMismatchException": "Código de verificação inválido, tente novamente.",
-    "UsernameExistsException": "Já existe uma conta com o email fornecido.",
     "UserNotFoundException": "E-mail não encontrado.",
+    "UsernameExistsException": "Já existe uma conta com o email fornecido.",
     "basicError": "Um erro occorreu."
   },
   "basic": {
@@ -56,7 +65,9 @@
     "confirm": "Confirmar",
     "create": "Criar",
     "error": "Erro",
+    "favorite": "Favorito",
     "ok": "OK",
+    "remove": "Remover",
     "request": "Requisitar"
   },
   "cfg": {

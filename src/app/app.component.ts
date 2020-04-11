@@ -99,12 +99,12 @@ export class AppComponent implements OnInit {
   listenForLoginEvents() {
     window.addEventListener('user:login', () => {
       this.updateLoggedInStatus(true);
-      this.router.navigateByUrl('/app/tabs/schedule');
+      this.router.navigateByUrl('/');
     });
 
     window.addEventListener('user:signup', () => {
       this.updateLoggedInStatus(true);
-      this.router.navigateByUrl('/app/tabs/schedule');
+      this.router.navigateByUrl('/');
     });
 
     window.addEventListener('user:logout', () => {

@@ -22,6 +22,7 @@ export class ConfigurationPage implements OnInit {
   }
 
   openTutorial() {
+    // TODO: disable the login page on tutorial
     this.menu.enable(false);
     this.configService.setTutorialDone(false);
     this.router.navigateByUrl('/tutorial');
