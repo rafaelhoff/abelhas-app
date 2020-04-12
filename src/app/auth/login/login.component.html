@@ -5,8 +5,8 @@
 <form #loginForm="ngForm" novalidate>
   <ion-list>
     <ion-item>
-      <ion-label position="floating" color="primary">{{ 'auth.email' | translate }} <ion-text color="danger">*
-        </ion-text>
+      <ion-label position="floating" color="primary">
+        {{ 'auth.email' | translate }} <pm-required></pm-required>
       </ion-label>
       <ion-input [(ngModel)]="credentials.username" name="username" type="email" #username="ngModel" required email>
       </ion-input>
@@ -22,8 +22,8 @@
     </ion-text>
 
     <ion-item>
-      <ion-label position="floating" color="primary">{{ 'auth.pwd' | translate }} <ion-text color="danger">*
-        </ion-text>
+      <ion-label position="floating" color="primary">
+        {{ 'auth.pwd' | translate }} <pm-required></pm-required>
       </ion-label>
       <ion-input [(ngModel)]="credentials.password" name="password" type="password" #password="ngModel" required
         clearOnEdit="false">

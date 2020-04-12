@@ -26,6 +26,8 @@ export class AccountPage implements OnInit {
     public translateService: TranslateService
   ) { }
 
+  readonly = true;
+
   ngOnInit(): void {
     this.userDataService.getUser(); // .then(d => console.log(JSON.stringify(d)));
   }
@@ -95,7 +97,7 @@ export class AccountPage implements OnInit {
 
   async getPhoto() {
     const photo: CameraPhoto = await this.photoService.getFromLibrary();
-    this.userDataService.userData.avatarPath = photo.webPath;
+    this.userDataService.userData.attributes.picture = photo.webPath;
     this.userDataService.save();
   }
 
@@ -104,8 +106,20 @@ export class AccountPage implements OnInit {
     const photo: CameraPhoto = await this.photoService.capturePhoto();
     // const photo: Photo = await this.photoService.savePicture(camPhoto, 'profile.jpg');
 
-    this.userDataService.userData.avatarPath = photo.webPath;
+    this.userDataService.userData.attributes.picture = photo.webPath;
     this.userDataService.save();
 
+  }
+
+  switchEdit() {
+    // TODO: fix the form
+    if (!this.readonly) {
+      console.log('saved.');
+    }
+    this.readonly = !this.readonly;
+  }
+
+  cancelChanges() {
+    this.readonly = !this.readonly;
   }
 }

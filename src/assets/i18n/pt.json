@@ -29,12 +29,14 @@
     "email": "E-mail",
     "emailReq": "E-mail é obrigatório",
     "emailValid": "E-mail deve ser valido",
+    "firstName": "Nome",
     "forgot": {
       "changed": "A senha foi alterada.",
       "desc": "Um e-mail foi enviado para <strong>{{email}}</strong> para a alteração de senha. Por favor, abra o e-mail, copie o código de confirmação e coloque no campo abaixo.",
       "question": "Esqueceu a senha?",
       "title": "Esqueceu a senha"
     },
+    "lastName": "Sobrenome",
     "login": "Login",
     "new": "Nova senha",
     "new2": "Repita nova senha",

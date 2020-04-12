@@ -14,9 +14,33 @@
 
   <form #signupForm="ngForm" novalidate>
     <ion-list>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating" color="primary">
+                {{ 'auth.firstName' | translate }} <pm-required></pm-required>
+              </ion-label>
+              <ion-input [(ngModel)]="signup.attributes.name" name="firstName" #firstName="ngModel" required>
+              </ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating" color="primary">
+                {{ 'auth.lastName' | translate }} <pm-required></pm-required>
+              </ion-label>
+              <ion-input [(ngModel)]="signup.attributes.family_name" name="lastName" #lastName="ngModel" required>
+              </ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
       <ion-item>
-        <ion-label position="floating" color="primary">{{ 'auth.email' | translate }} <ion-text color="danger">*
-          </ion-text>
+        <ion-label position="floating" color="primary">
+          {{ 'auth.email' | translate }} <pm-required></pm-required>
         </ion-label>
         <ion-input [(ngModel)]="signup.username" name="username" type="email" #username="ngModel" required email>
         </ion-input>
@@ -32,25 +56,22 @@
       </ion-text>
 
       <ion-item>
-        <ion-label position="floating" color="primary">{{ 'auth.pwd' | translate }} <ion-text color="danger">*
-          </ion-text>
+        <ion-label position="floating" color="primary">
+          {{ 'auth.pwd' | translate }} <pm-required></pm-required>
         </ion-label>
         <ion-input [(ngModel)]="signup.password" name="password" type="password" #password="ngModel" minlength="8"
           required app-password clearOnEdit="false">
         </ion-input>
       </ion-item>
 
-      <div *ngIf="password.invalid && (password.dirty && password.touched)" class="alert alert-danger">
-
-        <ion-text color="danger">
-          <p *ngIf="password.errors.required" class="ion-padding-start">
-            {{ 'auth.pwdReq' | translate }}
-          </p>
-          <p *ngIf="password.errors.password" class="ion-padding-start">
-            {{ 'auth.pwdComp' | translate }}
-          </p>
-        </ion-text>
-      </div>
+      <ion-text color="danger" *ngIf="password.invalid && (password.dirty && password.touched)">
+        <p *ngIf="password.errors.required" class="ion-padding-start">
+          {{ 'auth.pwdReq' | translate }}
+        </p>
+        <p *ngIf="password.errors.password" class="ion-padding-start">
+          {{ 'auth.pwdComp' | translate }}
+        </p>
+      </ion-text>
 
       <ion-item lines="none">
         <p>{{ 'auth.terms.descPre' | translate }} <a [routerLink]=""

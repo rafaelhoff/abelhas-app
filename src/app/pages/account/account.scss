@@ -3,3 +3,8 @@
   max-height: 140px;
   border-radius: 50%;
 }
+
+ion-grid {
+  --ion-grid-padding: 0;
+  --ion-grid-column-padding: 0;
+}

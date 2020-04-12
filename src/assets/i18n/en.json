@@ -29,12 +29,14 @@
     "email": "E-mail",
     "emailReq": "E-mail is required",
     "emailValid": "E-mail must be valid",
+    "firstName": "First name",
     "forgot": {
       "changed": "Your password was changed.",
       "desc": "An e-mail was sent to <strong>{{email}}</strong> with a security code to change the password. Please open the e-mail, copy the security code and enter in the input below.",
       "question": "Forgot Password?",
       "title": "Forgot Password"
     },
+    "lastName": "Last name",
     "login": "Login",
     "new": "New Password",
     "new2": "Repeat new Password",

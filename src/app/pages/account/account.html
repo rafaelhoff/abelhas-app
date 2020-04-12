@@ -1,29 +1,70 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button *ngIf="readonly"></ion-menu-button>
+      <ion-button *ngIf="!readonly" (click)="cancelChanges()">
+        <span>Cancel</span>
+      </ion-button>
+
     </ion-buttons>
     <ion-title>Account</ion-title>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="readonly" (click)="switchEdit()">
+        <span>Edit</span>
+      </ion-button>
+      <ion-button *ngIf="!readonly" (click)="switchEdit()">
+        <span>Done</span>
+      </ion-button>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div *ngIf="userDataService.userData" class="ion-padding-top ion-text-center">
-    <img [src]="userDataService.userData.avatarPath" alt="avatar" class="imgAvatar">
+    <img [src]="userDataService.userData.attributes.picture" alt="avatar" class="imgAvatar">
     <br>
-    <ion-button style="text-transform:none" fill="clear" (click)="updatePicture()">{{ 'account.chgpic' | translate }}
+    <ion-button *ngIf="!readonly" style="text-transform:none" fill="clear" (click)="updatePicture()">
+      {{ 'account.chgpic' | translate }}
     </ion-button>
 
-    <ion-item>
-      <ion-label>{{ 'account.name' | translate }}</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
+    <ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating" color="primary">
+                {{ 'auth.firstName' | translate }} <pm-required *ngIf="!readonly"></pm-required>
+              </ion-label>
+              <ion-input [(ngModel)]="userDataService.userData.attributes.name" name="firstName" #firstName="ngModel"
+                required [readonly]="readonly">
+              </ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating" color="primary">
+                {{ 'auth.lastName' | translate }} <pm-required *ngIf="!readonly"></pm-required>
+              </ion-label>
+              <ion-input [(ngModel)]="userDataService.userData.attributes.family_name" name="lastName"
+                #lastName="ngModel" required [readonly]="readonly">
+              </ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
-    <!-- Inputs with labels -->
-    <ion-item>
-      <ion-label>{{ 'account.username' | translate }}</ion-label>
-      <ion-input>{{userDataService.userData.username}}</ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label position="floating" color="primary">
+          {{ 'auth.email' | translate }}
+          <pm-required *ngIf="!readonly"></pm-required>
+        </ion-label>
+        <ion-input name="username" type="email" email readonly [value]="userDataService.userData.username">
+        </ion-input>
+      </ion-item>
+
+
+    </ion-list>
 
     <ion-button style="text-transform:none" fill="clear" (click)="changePassword()">
       {{ 'auth.chgPwdTitle' | translate }}

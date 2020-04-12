@@ -6,6 +6,7 @@ import { ModalController } from '@ionic/angular';
 import { ConfirmCodeModalPage } from '../confirmCode/confirmCode';
 import { TermsConditionsModalPage } from '../termsConditions/termsConditions';
 import { ModalsService } from 'src/app/shared/modals.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'page-signup',
@@ -13,7 +14,15 @@ import { ModalsService } from 'src/app/shared/modals.service';
   styleUrls: ['./signup.scss'],
 })
 export class SignupPage {
-  signup: UserLoginParams = { username: '', password: '' };
+  signup: UserLoginParams = {
+    username: '',
+    password: '',
+    attributes: {
+      name: '',
+      family_name: '',
+      picture: environment.defaultPicture
+    }
+  };
 
   constructor(
     public userDataService: UserDataService,
@@ -46,7 +55,7 @@ export class SignupPage {
       backdropDismiss: false,
       component: ConfirmCodeModalPage,
       componentProps: {
-        username: this.signup.username
+        user: this.signup
       }
     });
     await modal.present();

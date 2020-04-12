@@ -13,8 +13,8 @@
   <form #confirmForm="ngForm" novalidate>
     <ion-list>
       <ion-item>
-        <ion-label position="floating" color="primary">{{ 'auth.confirm.code' | translate }} <ion-text color="danger">*
-          </ion-text>
+        <ion-label position="floating" color="primary">
+          {{ 'auth.confirm.code' | translate }} <pm-required></pm-required>
         </ion-label>
         <ion-input [(ngModel)]="code" name="codeCtrl" type="text" #codeCtrl="ngModel" required>
         </ion-input>

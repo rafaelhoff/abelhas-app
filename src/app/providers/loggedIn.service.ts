@@ -14,15 +14,18 @@ export class LoggedInService implements CanLoad {
     private router: Router
   ) { }
 
-  async canLoad(): Promise<boolean> {
-    const loggedIn: boolean = await this.userService.isLoggedIn();
-    if (!loggedIn) {
-      this.router.navigate(['/login']);
-      this.menu.enable(false);
-    } else {
-      this.menu.enable(true);
-    }
+  canLoad(): Promise<boolean> {
+    // TODO: fix menu problem.
 
-    return loggedIn;
+    return this.userService.isLoggedIn().then((loggedIn: boolean) => {
+      if (!loggedIn) {
+        this.router.navigate(['/login']);
+        this.menu.enable(false);
+      } else {
+        this.menu.enable(true);
+      }
+
+      return loggedIn;
+    });
   }
 }
