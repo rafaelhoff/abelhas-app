@@ -33,7 +33,7 @@ export class SignupPage {
   async onSignup(form: NgForm) {
 
     try {
-      await this.userDataService.signup(this.signup);
+      await this.userDataService.signUp(this.signup);
       const confirmed = await this.showConfirmCode();
       if (!confirmed) {
         // TODO: clean the user that was created.

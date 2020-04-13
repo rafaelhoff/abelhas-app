@@ -13,7 +13,7 @@ export class UserDataService {
   readonly storageKey = 'username';
 
   favorites: string[] = [];
-  public userData: UserLoginParams = null;
+  private userData: UserLoginParams = null;
   private cognitoUser: CognitoUser;
 
   constructor(
@@ -50,17 +50,15 @@ export class UserDataService {
       });
 
     } else {
-      this.logger.debug('skipping Cognito');
+      this.logger.debug('skipping Cognito: login');
       attributesObj = { name: 'John', family_name: 'Doe', picture: environment.defaultPicture };
     }
 
-
-    this.userData = {
+    this.save({
       username: user.username,
       password: null,
       attributes: attributesObj
-    };
-    this.save();
+    }, false);
 
     return window.dispatchEvent(new CustomEvent('user:login'));
   }
@@ -76,13 +74,13 @@ export class UserDataService {
     });
   }
 
-  async signup(user: UserLoginParams): Promise<any> {
+  async signUp(user: UserLoginParams): Promise<any> {
 
     if (environment.connectToCognito) {
       const signUpData: ISignUpResult = await Auth.signUp(user);
       this.logger.trace(signUpData);
     } else {
-      this.logger.debug('skipping Cognito');
+      this.logger.debug('skipping Cognito: signUp');
     }
 
     return true;
@@ -92,12 +90,12 @@ export class UserDataService {
     if (environment.connectToCognito) {
       await Auth.confirmSignUp(user.username, code);
     } else {
-      this.logger.debug('skipping Cognito');
+      this.logger.debug('skipping Cognito: confirmCodeSignUp');
     }
 
     this.userData = user;
     this.userData.password = null;
-    this.save();
+    this.save(this.userData, false);
     return window.dispatchEvent(new CustomEvent('user:signup'));
   }
 
@@ -105,7 +103,7 @@ export class UserDataService {
     if (environment.connectToCognito) {
       await Auth.signOut();
     } else {
-      this.logger.debug('skipping Cognito');
+      this.logger.debug('skipping Cognito: logout');
     }
 
     await this.storage.set(this.storageKey, null);
@@ -114,8 +112,17 @@ export class UserDataService {
     return true;
   }
 
-  save(): Promise<any> {
-    return this.storage.set(this.storageKey, this.userData);
+  async save(newData: UserLoginParams, updateExternal: boolean = true): Promise<any> {
+    if (environment.connectToCognito && updateExternal) {
+      const resultCog: string = await Auth.updateUserAttributes(this.cognitoUser, newData.attributes);
+      this.logger.trace(resultCog);
+    } else {
+      this.logger.debug('skipping Cognito: updateUserAttributes');
+    }
+
+    await this.storage.set(this.storageKey, newData);
+    this.userData = newData;
+    return true;
   }
 
   async getUser(): Promise<UserLoginParams> {
@@ -134,7 +141,7 @@ export class UserDataService {
     if (environment.connectToCognito) {
       await Auth.changePassword(this.cognitoUser, options.oldPassword, options.newPassword);
     } else {
-      this.logger.debug('skipping Cognito');
+      this.logger.debug('skipping Cognito: changePassword');
     }
 
     return true;
@@ -144,7 +151,7 @@ export class UserDataService {
     if (environment.connectToCognito) {
       await Auth.forgotPassword(username);
     } else {
-      this.logger.debug('skipping Cognito');
+      this.logger.debug('skipping Cognito: forgotPassword');
     }
 
     return true;
@@ -154,7 +161,7 @@ export class UserDataService {
     if (environment.connectToCognito) {
       await Auth.forgotPasswordSubmit(username, code, password);
     } else {
-      this.logger.debug('skipping Cognito');
+      this.logger.debug('skipping Cognito: confirmCodePassword');
     }
 
     return true;

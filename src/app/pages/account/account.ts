@@ -3,10 +3,12 @@ import { Router } from '@angular/router';
 
 import { AlertController, ActionSheetController, ModalController } from '@ionic/angular';
 
-import { UserDataService } from '../../providers/userData.service';
+import { UserDataService, UserLoginParams } from '../../providers/userData.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ChangePasswordModalPage } from '../../auth/changePassword/changePassword';
 import { PhotoService, CameraPhoto } from 'src/app/providers/photo.service';
+import { FormGroup, FormControl } from '@angular/forms';
+import { ModalsService } from 'src/app/shared/modals.service';
 
 
 @Component({
@@ -20,6 +22,7 @@ export class AccountPage implements OnInit {
     public actionSheetController: ActionSheetController,
     public alertCtrl: AlertController,
     public modalController: ModalController,
+    private modalService: ModalsService,
     public photoService: PhotoService,
     public router: Router,
     public userDataService: UserDataService,
@@ -27,9 +30,21 @@ export class AccountPage implements OnInit {
   ) { }
 
   readonly = true;
+  accountData: UserLoginParams;
+  myform: FormGroup;
 
   ngOnInit(): void {
-    this.userDataService.getUser(); // .then(d => console.log(JSON.stringify(d)));
+    this.userDataService.getUser().then(d => {
+      this.accountData = d;
+      this.formInit();
+    });
+  }
+
+  private formInit() {
+    this.myform = new FormGroup({
+      name: new FormControl(this.accountData.attributes.name),
+      family_name: new FormControl(this.accountData.attributes.family_name),
+    });
   }
 
   async updatePicture() {
@@ -56,34 +71,6 @@ export class AccountPage implements OnInit {
     await actionSheet.present();
   }
 
-  // Present an alert with the current username populated
-  // clicking OK will update the username and display it
-  // clicking Cancel will close the alert and do nothing
-  async changeUsername() {
-    const alert = await this.alertCtrl.create({
-      header: 'Change Username',
-      buttons: [
-        'Cancel',
-        {
-          text: 'Ok',
-          handler: (data: any) => {
-            this.userDataService.userData.username = data.username;
-            this.userDataService.save();
-          }
-        }
-      ],
-      inputs: [
-        {
-          type: 'text',
-          name: 'username',
-          value: this.userDataService.userData.username,
-          placeholder: 'username'
-        }
-      ]
-    });
-    await alert.present();
-  }
-
   async changePassword() {
     const modal = await this.modalController.create({
       component: ChangePasswordModalPage
@@ -97,8 +84,13 @@ export class AccountPage implements OnInit {
 
   async getPhoto() {
     const photo: CameraPhoto = await this.photoService.getFromLibrary();
-    this.userDataService.userData.attributes.picture = photo.webPath;
-    this.userDataService.save();
+
+    try {
+      this.accountData.attributes.picture = photo.webPath;
+      this.userDataService.save(this.accountData);
+    } catch (error) {
+      this.modalService.createCognitoErrorAlert(error);
+    }
   }
 
   async takePicture() {
@@ -106,20 +98,32 @@ export class AccountPage implements OnInit {
     const photo: CameraPhoto = await this.photoService.capturePhoto();
     // const photo: Photo = await this.photoService.savePicture(camPhoto, 'profile.jpg');
 
-    this.userDataService.userData.attributes.picture = photo.webPath;
-    this.userDataService.save();
-
+    try {
+      this.accountData.attributes.picture = photo.webPath;
+      this.userDataService.save(this.accountData);
+    } catch (error) {
+      this.modalService.createCognitoErrorAlert(error);
+    }
   }
 
   switchEdit() {
-    // TODO: fix the form
-    if (!this.readonly) {
-      console.log('saved.');
+    try {
+      // Saving...
+      if (!this.readonly && this.myform.valid) {
+        this.accountData.attributes.name = this.myform.value.name;
+        this.accountData.attributes.family_name = this.myform.value.family_name;
+
+        this.userDataService.save(this.accountData);
+      }
+    } catch (error) {
+      this.modalService.createCognitoErrorAlert(error);
     }
     this.readonly = !this.readonly;
   }
 
   cancelChanges() {
+    this.myform.reset();
+    this.formInit();
     this.readonly = !this.readonly;
   }
 }

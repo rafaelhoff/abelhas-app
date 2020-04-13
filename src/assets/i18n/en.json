@@ -5,6 +5,7 @@
     "logout": "Logout",
     "name": "Name",
     "takePhoto": "Take Photo",
+    "title": "Account",
     "username": "Username"
   },
   "apiary": {
@@ -66,6 +67,8 @@
     "change": "Change",
     "confirm": "Confirm",
     "create": "Create",
+    "done": "Done",
+    "edit": "Edit",
     "error": "Error",
     "favorite": "Favorite",
     "ok": "OK",
