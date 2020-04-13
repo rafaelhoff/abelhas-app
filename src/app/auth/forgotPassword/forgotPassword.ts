@@ -33,13 +33,18 @@ export class ForgotPasswordModalPage {
   async forgotPassword(form: NgForm) {
 
     if (form.valid) {
+      const loading = await this.modalService.createLoadController('auth.requesting');
+
       try {
+        await loading.present();
         const res = await this.userDataService.forgotPassword(this.username);
+        await loading.dismiss();
 
         this.usernameGiven = true;
         this.param = { email: this.username };
 
       } catch (error) {
+        await loading.dismiss();
         this.modalService.createCognitoErrorAlert(error);
       }
     }
@@ -48,13 +53,18 @@ export class ForgotPasswordModalPage {
   async confirmCode(form: NgForm) {
 
     if (form.valid) {
+      const loading = await this.modalService.createLoadController('auth.changingPwd');
+
       try {
+        await loading.present();
         const res = await this.userDataService.confirmCodePassword(this.username, this.code, this.password);
+        await loading.dismiss();
 
         await this.modalService.createToast('auth.forgot.changed');
         this.dismiss();
 
       } catch (error) {
+        await loading.dismiss();
         this.modalService.createCognitoErrorAlert(error);
       }
     }

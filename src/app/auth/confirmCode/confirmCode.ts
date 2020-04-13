@@ -34,13 +34,18 @@ export class ConfirmCodeModalPage implements OnInit {
   async confirmCode(form: NgForm) {
 
     if (form.valid) {
+      const loading = await this.modalService.createLoadController('auth.confirm.confirming');
+
       try {
+        await loading.present();
         const res = await this.userDataService.confirmCodeSignUp(this.user, this.code);
+        await loading.dismiss();
 
         await this.modalService.createToast('auth.confirm.confirmed');
         this.dismiss(true);
 
       } catch (error) {
+        await loading.dismiss();
         await this.modalService.createCognitoErrorAlert(error);
       }
     }

@@ -28,12 +28,17 @@ export class ChangePasswordModalPage {
   async passwordChange(form: NgForm) {
 
     if (form.valid) {
+      const loading = await this.modalService.createLoadController('auth.changingPwd');
+
       try {
+        await loading.present();
         const res = await this.userDataService.changePassword(this.changePassword);
+        await loading.dismiss();
         await this.modalService.createToast('auth.chgPwdConfirm');
         this.dismiss();
 
       } catch (error) {
+        await loading.dismiss();
         this.modalService.createCognitoErrorAlert(error);
       }
     }

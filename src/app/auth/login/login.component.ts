@@ -24,10 +24,15 @@ export class LoginComponent {
   ) { }
 
   async onLogin(form: NgForm) {
+    const loading = await this.modalService.createLoadController('auth.loggingIn');
 
     try {
+      await loading.present();
       await this.userDataService.login(this.credentials);
+      await loading.dismiss();
+
     } catch (error) {
+      await loading.dismiss();
       this.modalService.createCognitoErrorAlert(error);
     }
   }

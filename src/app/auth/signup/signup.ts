@@ -25,20 +25,25 @@ export class SignupPage {
   };
 
   constructor(
-    public userDataService: UserDataService,
+    private userDataService: UserDataService,
     private modalController: ModalController,
     private modalService: ModalsService
   ) { }
 
   async onSignup(form: NgForm) {
+    const loading = await this.modalService.createLoadController('auth.signingUp');
 
     try {
+      await loading.present();
       await this.userDataService.signUp(this.signup);
+      await loading.dismiss();
+
       const confirmed = await this.showConfirmCode();
       if (!confirmed) {
         // TODO: clean the user that was created.
       }
     } catch (error) {
+      await loading.dismiss();
       await this.modalService.createCognitoErrorAlert(error);
     }
   }

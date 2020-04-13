@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Modals } from '@capacitor/core';
 
@@ -10,6 +10,7 @@ import { Modals } from '@capacitor/core';
 export class ModalsService {
 
   constructor(
+    private loadingController: LoadingController,
     private toastController: ToastController,
     private translateService: TranslateService,
   ) {
@@ -45,5 +46,13 @@ export class ModalsService {
 
   }
 
-}
+  async createLoadController(translateCode: string): Promise<any> {
+    const initialMsg: string = this.translateService.instant(translateCode);
+    const waitMsg: string = this.translateService.instant('basic.pleaseWait');
 
+    const loading = await this.loadingController.create({
+      message: initialMsg + waitMsg
+    });
+    return loading;
+  }
+}
