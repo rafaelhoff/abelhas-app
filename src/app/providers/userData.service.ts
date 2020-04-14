@@ -37,7 +37,7 @@ export class UserDataService {
   }
 
   async login(user: UserLoginParams): Promise<any> {
-    let attributesObj = {};
+    let attributesObj = { name: '', family_name: '', picture: '', locale: '' };
 
     if (environment.connectToCognito) {
       this.cognitoUser = await Auth.signIn(user);
@@ -51,7 +51,7 @@ export class UserDataService {
 
     } else {
       this.logger.debug('skipping Cognito: login');
-      attributesObj = { name: 'John', family_name: 'Doe', picture: environment.defaultPicture };
+      attributesObj = { name: 'John', family_name: 'Doe', picture: environment.defaultPicture, locale: 'en' };
     }
 
     this.save({
@@ -177,6 +177,11 @@ export interface ChangePasswordOptions {
 export interface UserLoginParams {
   username: string;
   password: string;
-  attributes?: any;
+  attributes?: {
+    name: string;
+    family_name: string;
+    picture: string;
+    locale: string;
+  };
 }
 

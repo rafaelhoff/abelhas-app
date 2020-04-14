@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanLoad, Router } from '@angular/router';
-import { ConfigService } from './config-data';
+import { ConfigDataService } from './configData.service';
 import { MenuController } from '@ionic/angular';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { MenuController } from '@ionic/angular';
 })
 export class CheckTutorialService implements CanLoad {
   constructor(
-    private configService: ConfigService,
+    private configService: ConfigDataService,
     private menu: MenuController,
     private router: Router
   ) { }

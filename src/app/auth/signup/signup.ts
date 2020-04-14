@@ -7,6 +7,7 @@ import { ConfirmCodeModalPage } from '../confirmCode/confirmCode';
 import { TermsConditionsModalPage } from '../termsConditions/termsConditions';
 import { ModalsService } from 'src/app/shared/modals.service';
 import { environment } from '../../../environments/environment';
+import { ConfigDataService } from 'src/app/providers/configData.service';
 
 @Component({
   selector: 'page-signup',
@@ -20,15 +21,23 @@ export class SignupPage {
     attributes: {
       name: '',
       family_name: '',
-      picture: environment.defaultPicture
+      picture: environment.defaultPicture,
+      locale: ''
     }
   };
+  configData: any;
 
   constructor(
+    private configService: ConfigDataService,
     private userDataService: UserDataService,
     private modalController: ModalController,
     private modalService: ModalsService
-  ) { }
+  ) {
+    this.configService.load().then(data => {
+      this.configData = data;
+      this.signup.attributes.locale = data.language;
+    });
+  }
 
   async onSignup(form: NgForm) {
     const loading = await this.modalService.createLoadController('auth.signingUp');

@@ -4,7 +4,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConfigurationPage } from './configuration.page';
 import { TranslatePipeMock } from 'src/app/util/translatePipe.mock';
 import { Router } from '@angular/router';
-import { ConfigService } from 'src/app/providers/config-data';
+import { ConfigDataService } from 'src/app/providers/configData.service';
 import { Observable } from 'rxjs';
 
 describe('ConfigurationPage', () => {
@@ -22,7 +22,7 @@ describe('ConfigurationPage', () => {
       declarations: [ConfigurationPage, TranslatePipeMock],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
-        { provide: ConfigService, useValue: configServiceSpy },
+        { provide: ConfigDataService, useValue: configServiceSpy },
         { provide: Router, useValue: routerSpy }
       ]
     })

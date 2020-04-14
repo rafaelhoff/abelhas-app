@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { CanLoad, Router } from '@angular/router';
-import { ConfigService } from './config-data';
 import { UserDataService } from './userData.service';
 import { MenuController } from '@ionic/angular';
 

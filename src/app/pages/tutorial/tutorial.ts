@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { IonSlides } from '@ionic/angular';
-import { ConfigService } from 'src/app/providers/config-data';
+import { ConfigDataService } from 'src/app/providers/configData.service';
 import { UserLoginParams } from 'src/app/providers/userData.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class TutorialPage {
 
   constructor(
     public router: Router,
-    public configService: ConfigService
+    public configService: ConfigDataService
   ) { }
 
   async goToLogin() {

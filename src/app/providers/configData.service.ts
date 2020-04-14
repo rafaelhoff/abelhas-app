@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, of } from 'rxjs';
+import { Subject, of, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
@@ -11,9 +11,9 @@ const { Device } = Plugins;
 @Injectable({
   providedIn: 'root'
 })
-export class ConfigService {
-  preSetData: any;
-  data: any;
+export class ConfigDataService {
+  preSetData: PresetConfigData;
+  data: ConfigData;
 
   private darkModeSource = new Subject<boolean>();
   darkMode$ = this.darkModeSource.asObservable();
@@ -24,7 +24,7 @@ export class ConfigService {
     private translate: TranslateService,
   ) { }
 
-  async getInitialConfiguation(): Promise<any> {
+  async getInitialConfiguation(): Promise<ConfigData> {
     const langRes: DeviceLanguageCodeResult = await Device.getLanguageCode();
     let lang = 'en';
     lang = langRes.value.startsWith('pt') ? 'pt' : lang;
@@ -37,7 +37,7 @@ export class ConfigService {
     };
   }
 
-  loadPreData(): any {
+  loadPreData(): Observable<PresetConfigData> {
     if (this.preSetData) {
       return of(this.preSetData);
     } else {
@@ -47,12 +47,12 @@ export class ConfigService {
     }
   }
 
-  private processPreData(data: any) {
+  private processPreData(data: PresetConfigData) {
     this.preSetData = data;
     return this.preSetData;
   }
 
-  async load(): Promise<any> {
+  async load(): Promise<ConfigData> {
     if (!this.data) {
       // First-time load.
       this.data = await this.storage.get('configuration');
@@ -65,10 +65,10 @@ export class ConfigService {
     return this.data;
   }
 
-  async save(newData: any): Promise<any> {
-    const result = await this.storage.set('configuration', newData);
+  async save(newData: any): Promise<void> {
+    await this.storage.set('configuration', newData);
     this.data = newData;
-    return result;
+    return;
   }
 
   setDarkMode(darkMode: boolean) {
@@ -100,4 +100,14 @@ export class ConfigService {
     await this.load();
     return this.data.tutorialDone;
   }
+}
+
+export interface ConfigData {
+  darkMode: boolean;
+  language: string;
+  tutorialDone: boolean;
+}
+
+export interface PresetConfigData {
+  languages: string[];
 }
