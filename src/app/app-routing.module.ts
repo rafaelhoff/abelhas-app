@@ -70,6 +70,10 @@ const routes: Routes = [
     loadChildren: () => import('./test/camera/camera.module').then(m => m.CameraPageModule)
   },
   {
+    path: 'pictures',
+    loadChildren: () => import('./test/pictures/picture.module').then(m => m.PictureModule)
+  },
+  {
     path: 'voice',
     loadChildren: () => import('./test/voicerecording/voicerecording.module').then(m => m.VoiceRecordingModule)
   }

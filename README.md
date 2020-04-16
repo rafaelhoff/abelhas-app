@@ -96,3 +96,8 @@ See [CONTRIBUTING.md](https://github.com/ionic-team/ionic-conference-app/blob/ma
   - https://angular.io/guide/animations
   - https://medium.com/ngconf/animating-angulars-ngif-and-ngfor-32a6ff26ed2d
 [ ] Fix Geolocation Problem
+
+
+## Good Links
+
+- Angular Forms: https://codecraft.tv/courses/angular/forms/template-driven/

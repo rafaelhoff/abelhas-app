@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AppStorage } from '../util/storage';
+import { AppStorage } from '../util/appStorage';
 import { Auth } from 'aws-amplify';
 import { ISignUpResult, CognitoUser, CognitoUserAttribute } from 'amazon-cognito-identity-js';
 import { environment } from '../../environments/environment';
-import { AppLogger } from '../util/logger';
+import { AppLogger } from '../util/appLogger';
+import { AppMediaStorage } from '../util/appMediaStorage';
+import { CameraPhoto } from './photo.service';
 
 
 @Injectable({
@@ -18,7 +20,8 @@ export class UserDataService {
 
   constructor(
     private logger: AppLogger,
-    public storage: AppStorage
+    private storage: AppStorage,
+    private appMediaStorage: AppMediaStorage
   ) { }
 
   hasFavorite(sessionName: string): boolean {
@@ -43,11 +46,14 @@ export class UserDataService {
       this.cognitoUser = await Auth.signIn(user);
       this.logger.trace(this.cognitoUser);
 
-      // TODO: read the avatarpicture and download it.
       const attributes: CognitoUserAttribute[] = await this.readCognitoUserAttributes(this.cognitoUser);
       attributes.forEach(element => {
         attributesObj[element.getName()] = element.getValue();
       });
+
+      if (attributesObj.picture !== environment.defaultPicture) {
+        this.getCustomProfilePic();
+      }
 
     } else {
       this.logger.debug('skipping Cognito: login');
@@ -93,10 +99,7 @@ export class UserDataService {
       this.logger.debug('skipping Cognito: confirmCodeSignUp');
     }
 
-    this.userData = user;
-    this.userData.password = null;
-    this.save(this.userData, false);
-    return window.dispatchEvent(new CustomEvent('user:signup'));
+    return this.login(user);
   }
 
   async logout(): Promise<any> {
@@ -113,9 +116,15 @@ export class UserDataService {
   }
 
   async save(newData: UserLoginParams, updateExternal: boolean = true): Promise<any> {
-    if (environment.connectToCognito && updateExternal) {
-      const resultCog: string = await Auth.updateUserAttributes(this.cognitoUser, newData.attributes);
-      this.logger.trace(resultCog);
+    if (environment.connectToCognito) {
+      if (updateExternal) {
+        // // window.LOG_LEVEL = 'DEBUG';
+        // const session = await Auth.currentSession();
+        // this.logger.debug(JSON.stringify(session));
+
+        const resultCog: string = await Auth.updateUserAttributes(this.cognitoUser, newData.attributes);
+        this.logger.trace(resultCog);
+      }
     } else {
       this.logger.debug('skipping Cognito: updateUserAttributes');
     }
@@ -165,6 +174,30 @@ export class UserDataService {
     }
 
     return true;
+  }
+
+  // TODO: read the avatarpicture and download it.
+  async getCustomProfilePic() {
+    // // 'customProfile.jpg'
+    // this.appMediaStorage.getProfilePictureFromS3(user.username)
+    //   .then(pic => {
+    //     //this.storage.
+    //   });
+
+  }
+
+  async setCustomProfilePic(photo: CameraPhoto) {
+    this.userData.attributes.picture = photo.webPath;
+    this.logger.debug('saving picture changes');
+    await this.save(this.userData);
+
+    if (environment.connectToS3) {
+      this.logger.debug('uploading profile picture to S3');
+      await this.appMediaStorage.savePictureToS3(photo, this.userData.username, 'customProfile.jpg');
+    } else {
+      this.logger.debug('skipping S3: setCustomProfilePic');
+    }
+
   }
 }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToastController, LoadingController } from '@ionic/angular';
+import { ToastController, LoadingController, ActionSheetController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Modals } from '@capacitor/core';
 
@@ -10,6 +10,7 @@ import { Modals } from '@capacitor/core';
 export class ModalsService {
 
   constructor(
+    public actionSheetController: ActionSheetController,
     private loadingController: LoadingController,
     private toastController: ToastController,
     private translateService: TranslateService,
@@ -32,11 +33,13 @@ export class ModalsService {
     // - https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SignUp.html#API_SignUp_Errors
 
     // TODO: Possible errors: ExpiredCodeException, InvalidPasswordException, TooManyFailedAttemptsException, UserNotConfirmedException
+    // TODO: in case an unkwown error, push to a monitoring system.
 
     const translateCode = 'aws.' + error.code;
     let errorMsg: string = this.translateService.instant(translateCode);
     if (errorMsg === translateCode) {
       errorMsg = this.translateService.instant('aws.basicError');
+      console.log(JSON.stringify(error));
     }
 
     const alertRet = await Modals.alert({
@@ -54,5 +57,29 @@ export class ModalsService {
       message: initialMsg + waitMsg
     });
     return loading;
+  }
+
+  async createPictureActionSheet(handler: any) {
+    const actionSheet = await this.actionSheetController.create({
+      header: this.translateService.instant('account.chgpic'),
+      buttons: [{
+        text: this.translateService.instant('account.takePhoto'),
+        icon: 'share',
+        handler: async () => {
+          handler(true);
+        }
+      }, {
+        text: this.translateService.instant('account.fromLibrary'),
+        icon: 'arrow-dropright-circle',
+        handler: () => {
+          handler(false);
+        }
+      }, {
+        text: this.translateService.instant('basic.cancel'),
+        icon: 'close',
+        role: 'cancel'
+      }]
+    });
+    return actionSheet;
   }
 }

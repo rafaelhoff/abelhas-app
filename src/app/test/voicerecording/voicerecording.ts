@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 
-import { Plugins, Capacitor } from '@capacitor/core';
+import { Plugins, Capacitor, DeviceInfo } from '@capacitor/core';
 
 // not mandatory, only for code completion
 import { RecordingData, GenericResponse } from 'capacitor-voice-recorder';
+import { AppMediaStorage } from 'src/app/util/appMediaStorage';
 
-import { Auth, Storage } from 'aws-amplify';
 
 // without types
-const { VoiceRecorder } = Plugins;
+const { VoiceRecorder, Device } = Plugins;
 
 // TODO: npm install -D @types/dom-mediacapture-record
 declare var MediaRecorder: any;
@@ -25,12 +25,16 @@ export class VoiceRecordingPage {
   timer: number = 0;
   intervalObj: any;
 
+  constructor(
+    private appMediaStorage: AppMediaStorage
+  ) { }
 
   async start() {
     this.recording = true;
     this.intervalObj = this.setTimer();
 
-    if (Capacitor.platform === 'web') {
+    const isWeb: boolean = await this.isWeb();
+    if (isWeb) {
       return this.startWeb();
     } else {
       return this.startMobile();
@@ -147,17 +151,17 @@ export class VoiceRecordingPage {
     return interval;
   }
 
-  async saveToS3(record: any) {
-    if (record) {
-      try {
-        const audio: HTMLAudioElement = record.audio;
-        let blob = await fetch(audio.src).then(r => r.blob());
-
-        await Storage.put(record.recordedAt + '.ogg', blob);
-      } catch (error) {
-        console.log(error);
-      }
+  save(record: any) {
+    try {
+      this.appMediaStorage.saveAudioToS3(record.audio, record.recordedAt + '.ogg');
+    } catch (error) {
+      console.log(error);
     }
+  }
+
+  private async isWeb(): Promise<boolean> {
+    const info: DeviceInfo = await Device.getInfo();
+    return (info.platform === 'web');
   }
 
 }

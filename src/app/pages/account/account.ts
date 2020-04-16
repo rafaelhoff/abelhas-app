@@ -48,25 +48,25 @@ export class AccountPage implements OnInit {
   }
 
   async updatePicture() {
-    const actionSheet = await this.actionSheetController.create({
-      header: this.translateService.instant('account.chgpic'),
-      buttons: [{
-        text: this.translateService.instant('account.takePhoto'),
-        icon: 'share',
-        handler: async () => {
-          this.takePicture();
-        }
-      }, {
-        text: this.translateService.instant('account.fromLibrary'),
-        icon: 'arrow-dropright-circle',
-        handler: () => {
-          this.getPhoto();
-        }
-      }, {
-        text: this.translateService.instant('basic.cancel'),
-        icon: 'close',
-        role: 'cancel'
-      }]
+
+    const actionSheet = await this.modalService.createPictureActionSheet(async (isCapture: boolean) => {
+      // TODO: deal with the Picture.
+      const photo: CameraPhoto = (isCapture) ?
+        await this.photoService.capturePhoto() :
+        await this.photoService.getFromLibrary();
+
+      // TODO: validate what happens when user cancels.
+      if (photo == null) {
+        return;
+      }
+
+      try {
+        await this.userDataService.setCustomProfilePic(photo);
+        this.accountData = await this.userDataService.getUser();
+      } catch (error) {
+        this.modalService.createCognitoErrorAlert(error);
+      }
+
     });
     await actionSheet.present();
   }
@@ -80,30 +80,6 @@ export class AccountPage implements OnInit {
 
   async logout() {
     await this.userDataService.logout();
-  }
-
-  async getPhoto() {
-    const photo: CameraPhoto = await this.photoService.getFromLibrary();
-
-    try {
-      this.accountData.attributes.picture = photo.webPath;
-      this.userDataService.save(this.accountData);
-    } catch (error) {
-      this.modalService.createCognitoErrorAlert(error);
-    }
-  }
-
-  async takePicture() {
-    // TODO: deal with the Picture.
-    const photo: CameraPhoto = await this.photoService.capturePhoto();
-    // const photo: Photo = await this.photoService.savePicture(camPhoto, 'profile.jpg');
-
-    try {
-      this.accountData.attributes.picture = photo.webPath;
-      this.userDataService.save(this.accountData);
-    } catch (error) {
-      this.modalService.createCognitoErrorAlert(error);
-    }
   }
 
   switchEdit() {

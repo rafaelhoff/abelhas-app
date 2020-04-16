@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   connectToCognito: false,
+  connectToS3: false,
   defaultPicture: '/assets/img/profile.png'
 };
 

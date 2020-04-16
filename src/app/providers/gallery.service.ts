@@ -1,21 +1,21 @@
-import { Plugins } from '@capacitor/core';
-const { FilesystemDirectory, Filesystem } = Plugins;
+import { Plugins, DeviceInfo } from '@capacitor/core';
+const { FilesystemDirectory, Filesystem, Device } = Plugins;
 
 import { Injectable } from '@angular/core';
-import { PhotoService, Photo } from './photo.service';
-import { Platform } from '@ionic/angular';
-import { AppStorage } from '../util/storage';
+import { PhotoService, CameraPhoto } from './photo.service';
+import { AppStorage } from '../util/appStorage';
+import { AppMediaStorage } from '../util/appMediaStorage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GalleryService {
-  public photos: Photo[] = [];
+  public photos: CameraPhoto[] = [];
   private PHOTO_STORAGE = 'photos';
 
   constructor(
     private appStorage: AppStorage,
-    private platform: Platform,
+    private appMediaStorage: AppMediaStorage,
     private photoService: PhotoService) {
   }
 
@@ -29,23 +29,24 @@ export class GalleryService {
   // https://capacitor.ionicframework.com/docs/apis/storage
 
   public async addNewToGallery() {
+    const isWeb: boolean = await this.isWeb();
 
-    const capturedPhoto = await this.photoService.capturePhoto();
-    const fileName = new Date().getTime() + '.jpeg';
-    const savedImageFile = await this.photoService.savePicture(capturedPhoto, fileName);
+    const capturedPhoto: CameraPhoto = await this.photoService.capturePhoto();
+    // TODO: fix the username;
+    this.appMediaStorage.savePictureToS3(capturedPhoto, 'rafael.hoff@gmail.com');
 
     // Add new photo to Photos array
-    this.photos.unshift(savedImageFile);
+    this.photos.unshift(capturedPhoto);
 
     // Cache all photo data for future retrieval
     this.appStorage.set(this.PHOTO_STORAGE,
-      this.platform.is('hybrid')
+      isWeb
         ? JSON.stringify(this.photos)
         : JSON.stringify(this.photos.map(p => {
           // Don't save the base64 representation of the photo data,
           // since it's already saved on the Filesystem
           const photoCopy = { ...p };
-          delete photoCopy.base64;
+          delete photoCopy.base64String;
 
           return photoCopy;
         }))
@@ -53,17 +54,16 @@ export class GalleryService {
   }
 
   // Delete picture by removing it from reference data and the filesystem
-  public async deletePicture(photo: Photo, position: number) {
+  public async deletePicture(photo: CameraPhoto, position: number) {
     // Remove this photo from the Photos reference data array
     this.photos.splice(position, 1);
 
     // Update photos array cache by overwriting the existing photo array
-    this.appStorage.set(this.PHOTO_STORAGE, JSON.stringify(this.photos));
+    this.appStorage.set(this.PHOTO_STORAGE, this.photos);
 
     // delete photo file from filesystem
-    const filename = photo.filepath.substr(photo.filepath.lastIndexOf('/') + 1);
     await Filesystem.deleteFile({
-      path: filename,
+      path: photo.path,
       directory: FilesystemDirectory.Data
     });
   }
@@ -71,15 +71,20 @@ export class GalleryService {
   public async loadSaved() {
     // Retrieve cached photo array data
     const photos = await this.appStorage.get(this.PHOTO_STORAGE);
-    this.photos = JSON.parse(photos) || [];
 
     // If running on the web...
-    if (!this.platform.is('hybrid')) {
+    const isWeb: boolean = await this.isWeb();
+    if (isWeb) {
       // Display the photo by reading into base64 format
       for (const photo of this.photos) {
         // Read each saved photo's data from the Filesystem
-        photo.base64 = await this.photoService.readBase64Photo(photo.filepath);
+        photo.base64String = await this.photoService.readBase64Photo(photo.path);
       }
     }
+  }
+
+  private async isWeb(): Promise<boolean> {
+    const info: DeviceInfo = await Device.getInfo();
+    return (info.platform === 'web');
   }
 }

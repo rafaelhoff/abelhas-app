@@ -6,7 +6,7 @@ import { Platform, ToastController } from '@ionic/angular';
 
 import { UserDataService } from './providers/userData.service';
 import { SplashScreen } from '@capacitor/core';
-import { ConfigService } from './providers/config-data';
+import { ConfigDataService } from './providers/configData.service';
 import { NGXLogger } from 'ngx-logger';
 
 @Component({
@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
     private userDataService: UserDataService,
     private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
-    private configService: ConfigService
+    private configService: ConfigDataService
   ) {
     this.initializeApp();
   }
@@ -99,12 +99,7 @@ export class AppComponent implements OnInit {
   listenForLoginEvents() {
     window.addEventListener('user:login', () => {
       this.updateLoggedInStatus(true);
-      this.router.navigateByUrl('/');
-    });
-
-    window.addEventListener('user:signup', () => {
-      this.updateLoggedInStatus(true);
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/apiary');
     });
 
     window.addEventListener('user:logout', () => {

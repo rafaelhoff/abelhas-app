@@ -3,7 +3,7 @@ import { Subject, of, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
-import { AppStorage } from '../util/storage';
+import { AppStorage } from '../util/appStorage';
 
 import { Plugins, DeviceLanguageCodeResult } from '@capacitor/core';
 const { Device } = Plugins;
