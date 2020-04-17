@@ -1,0 +1,14 @@
+{
+  "trigger": true,
+  "modules": [
+    "custom"
+  ],
+  "parentResource": "abelhasAuth",
+  "functionName": "abelhasAuthCustomMessage",
+  "resourceName": "abelhasAuthCustomMessage",
+  "parentStack": "auth",
+  "triggerEnvs": [],
+  "triggerTemplate": "CustomMessage.json.ejs",
+  "roleName": "abelhasAuthCustomMessage",
+  "skipEdit": true
+}

@@ -1,0 +1,15 @@
+{
+  "appName": "AbelhasCare",
+  "signup": {
+    "en": {
+      "smsMessage": "Your verification code is ${codeParameter}.",
+      "emailSubject": "Welcome to ${appName}",
+      "emailMessage": "Your verification code is ${codeParameter}."
+    },
+    "pt": {
+      "smsMessage": "Seu código de verificação é ${codeParameter}.",
+      "emailSubject": "Bem-vindo ao ${appName}",
+      "emailMessage": "Seu código de verificação é ${codeParameter}."
+    }
+  }
+}

@@ -85,17 +85,17 @@ See [CONTRIBUTING.md](https://github.com/ionic-team/ionic-conference-app/blob/ma
 ## TODO:
 
 [ ] Fix Orientation of Pictures: https://github.com/ionic-team/capacitor/issues/307
-[ ] Add AWS Cognito: 
+[X] Add AWS Cognito: 
   - https://aws.amazon.com/blogs/mobile/user-sign-in-and-sign-up-for-ionic-mobile-apps-with-amazon-cognito/
   - https://github.com/awslabs/aws-mobile-ionic-sample
-[X] Add Voice Recording
-  - https://bitbucket.org/tchvu3/capacitor-voice-recorder/src/master/
 [ ] Voice Recording
-  - Offer Pull Request?
+  - Offer Pull Request? To Web Environment?
+  - https://bitbucket.org/tchvu3/capacitor-voice-recorder/src/master/
 [ ] Add Angular Animations
   - https://angular.io/guide/animations
   - https://medium.com/ngconf/animating-angulars-ngif-and-ngfor-32a6ff26ed2d
 [ ] Fix Geolocation Problem
+[ ] Rename Amplify abelhas2 to something meaningful.
 
 
 ## Good Links
