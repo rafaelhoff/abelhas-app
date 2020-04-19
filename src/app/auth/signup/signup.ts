@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Location } from '@angular/common';
 
 import { UserDataService, UserLoginParams } from '../../providers/userData.service';
 import { ModalController } from '@ionic/angular';
@@ -29,6 +30,7 @@ export class SignupPage {
 
   constructor(
     private configService: ConfigDataService,
+    private location: Location,
     private userDataService: UserDataService,
     private modalController: ModalController,
     private modalService: ModalsService
@@ -49,7 +51,8 @@ export class SignupPage {
 
       const confirmed = await this.showConfirmCode();
       if (!confirmed) {
-        // TODO: clean the user that was created.
+        this.modalService.createToast('auth.confirm.warn');
+        this.location.back();
       }
     } catch (error) {
       await loading.dismiss();

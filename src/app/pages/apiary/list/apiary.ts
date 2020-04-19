@@ -2,7 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   AlertController, IonList, IonRouterOutlet, LoadingController,
-  ModalController, ToastController, Config, IonFab, IonItemSliding
+  ModalController, ToastController, Config, IonItemSliding
 } from '@ionic/angular';
 
 import { UserDataService } from '../../../providers/userData.service';
@@ -31,7 +31,6 @@ export class ApiaryPage implements OnInit {
   constructor(
     public alertCtrl: AlertController,
     public confData: ApiaryDataService,
-    public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
     public router: Router,
     public routerOutlet: IonRouterOutlet,
@@ -131,13 +130,7 @@ export class ApiaryPage implements OnInit {
     await alert.present();
   }
 
-  async openSocial(network: string, fab: IonFab) {
-    const loading = await this.loadingCtrl.create({
-      message: `Posting to ${network}`,
-      duration: (Math.random() * 1000) + 500
-    });
-    await loading.present();
-    await loading.onWillDismiss();
-    fab.close();
+  async add() {
+    console.log('added');
   }
 }

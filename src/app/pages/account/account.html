@@ -35,17 +35,32 @@
             <ion-col>
               <ion-item>
                 <app-label tCode="auth.firstName" [required]="!readonly"></app-label>
-                <ion-input formControlName="name" required [readonly]="readonly"></ion-input>
+                <ion-input formControlName="name" [required]="!readonly" [readonly]="readonly"></ion-input>
               </ion-item>
             </ion-col>
             <ion-col>
               <ion-item>
                 <app-label tCode="auth.lastName" [required]="!readonly"></app-label>
-                <ion-input formControlName="family_name" required [readonly]="readonly"></ion-input>
+                <ion-input formControlName="family_name" [required]="!readonly" [readonly]="readonly"></ion-input>
               </ion-item>
             </ion-col>
           </ion-row>
         </ion-grid>
+
+        <!-- TODO: add the warnings / errors -->
+        <ion-text color="danger"
+          *ngIf="myform.controls.family_name.invalid && (myform.controls.family_name.dirty && myform.controls.family_name.touched)">
+          <p *ngIf="myform.controls.family_name.errors.required" class="ion-padding-start ion-text-left">
+            {{ 'account.lastNameReq' | translate }}
+          </p>
+        </ion-text>
+        <ion-text color="danger"
+          *ngIf="myform.controls.name.invalid && (myform.controls.name.dirty && myform.controls.name.touched)">
+          <p *ngIf="myform.controls.name.errors.required" class="ion-padding-start ion-text-left">
+            {{ 'account.firstNameReq' | translate }}
+          </p>
+        </ion-text>
+
         <br>
         <ion-item>
           <app-label tCode="auth.email" [required]="false"></app-label>

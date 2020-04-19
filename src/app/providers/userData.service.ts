@@ -102,6 +102,16 @@ export class UserDataService {
     return this.login(user);
   }
 
+  async resendConfirmCodeSignUp(user: UserLoginParams): Promise<any> {
+    if (environment.connectToCognito) {
+      await Auth.resendSignUp(user.username);
+    } else {
+      this.logger.debug('skipping Cognito: confirmCodeSignUp');
+    }
+
+    return true;
+  }
+
   async logout(): Promise<any> {
     if (environment.connectToCognito) {
       await Auth.signOut();

@@ -46,8 +46,20 @@ export class ConfirmCodeModalPage implements OnInit {
 
       } catch (error) {
         await loading.dismiss();
+        if (error.code === 'NotAuthorizedException') {
+          this.dismiss(false);
+        }
         await this.modalService.createCognitoErrorAlert(error);
       }
+    }
+  }
+
+  async resendCode() {
+    try {
+      await this.userDataService.resendConfirmCodeSignUp(this.user);
+      await this.modalService.createToast('auth.confirm.codeSentAgain');
+    } catch (error) {
+      await this.modalService.createCognitoErrorAlert(error);
     }
   }
 }

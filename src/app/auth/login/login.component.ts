@@ -6,6 +6,7 @@ import { UserDataService, UserLoginParams } from '../../providers/userData.servi
 import { ModalController } from '@ionic/angular';
 import { ForgotPasswordModalPage } from '../forgotPassword/forgotPassword';
 import { ModalsService } from 'src/app/shared/modals.service';
+import { ConfirmCodeModalPage } from '../confirmCode/confirmCode';
 
 
 @Component({
@@ -33,7 +34,11 @@ export class LoginComponent {
 
     } catch (error) {
       await loading.dismiss();
-      this.modalService.createCognitoErrorAlert(error);
+      if (error.code === 'UserNotConfirmedException') {
+        this.showConfirmCode();
+      } else {
+        this.modalService.createCognitoErrorAlert(error);
+      }
     }
   }
 
@@ -49,5 +54,18 @@ export class LoginComponent {
     await modal.onWillDismiss();
 
     return true;
+  }
+
+  async showConfirmCode(): Promise<boolean> {
+    const modal = await this.modalController.create({
+      backdropDismiss: false,
+      component: ConfirmCodeModalPage,
+      componentProps: {
+        user: this.credentials
+      }
+    });
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+    return data.confirmed;
   }
 }

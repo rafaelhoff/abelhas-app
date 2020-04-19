@@ -30,4 +30,9 @@
       {{ 'basic.confirm' | translate }}
     </ion-button>
   </form>
+  <ion-item lines="none">
+    <ion-button style="text-transform:none" fill="clear" (click)="resendCode()">
+      {{ 'auth.confirm.resend' | translate }}
+    </ion-button>
+  </ion-item>
 </ion-content>
