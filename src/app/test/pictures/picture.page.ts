@@ -18,6 +18,10 @@ export class PicturePage implements OnInit {
     this.galleryService.loadSaved();
   }
 
+  selectFile() {
+    this.galleryService.addNewToGallery();
+  }
+
   public async showActionSheet(photo, position) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Photos',

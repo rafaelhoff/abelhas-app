@@ -5,14 +5,24 @@ import { EqualValidator } from './equalPassword.directive';
 import { PasswordValidator } from './password.directive';
 import { IonicModule } from '@ionic/angular';
 import { AppLabelComponent } from './appLabel.component';
+import { IconAddMediaComponent } from './iconAddMedia.component';
+import { RecordAudioComponent } from '../media/recordAudio.component';
 
 @NgModule({
-  declarations: [EqualValidator, PasswordValidator, AppLabelComponent],
+  declarations: [EqualValidator, PasswordValidator, AppLabelComponent, IconAddMediaComponent, RecordAudioComponent],
   imports: [
     CommonModule,
     IonicModule,
     TranslateModule
   ],
-  exports: [EqualValidator, PasswordValidator, CommonModule, TranslateModule, AppLabelComponent]
+  exports: [
+    EqualValidator,
+    PasswordValidator,
+    CommonModule,
+    TranslateModule,
+    AppLabelComponent,
+    IconAddMediaComponent,
+    RecordAudioComponent
+  ]
 })
 export class SharedModule { }

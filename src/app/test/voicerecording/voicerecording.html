@@ -24,22 +24,6 @@
     </ion-item>
   </ion-list>
 
-  <div *ngIf="!recording">
-    <ion-button (click)="start()" color="primary">
-      <ion-icon name="mic"></ion-icon>
-    </ion-button>
-  </div>
-
-  <div *ngIf="recording">
-    <ion-button (click)="stop(false)" color="primary">
-      <ion-icon name="close-circle"></ion-icon>
-    </ion-button>
-
-    {{timer}}
-
-    <ion-button (click)="stop(true)" color="primary">
-      <ion-icon name="checkmark-circle"></ion-icon>
-    </ion-button>
-  </div>
+  <app-record-audio (newRecord)="newRecord($event)"></app-record-audio>
 
 </ion-content>

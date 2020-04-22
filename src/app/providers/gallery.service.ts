@@ -1,10 +1,11 @@
-import { Plugins, DeviceInfo } from '@capacitor/core';
-const { FilesystemDirectory, Filesystem, Device } = Plugins;
+import { Plugins } from '@capacitor/core';
+const { FilesystemDirectory, Filesystem } = Plugins;
 
 import { Injectable } from '@angular/core';
 import { PhotoService, CameraPhoto } from './photo.service';
 import { AppStorage } from '../util/appStorage';
 import { AppMediaStorage } from '../util/appMediaStorage';
+import { AppPlatform } from '../util/appPlatform';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,15 @@ import { AppMediaStorage } from '../util/appMediaStorage';
 export class GalleryService {
   public photos: CameraPhoto[] = [];
   private PHOTO_STORAGE = 'photos';
+  isWeb: boolean = false;
 
   constructor(
+    private appPlatform: AppPlatform,
     private appStorage: AppStorage,
     private appMediaStorage: AppMediaStorage,
-    private photoService: PhotoService) {
+    private photoService: PhotoService
+  ) {
+    appPlatform.isWeb().then(w => this.isWeb = w);
   }
 
   // Use the device camera to take a photo:
@@ -29,7 +34,6 @@ export class GalleryService {
   // https://capacitor.ionicframework.com/docs/apis/storage
 
   public async addNewToGallery() {
-    const isWeb: boolean = await this.isWeb();
 
     const capturedPhoto: CameraPhoto = await this.photoService.capturePhoto();
     // TODO: fix the username;
@@ -40,7 +44,7 @@ export class GalleryService {
 
     // Cache all photo data for future retrieval
     this.appStorage.set(this.PHOTO_STORAGE,
-      isWeb
+      this.isWeb
         ? JSON.stringify(this.photos)
         : JSON.stringify(this.photos.map(p => {
           // Don't save the base64 representation of the photo data,
@@ -73,18 +77,12 @@ export class GalleryService {
     const photos = await this.appStorage.get(this.PHOTO_STORAGE);
 
     // If running on the web...
-    const isWeb: boolean = await this.isWeb();
-    if (isWeb) {
+    if (this.isWeb) {
       // Display the photo by reading into base64 format
       for (const photo of this.photos) {
         // Read each saved photo's data from the Filesystem
         photo.base64String = await this.photoService.readBase64Photo(photo.path);
       }
     }
-  }
-
-  private async isWeb(): Promise<boolean> {
-    const info: DeviceInfo = await Device.getInfo();
-    return (info.platform === 'web');
   }
 }
