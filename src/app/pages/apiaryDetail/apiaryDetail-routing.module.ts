@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiaryDetailPage } from './apiaryDetail';
+import { ApiaryHistoryPage } from './history/history';
+import { ApiaryInfoPage } from './info/info';
+import { ApiaryMapPage } from './map/map';
 
 
 const routes: Routes = [
@@ -10,30 +13,15 @@ const routes: Routes = [
     children: [
       {
         path: 'info',
-        children: [
-          {
-            path: '',
-            loadChildren: () => import('./info/info.module').then(m => m.ApiaryInfoModule)
-          }
-        ]
+        children: [{ path: '', component: ApiaryInfoPage }]
       },
       {
         path: 'map',
-        children: [
-          {
-            path: '',
-            loadChildren: () => import('./map/map.module').then(m => m.ApiaryMapModule)
-          }
-        ]
+        children: [{ path: '', component: ApiaryMapPage }]
       },
       {
         path: 'history',
-        children: [
-          {
-            path: '',
-            loadChildren: () => import('./history/history.module').then(m => m.ApiaryHistoryModule)
-          }
-        ]
+        children: [{ path: '', component: ApiaryHistoryPage }]
       },
       {
         // TODO: fix this route here.
