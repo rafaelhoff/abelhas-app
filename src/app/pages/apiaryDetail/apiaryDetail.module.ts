@@ -11,6 +11,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ApiaryInfoPage } from './info/info';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ApiaryMapPage } from './map/map';
+import { ApiaryInfoFormComponent } from './info/infoForm.component';
+import { ApiaryAddPage } from './add/add';
 
 @NgModule({
   imports: [
@@ -25,7 +27,9 @@ import { ApiaryMapPage } from './map/map';
     ApiaryDetailPage,
     ApiaryInfoPage,
     ApiaryMapPage,
-    ApiaryHistoryPage
+    ApiaryHistoryPage,
+    ApiaryAddPage,
+    ApiaryInfoFormComponent
   ]
 })
 export class ApiaryDetailModule { }

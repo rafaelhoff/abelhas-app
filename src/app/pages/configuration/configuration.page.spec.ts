@@ -6,6 +6,8 @@ import { TranslatePipeMock } from 'src/app/util/translatePipe.mock';
 import { Router } from '@angular/router';
 import { ConfigDataService } from 'src/app/providers/configData.service';
 import { Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { NGXLogger } from 'ngx-logger';
 
 describe('ConfigurationPage', () => {
   let component: ConfigurationPage;
@@ -17,13 +19,17 @@ describe('ConfigurationPage', () => {
       loadPreData: new Observable(),
       load: Promise.resolve()
     });
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['instant', 'setDefaultLang', 'get', 'subscribe', 'use']);
+    const loggerSpy = jasmine.createSpyObj('NGXLogger', ['log']);
 
     TestBed.configureTestingModule({
       declarations: [ConfigurationPage, TranslatePipeMock],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
         { provide: ConfigDataService, useValue: configServiceSpy },
-        { provide: Router, useValue: routerSpy }
+        { provide: NGXLogger, useValue: loggerSpy },
+        { provide: Router, useValue: routerSpy },
+        { provide: TranslateService, useValue: translateServiceSpy }
       ]
     })
       .compileComponents();

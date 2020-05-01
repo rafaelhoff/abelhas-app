@@ -1,18 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { UserDataService } from 'src/app/providers/userData.service';
-import { ApiaryDataService } from 'src/app/providers/apiaryData.service';
+import { ApiaryDataService, ApiaryInfo } from 'src/app/providers/apiaryData.service';
+import { ApiaryInfoFormComponent } from './infoForm.component';
 
 @Component({
   selector: 'page-apiary-info',
   styleUrls: ['./info.scss'],
   templateUrl: 'info.html'
 })
-export class ApiaryInfoPage {
-  session: any;
+export class ApiaryInfoPage implements OnInit {
+  apiaryData: ApiaryInfo;
   isFavorite = false;
   defaultHref = '';
+  readonly = true;
+
+  @ViewChild('form', { static: true }) form: ApiaryInfoFormComponent;
 
   constructor(
     private confData: ApiaryDataService,
@@ -20,26 +24,14 @@ export class ApiaryInfoPage {
     private route: ActivatedRoute
   ) { }
 
+  ngOnInit(): void {
+  }
+
   ionViewWillEnter() {
-    this.confData.load().subscribe((data: any) => {
-      if (data && data.schedule && data.schedule[0] && data.schedule[0].groups) {
-        const sessionId = this.route.snapshot.paramMap.get('sessionId');
-        for (const group of data.schedule[0].groups) {
-          if (group && group.sessions) {
-            for (const session of group.sessions) {
-              if (session && session.id === sessionId) {
-                this.session = session;
-
-                this.isFavorite = this.userDataService.hasFavorite(
-                  this.session.name
-                );
-
-                break;
-              }
-            }
-          }
-        }
-      }
+    const apiaryId = this.route.snapshot.parent.parent.paramMap.get('apiaryId');
+    this.confData.get(apiaryId).subscribe((data: ApiaryInfo) => {
+      this.apiaryData = data;
+      this.form.init(this.apiaryData);
     });
   }
 
@@ -47,21 +39,34 @@ export class ApiaryInfoPage {
     this.defaultHref = `/apiary`;
   }
 
-  sessionClick(item: string) {
-    // console.log('Clicked', item);
-  }
-
   toggleFavorite() {
-    if (this.userDataService.hasFavorite(this.session.name)) {
-      this.userDataService.removeFavorite(this.session.name);
+    if (this.userDataService.hasFavorite(this.apiaryData.name)) {
+      this.userDataService.removeFavorite(this.apiaryData.name);
       this.isFavorite = false;
     } else {
-      this.userDataService.addFavorite(this.session.name);
+      this.userDataService.addFavorite(this.apiaryData.name);
       this.isFavorite = true;
     }
   }
 
   shareSession() {
     // console.log('Clicked share session');
+  }
+
+  async add() {
+    console.log('added');
+  }
+
+  async addPicture() {
+    console.log('picture added.');
+  }
+
+  async uploadFile() {
+    console.log('uploadFile');
+  }
+
+  async switchEdit() {
+    this.form.isReadonly = !this.form.isReadonly;
+    this.readonly = !this.readonly;
   }
 }

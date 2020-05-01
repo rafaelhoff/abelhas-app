@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="defaultHref"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Apiary</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <app-apiary-form #form></app-apiary-form>
+  <div class="ion-padding">
+    <ion-button expand="block" type="submit" (click)="onSave()">Save</ion-button>
+  </div>
+
+</ion-content>

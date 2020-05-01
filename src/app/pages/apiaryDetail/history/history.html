@@ -11,6 +11,15 @@
 
 <ion-content>
 
+  <!-- TODO: add a timeline:
+    - https://github.com/kevincobain2000/ionic-timeline-v3
+    - https://github.com/ahmadkhalaf1/ion-timeline
+    - https://github.com/juniorabranches/ionic-timeline
+    - https://market.ionicframework.com/plugins/ionic-timeline
+
+
+  -->
+
   <ion-grid>
     <ion-row>
       <ion-col size="6" *ngFor="let photo of galleryService.photos; index as position">
@@ -20,9 +29,5 @@
     </ion-row>
   </ion-grid>
 
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button (click)="galleryService.addNewToGallery()">
-      <ion-icon name="camera"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+  <app-icon-addmedia></app-icon-addmedia>
 </ion-content>

@@ -4,9 +4,14 @@ import { ApiaryDetailPage } from './apiaryDetail';
 import { ApiaryHistoryPage } from './history/history';
 import { ApiaryInfoPage } from './info/info';
 import { ApiaryMapPage } from './map/map';
+import { ApiaryAddPage } from './add/add';
 
 
 const routes: Routes = [
+  {
+    path: 'new',
+    component: ApiaryAddPage
+  },
   {
     path: ':apiaryId',
     component: ApiaryDetailPage,

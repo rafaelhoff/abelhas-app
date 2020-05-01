@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
-  AlertController, IonList, IonRouterOutlet, LoadingController,
+  AlertController, IonList, IonRouterOutlet,
   ModalController, ToastController, Config, IonItemSliding
 } from '@ionic/angular';
 
@@ -16,14 +16,13 @@ import { ApiaryDataService } from 'src/app/providers/apiaryData.service';
 })
 export class ApiaryPage implements OnInit {
   // Gets a reference to the list element
-  @ViewChild('scheduleList', { static: true }) scheduleList: IonList;
+  @ViewChild('apiaryList', { static: true }) apiaryList: IonList;
 
   ios: boolean;
   dayIndex = 0;
   queryText = '';
-  segment = 'all';
   excludeTracks: any = [];
-  shownSessions: any = [];
+  shownApiaries: any = [];
   groups: any = [];
   confDate: string;
   showSearchbar: boolean;
@@ -40,19 +39,19 @@ export class ApiaryPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.updateSchedule();
+    this.updateList();
 
     this.ios = this.config.get('mode') === 'ios';
   }
 
-  updateSchedule() {
+  updateList() {
     // Close any open sliding items when the schedule updates
-    if (this.scheduleList) {
-      this.scheduleList.closeSlidingItems();
+    if (this.apiaryList) {
+      this.apiaryList.closeSlidingItems();
     }
 
-    this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
-      this.shownSessions = data.shownSessions;
+    this.confData.getApiaries(this.dayIndex).subscribe((data: any) => {
+      this.shownApiaries = data.apiaries;
       this.groups = data.groups;
     });
   }
@@ -69,7 +68,7 @@ export class ApiaryPage implements OnInit {
     const { data } = await modal.onWillDismiss();
     if (data) {
       this.excludeTracks = data;
-      this.updateSchedule();
+      this.updateList();
     }
   }
 
@@ -118,7 +117,7 @@ export class ApiaryPage implements OnInit {
           handler: () => {
             // they want to remove this session from their favorites
             this.userDataService.removeFavorite(sessionData.name);
-            this.updateSchedule();
+            this.updateList();
 
             // close the sliding item and hide the option buttons
             slidingItem.close();
@@ -131,6 +130,6 @@ export class ApiaryPage implements OnInit {
   }
 
   async add() {
-    console.log('added');
+    this.router.navigateByUrl('/apiary-detail/new');
   }
 }

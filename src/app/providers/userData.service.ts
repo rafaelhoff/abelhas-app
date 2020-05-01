@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AppStorage } from '../util/appStorage';
+import { AppStorage, StorageKeys } from '../util/appStorage';
 import { Auth } from 'aws-amplify';
 import { ISignUpResult, CognitoUser, CognitoUserAttribute } from 'amazon-cognito-identity-js';
 import { environment } from '../../environments/environment';
@@ -12,7 +12,6 @@ import { CameraPhoto } from './photo.service';
   providedIn: 'root'
 })
 export class UserDataService {
-  readonly storageKey = 'username';
 
   favorites: string[] = [];
   private userData: UserLoginParams = null;
@@ -119,7 +118,7 @@ export class UserDataService {
       this.logger.debug('skipping Cognito: logout');
     }
 
-    await this.storage.set(this.storageKey, null);
+    await this.storage.set(StorageKeys.username, null);
 
     window.dispatchEvent(new CustomEvent('user:logout'));
     return true;
@@ -139,14 +138,14 @@ export class UserDataService {
       this.logger.debug('skipping Cognito: updateUserAttributes');
     }
 
-    await this.storage.set(this.storageKey, newData);
+    await this.storage.set(StorageKeys.username, newData);
     this.userData = newData;
     return true;
   }
 
   async getUser(): Promise<UserLoginParams> {
     if (!this.userData) {
-      this.userData = await this.storage.get(this.storageKey);
+      this.userData = await this.storage.get(StorageKeys.username);
     }
     return this.userData;
   }

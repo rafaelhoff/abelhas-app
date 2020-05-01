@@ -3,7 +3,7 @@ const { FilesystemDirectory, Filesystem } = Plugins;
 
 import { Injectable } from '@angular/core';
 import { PhotoService, CameraPhoto } from './photo.service';
-import { AppStorage } from '../util/appStorage';
+import { AppStorage, StorageKeys } from '../util/appStorage';
 import { AppMediaStorage } from '../util/appMediaStorage';
 import { AppPlatform } from '../util/appPlatform';
 
@@ -12,7 +12,6 @@ import { AppPlatform } from '../util/appPlatform';
 })
 export class GalleryService {
   public photos: CameraPhoto[] = [];
-  private PHOTO_STORAGE = 'photos';
   isWeb: boolean = false;
 
   constructor(
@@ -43,7 +42,7 @@ export class GalleryService {
     this.photos.unshift(capturedPhoto);
 
     // Cache all photo data for future retrieval
-    this.appStorage.set(this.PHOTO_STORAGE,
+    this.appStorage.set(StorageKeys.photos,
       this.isWeb
         ? JSON.stringify(this.photos)
         : JSON.stringify(this.photos.map(p => {
@@ -63,7 +62,7 @@ export class GalleryService {
     this.photos.splice(position, 1);
 
     // Update photos array cache by overwriting the existing photo array
-    this.appStorage.set(this.PHOTO_STORAGE, this.photos);
+    this.appStorage.set(StorageKeys.photos, this.photos);
 
     // delete photo file from filesystem
     await Filesystem.deleteFile({
@@ -74,7 +73,7 @@ export class GalleryService {
 
   public async loadSaved() {
     // Retrieve cached photo array data
-    const photos = await this.appStorage.get(this.PHOTO_STORAGE);
+    const photos = await this.appStorage.get(StorageKeys.photos);
 
     // If running on the web...
     if (this.isWeb) {

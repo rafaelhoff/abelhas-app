@@ -3,7 +3,7 @@ import { Subject, of, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
-import { AppStorage } from '../util/appStorage';
+import { AppStorage, StorageKeys } from '../util/appStorage';
 
 import { Plugins, DeviceLanguageCodeResult } from '@capacitor/core';
 const { Device } = Plugins;
@@ -55,7 +55,7 @@ export class ConfigDataService {
   async load(): Promise<ConfigData> {
     if (!this.data) {
       // First-time load.
-      this.data = await this.storage.get('configuration');
+      this.data = await this.storage.get(StorageKeys.configuration);
       if (!this.data) {
         this.data = await this.getInitialConfiguation();
       }
@@ -66,7 +66,7 @@ export class ConfigDataService {
   }
 
   async save(newData: any): Promise<void> {
-    await this.storage.set('configuration', newData);
+    await this.storage.set(StorageKeys.configuration, newData);
     this.data = newData;
     return;
   }

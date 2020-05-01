@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Config, ModalController, NavParams } from '@ionic/angular';
-import { ApiaryDataService } from 'src/app/providers/apiaryData.service';
+import { ApiaryDataService, ApiaryInfo } from 'src/app/providers/apiaryData.service';
 
 
 @Component({
@@ -26,15 +26,15 @@ export class ApiaryListFilterPage {
     // passed in array of track names that should be excluded (unchecked)
     const excludedTrackNames = this.navParams.get('excludedTracks');
 
-    this.confData.getTracks().subscribe((tracks: any[]) => {
-      tracks.forEach(track => {
-        this.tracks.push({
-          name: track.name,
-          icon: track.icon,
-          isChecked: (excludedTrackNames.indexOf(track.name) === -1)
-        });
-      });
-    });
+    // this.confData.getApiaries().subscribe((tracks: ApiaryInfo[]) => {
+    //   tracks.forEach(track => {
+    //     this.tracks.push({
+    //       name: track.name,
+    //       icon: track.icon,
+    //       isChecked: (excludedTrackNames.indexOf(track.name) === -1)
+    //     });
+    //   });
+    // });
   }
 
   selectAll(check: boolean) {
