@@ -1,9 +1,9 @@
 {
   "account": {
     "chgpic": "Alterar imagem",
-    "firstNameReq": "Nome é obrigatório",
+    "firstName": "Nome",
     "fromLibrary": "Buscar da Biblioteca",
-    "lastNameReq": "Sobrenome é obrigatório",
+    "lastName": "Sobrenome",
     "logout": "Deslogar",
     "name": "Nome",
     "takePhoto": "Tirar Foto",
@@ -25,7 +25,6 @@
     "chgPwdTitle": "Alterar senha",
     "confirm": {
       "code": "Código",
-      "codeReq": "Código é obrigatório",
       "codeSentAgain": "Código de confirmação foi enviado novamente.",
       "confirmed": "Código de confirmação é valido.",
       "confirming": "Confirmando",
@@ -35,28 +34,21 @@
       "warn": "Voce será perguntado pelo código de confirmação na próxima vez que fizer o Login."
     },
     "email": "E-mail",
-    "emailReq": "E-mail é obrigatório",
     "emailValid": "E-mail deve ser valido",
-    "firstName": "Nome",
     "forgot": {
       "changed": "A senha foi alterada.",
       "desc": "Um e-mail foi enviado para <strong>{{email}}</strong> para a alteração de senha. Por favor, abra o e-mail, copie o código de confirmação e coloque no campo abaixo.",
       "question": "Esqueceu a senha?",
       "title": "Esqueceu a senha"
     },
-    "lastName": "Sobrenome",
     "loggingIn": "Logando",
     "login": "Login",
     "new": "Nova senha",
     "new2": "Repita nova senha",
-    "new2Req": "Repita nova senha é obrigatória",
     "newPwdMatch": "Novas senhas devem corresponder",
-    "newReq": "Nova senha é obrigatória",
     "old": "Senha Antiga",
-    "oldReq": "Senha Antiga é obrigatória",
     "pwd": "Senha",
     "pwdComp": "Mínimo 8 caracteres, ao menos uma maiúscula, uma minúscula, um número e um caractere especial",
-    "pwdReq": "Senha é obrigatória",
     "requesting": "Requisitando",
     "signingUp": "Cadastrando",
     "signup": "Cadastrar",
@@ -85,7 +77,8 @@
     "ok": "OK",
     "pleaseWait": ", por favor espere...",
     "remove": "Remover",
-    "request": "Requisitar"
+    "request": "Requisitar",
+    "required": " é obrigatório"
   },
   "cfg": {
     "about": {

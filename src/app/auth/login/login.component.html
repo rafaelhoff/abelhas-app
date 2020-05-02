@@ -12,7 +12,7 @@
 
     <ion-text color="danger" *ngIf="username.invalid && (username.dirty && username.touched)">
       <p *ngIf="username.errors.required" class="ion-padding-start">
-        {{ 'auth.emailReq' | translate }}
+        {{ 'auth.email' | translate }}{{ 'basic.required' | translate }}
       </p>
       <p *ngIf="username.errors.email" class="ion-padding-start">
         {{ 'auth.emailValid' | translate }}
@@ -28,7 +28,7 @@
 
     <ion-text color="danger" *ngIf="password.invalid && (password.dirty && password.touched)">
       <p *ngIf="password.errors.required" class="ion-padding-start">
-        {{ 'auth.pwdReq' | translate }}
+        {{ 'auth.pwd' | translate }}{{ 'basic.required' | translate }}
       </p>
     </ion-text>
 

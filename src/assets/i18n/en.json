@@ -1,9 +1,9 @@
 {
   "account": {
     "chgpic": "Change Picture",
-    "firstNameReq": "Name is required",
+    "firstName": "First name",
     "fromLibrary": "From Library",
-    "lastNameReq": "Last Name is required",
+    "lastName": "Last Name",
     "logout": "Logout",
     "name": "Name",
     "takePhoto": "Take Photo",
@@ -25,7 +25,6 @@
     "chgPwdTitle": "Change Password",
     "confirm": {
       "code": "Code",
-      "codeReq": "Code is required",
       "codeSentAgain": "Confirmation code was sent again.",
       "confirmed": "Confirm Code is valid",
       "confirming": "Confirming",
@@ -35,28 +34,21 @@
       "warn": "You will be requested for the Confirmation Code next time during Login."
     },
     "email": "E-mail",
-    "emailReq": "E-mail is required",
     "emailValid": "E-mail must be valid",
-    "firstName": "First name",
     "forgot": {
       "changed": "Your password was changed.",
       "desc": "An e-mail was sent to <strong>{{email}}</strong> with a security code to change the password. Please open the e-mail, copy the security code and enter in the input below.",
       "question": "Forgot Password?",
       "title": "Forgot Password"
     },
-    "lastName": "Last name",
     "loggingIn": "Logging in",
     "login": "Login",
     "new": "New Password",
     "new2": "Repeat new Password",
-    "new2Req": "Repeat new Password is required",
     "newPwdMatch": "Repeat must match",
-    "newReq": "New Password is required",
     "old": "Old Password",
-    "oldReq": "Old Password is required",
     "pwd": "Password",
     "pwdComp": "Minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and one special character",
-    "pwdReq": "Password is required",
     "requesting": "Requesting",
     "signingUp": "Signing up",
     "signup": "Signup",
@@ -85,7 +77,8 @@
     "ok": "OK",
     "pleaseWait": ", please wait...",
     "remove": "Remove",
-    "request": "Request"
+    "request": "Request",
+    "required": " is required"
   },
   "cfg": {
     "about": {

@@ -19,14 +19,14 @@
         <ion-row>
           <ion-col>
             <ion-item>
-              <app-label tCode="auth.firstName"></app-label>
+              <app-label tCode="account.firstName"></app-label>
               <ion-input [(ngModel)]="signup.attributes.name" name="firstName" #firstName="ngModel" required>
               </ion-input>
             </ion-item>
           </ion-col>
           <ion-col>
             <ion-item>
-              <app-label tCode="auth.lastName"></app-label>
+              <app-label tCode="account.lastName"></app-label>
               <ion-input [(ngModel)]="signup.attributes.family_name" name="lastName" #lastName="ngModel" required>
               </ion-input>
             </ion-item>
@@ -44,7 +44,7 @@
 
       <ion-text color="danger" *ngIf="username.invalid && (username.dirty && username.touched)">
         <p *ngIf="username.errors.required" class="ion-padding-start">
-          {{ 'auth.emailReq' | translate }}
+          {{ 'auth.email' | translate }}{{ 'basic.required' | translate }}
         </p>
         <p *ngIf="username.errors.email" class="ion-padding-start">
           {{ 'auth.emailValid' | translate }}
@@ -60,7 +60,7 @@
 
       <ion-text color="danger" *ngIf="password.invalid && (password.dirty && password.touched)">
         <p *ngIf="password.errors.required" class="ion-padding-start">
-          {{ 'auth.pwdReq' | translate }}
+          {{ 'auth.pwd' | translate }}{{ 'basic.required' | translate }}
         </p>
         <p *ngIf="password.errors.password" class="ion-padding-start">
           {{ 'auth.pwdComp' | translate }}
