@@ -6,7 +6,7 @@ import { PasswordValidator } from './password.directive';
 import { IonicModule } from '@ionic/angular';
 import { AppLabelComponent } from './appLabel.component';
 import { IconAddMediaComponent } from './iconAddMedia.component';
-import { RecordAudioComponent } from '../media/recordAudio.component';
+import { RecordAudioComponent } from './recordAudio.component';
 
 @NgModule({
   declarations: [EqualValidator, PasswordValidator, AppLabelComponent, IconAddMediaComponent, RecordAudioComponent],

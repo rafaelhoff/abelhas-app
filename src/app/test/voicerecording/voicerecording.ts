@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AppMediaStorage } from 'src/app/util/appMediaStorage';
-import { AudioRecord } from 'src/app/media/recordAudio.component';
+import { AudioRecord } from 'src/app/shared/recordAudio.component';
 
 
 @Component({
