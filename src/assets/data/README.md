@@ -6,7 +6,7 @@ https://www.json-generator.com/
 [
   '{{repeat(6, 8)}}',
   {
-    _id: '{{objectId()}}',
+    id: '{{objectId()}}',
     name: '{{firstName()}} {{surname()}}',
     address: '{{street()}}',
     type: '{{random("tipo1", "tipo2", "tipo3")}}',

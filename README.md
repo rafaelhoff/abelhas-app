@@ -96,8 +96,23 @@ See [CONTRIBUTING.md](https://github.com/ionic-team/ionic-conference-app/blob/ma
   - https://medium.com/ngconf/animating-angulars-ngif-and-ngfor-32a6ff26ed2d
 [ ] Fix Geolocation Problem
 [ ] Rename Amplify abelhas2 to something meaningful.
+[ ] Disabled Apiary Form not working correctly.
 
 
 ## Good Links
 
 - Angular Forms: https://codecraft.tv/courses/angular/forms/template-driven/
+
+## Local Environment
+
+https://github.com/aaronshaf/dynamodb-admin
+https://www.gravitywell.co.uk/insights/how-to-use-your-mocked-dynamodb-with-appsync-and-lambda/
+
+```
+npm install -g dynamodb-admin
+DYNAMO_ENDPOINT=http://localhost:62224 AWS_REGION=us-fake-1 AWS_ACCESS_KEY_ID=fake AWS_SECRET_ACCESS_KEY=fake dynamodb-admin
+```
+
+Issues around mocking DataStore:
+https://github.com/aws-amplify/amplify-js/issues/5241
+

@@ -16,8 +16,12 @@
       "fav": "Favoritos",
       "filter": "Filtrar"
     },
+    "hives": "colméias",
     "notFound": "Nenhum apiário encontrado.",
     "title": "Apiários"
+  },
+  "apiaryDetail": {
+    "name": "Nome do Apiário"
   },
   "auth": {
     "changingPwd": "Alterando senha",

@@ -5,45 +5,49 @@ import { map } from 'rxjs/operators';
 
 import { UserDataService } from './userData.service';
 import { environment } from 'src/environments/environment';
-import { AppStorage, StorageKeys } from '../util/appStorage';
+import { DataStore } from '@aws-amplify/datastore';
+import { Apiary } from 'src/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiaryDataService {
-  data: ApiaryInfo[];
+  mockData: Apiary[];
 
   constructor(
-    public appStorage: AppStorage,
     public http: HttpClient,
     public user: UserDataService
   ) { }
 
-  load(): Observable<ApiaryInfo[]> {
-    if (this.data) {
-      return of(this.data);
-    } else {
-      if (environment.mockData) {
+  load(): Observable<Apiary[]> {
+    if (environment.mockData) {
+      if (this.mockData) {
+        return of(this.mockData);
+      } else {
         return this.http
           .get('assets/data/apiary.json')
           .pipe(map(this.processData, this));
-      } else {
-        return from(this.appStorage.get(StorageKeys.apiaries))
-          .pipe(map(this.processData, this));
       }
+    } else {
+      return from(DataStore.query<Apiary>(Apiary))
+        .pipe(map(this.processData, this));
+      // return from(this.appStorage.get(StorageKeys.apiaries))
+      //   .pipe(map(this.processData, this));
     }
   }
 
-  processData(data: any): ApiaryInfo[] {
-    this.data = data;
+  processData(data: any): Apiary[] {
+    if (environment.mockData) {
+      this.mockData = data;
+    }
 
     // SO FAR, not needed.
 
-    return this.data;
+    return data;
   }
 
   getApiaries(
-    dayIndex?: number,
+    queryText = '',
   ) {
     return this.load().pipe(
       map((data: any) => {
@@ -58,26 +62,35 @@ export class ApiaryDataService {
     );
   }
 
-  get(id: string): Observable<ApiaryInfo> {
-    return this.load().pipe(
-      map((apiaries: any) => {
-        for (const apiary of apiaries) {
-          if (apiary._id === id) {
-            return apiary;
-          }
-        }
-        return null;
-      })
-    );
+  async get(id: string): Promise<Apiary> {
+    const result: Apiary = await DataStore.query<Apiary>(Apiary, id);
+    return result;
   }
 
-  public async saveNew(newApiary: ApiaryInfo): Promise<any> {
+  public async create(newApiary: Apiary): Promise<Apiary> {
     // TODO: add a validation - if mock or not
-    newApiary._id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
-    newApiary.hives = 0;
-    this.data.push(newApiary);
-    return true;
+    const created: Apiary = await DataStore.save<Apiary>(new Apiary({
+      hives: [],
+      name: newApiary.name,
+      address: newApiary.address,
+      forages: newApiary.forages,
+      type: newApiary.type
+    }));
+
+    return created;
+  }
+
+  public async update(id: string, dataToUpdate: any) {
+    const original = await DataStore.query<Apiary>(Apiary, id);
+
+    await DataStore.save(
+      Apiary.copyOf(original, updated => {
+        Object.keys(dataToUpdate).forEach(key => {
+          updated[key] = dataToUpdate[key];
+        });
+      })
+    );
   }
 
   // TODO: delete this method.
@@ -101,13 +114,4 @@ export class ApiaryDataService {
       }
     ]);
   }
-}
-
-export interface ApiaryInfo {
-  _id: string;
-  name: string;
-  address: string;
-  forages: string[];
-  type: string;
-  hives: number;
 }

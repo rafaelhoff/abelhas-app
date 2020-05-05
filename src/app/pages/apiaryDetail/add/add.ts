@@ -27,7 +27,8 @@ export class ApiaryAddPage implements OnInit {
 
   onSave() {
     try {
-      this.apiaryDataService.saveNew(this.form.getData());
+      const data: any = this.form.getData();
+      this.apiaryDataService.create(data);
       this.router.navigateByUrl(this.defaultHref);
     } catch (error) {
       // TODO: add error;

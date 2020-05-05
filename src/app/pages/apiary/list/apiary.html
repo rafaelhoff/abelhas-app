@@ -48,7 +48,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-list #apiaryList [hidden]="shownApiaries === 0">
+  <ion-list #apiaryList *ngIf="allApiaries.length > 0">
     <ion-item-group *ngFor="let group of groups" [hidden]="group.hide">
       <ion-item-divider sticky>
         <ion-label>
@@ -58,11 +58,11 @@
 
       <ion-item-sliding *ngFor="let apiary of group.apiaries" #slidingItem [attr.track]="'ionic'"
         [hidden]="apiary.hide">
-        <ion-item routerLink="/apiary-detail/{{apiary._id}}/info">
+        <ion-item routerLink="/apiary-detail/{{apiary.id}}/info">
           <ion-label>
             <h3>{{apiary.name}}</h3>
             <p>
-              Hives &mdash; {{apiary.hives}}
+              {{apiary.hives ? apiary.hives.length : 0}} {{ 'apiary.hives' | translate }}
             </p>
           </ion-label>
         </ion-item>
@@ -81,7 +81,7 @@
     </ion-item-group>
   </ion-list>
 
-  <ion-list-header [hidden]="shownApiaries > 0">
+  <ion-list-header *ngIf="allApiaries.length === 0">
     {{ 'apiary.notFound' | translate }}
   </ion-list-header>
 

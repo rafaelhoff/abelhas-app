@@ -19,10 +19,9 @@ export class ApiaryPage implements OnInit {
   @ViewChild('apiaryList', { static: true }) apiaryList: IonList;
 
   ios: boolean;
-  dayIndex = 0;
   queryText = '';
   excludeTracks: any = [];
-  shownApiaries: any = [];
+  allApiaries: any = [];
   groups: any = [];
   confDate: string;
   showSearchbar: boolean;
@@ -44,14 +43,18 @@ export class ApiaryPage implements OnInit {
     this.ios = this.config.get('mode') === 'ios';
   }
 
+  ionViewDidEnter() {
+    this.updateList();
+  }
+
   updateList() {
-    // Close any open sliding items when the schedule updates
+    // Close any open sliding items when the list updates
     if (this.apiaryList) {
       this.apiaryList.closeSlidingItems();
     }
 
-    this.confData.getApiaries(this.dayIndex).subscribe((data: any) => {
-      this.shownApiaries = data.apiaries;
+    this.confData.getApiaries(this.queryText).subscribe((data: any) => {
+      this.allApiaries = data.apiaries;
       this.groups = data.groups;
     });
   }

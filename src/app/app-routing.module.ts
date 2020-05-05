@@ -17,26 +17,27 @@ const routes: Routes = [
   {
     path: 'account',
     loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule),
-    canLoad: [LoggedInService]
+    canActivate: [LoggedInService]
   },
   {
     path: 'apiary',
     loadChildren: () => import('./pages/apiary/apiary.module').then(m => m.ApiaryModule),
-    canLoad: [LoggedInService]
+    canActivate: [LoggedInService]
   },
   {
     path: 'apiary-detail',
-    loadChildren: () => import('./pages/apiaryDetail/apiaryDetail.module').then(m => m.ApiaryDetailModule)
+    loadChildren: () => import('./pages/apiaryDetail/apiaryDetail.module').then(m => m.ApiaryDetailModule),
+    canActivate: [LoggedInService]
   },
   {
     path: 'support',
     loadChildren: () => import('./pages/support/support.module').then(m => m.SupportModule),
-    canLoad: [LoggedInService]
+    canActivate: [LoggedInService]
   },
   {
     path: 'configuration',
     loadChildren: () => import('./pages/configuration/configuration.module').then(m => m.ConfigurationPageModule),
-    canLoad: [LoggedInService]
+    canActivate: [LoggedInService]
   },
   {
     path: 'signup',
@@ -45,7 +46,7 @@ const routes: Routes = [
   {
     path: 'tutorial',
     loadChildren: () => import('./pages/tutorial/tutorial.module').then(m => m.TutorialModule),
-    canLoad: [CheckTutorialService]
+    canActivate: [CheckTutorialService]
   },
 
   // THESE ARE THE TEST ROUTES FROM HERE ON...

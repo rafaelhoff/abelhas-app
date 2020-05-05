@@ -1,6 +1,6 @@
 [
   {
-    "_id": "5ea6d9e6ade6f2002fd745da",
+    "id": "5ea6d9e6ade6f2002fd745da",
     "name": "Tammi Nixon",
     "address": "McKibbin Street",
     "type": "tipo3",
@@ -10,7 +10,7 @@
     "hives": 30
   },
   {
-    "_id": "5ea6d9e63b30021c9e69c54e",
+    "id": "5ea6d9e63b30021c9e69c54e",
     "name": "Edwards Sawyer",
     "address": "Aster Court",
     "type": "tipo3",
@@ -20,7 +20,7 @@
     "hives": 35
   },
   {
-    "_id": "5ea6d9e611cdb463ae09a0c8",
+    "id": "5ea6d9e611cdb463ae09a0c8",
     "name": "Peters Yang",
     "address": "Throop Avenue",
     "type": "tipo3",
@@ -32,7 +32,7 @@
     "hives": 36
   },
   {
-    "_id": "5ea6d9e6ae11665e18e50238",
+    "id": "5ea6d9e6ae11665e18e50238",
     "name": "Levy Henderson",
     "address": "Stuyvesant Avenue",
     "type": "tipo1",
@@ -43,7 +43,7 @@
     "hives": 37
   },
   {
-    "_id": "5ea6d9e60b13c42709d25f12",
+    "id": "5ea6d9e60b13c42709d25f12",
     "name": "Donovan Ellison",
     "address": "Wyckoff Avenue",
     "type": "tipo1",
@@ -53,7 +53,7 @@
     "hives": 38
   },
   {
-    "_id": "5ea6d9e665e396b385b4a3d6",
+    "id": "5ea6d9e665e396b385b4a3d6",
     "name": "Ann Hughes",
     "address": "Gatling Place",
     "type": "tipo2",
@@ -63,7 +63,7 @@
     "hives": 32
   },
   {
-    "_id": "5ea6d9e6c2b9280013d7fc59",
+    "id": "5ea6d9e6c2b9280013d7fc59",
     "name": "Janell Frazier",
     "address": "Hill Street",
     "type": "tipo3",

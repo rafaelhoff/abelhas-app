@@ -1,30 +1,37 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, Router } from '@angular/router';
+import { CanLoad, Router, CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { UserDataService } from './userData.service';
 import { MenuController } from '@ionic/angular';
+import { AppLogger } from '../util/appLogger';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoggedInService implements CanLoad {
+export class LoggedInService implements CanLoad, CanActivate {
   constructor(
+    private logger: AppLogger,
     private menu: MenuController,
     private userService: UserDataService,
     private router: Router
   ) { }
 
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+    return this.validate();
+  }
+
   canLoad(): Promise<boolean> {
-    // TODO: fix menu problem.
+    return this.validate();
+  }
 
-    return this.userService.isLoggedIn().then((loggedIn: boolean) => {
-      if (!loggedIn) {
-        this.router.navigate(['/login']);
-        this.menu.enable(false);
-      } else {
-        this.menu.enable(true);
-      }
-
-      return loggedIn;
-    });
+  private async validate(): Promise<boolean> {
+    const loggedIn = await this.userService.isLoggedIn();
+    this.logger.debug('LoggedInService => loggedIn:', loggedIn);
+    if (!loggedIn) {
+      this.router.navigate(['/login']);
+      this.menu.enable(false);
+    } else {
+      this.menu.enable(true);
+    }
+    return loggedIn;
   }
 }

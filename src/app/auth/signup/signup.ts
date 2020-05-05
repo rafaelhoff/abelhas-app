@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Location } from '@angular/common';
 
@@ -15,7 +15,7 @@ import { ConfigDataService } from 'src/app/providers/configData.service';
   templateUrl: 'signup.html',
   styleUrls: ['./signup.scss'],
 })
-export class SignupPage {
+export class SignupPage implements OnInit {
   signup: UserLoginParams = {
     username: '',
     password: '',
@@ -34,7 +34,9 @@ export class SignupPage {
     private userDataService: UserDataService,
     private modalController: ModalController,
     private modalService: ModalsService
-  ) {
+  ) { }
+
+  ngOnInit(): void {
     this.configService.load().then(data => {
       this.configData = data;
       this.signup.attributes.locale = data.language;

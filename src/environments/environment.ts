@@ -4,10 +4,10 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 export const environment = {
   production: false,
-  connectToCognito: false,
+  connectToCognito: true,
   connectToS3: false,
   defaultPicture: '/assets/img/profile.png',
-  mockData: true
+  mockData: false
 };
 
 /*

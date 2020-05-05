@@ -1,23 +1,32 @@
 <form [formGroup]="apiaryInfoForm">
   <ion-list fullscreen>
     <ion-item>
-      <app-label tCode="Apiary Name" [required]="!isReadonly"></app-label>
-      <ion-input formControlName="name" [required]="!isReadonly" [readonly]="isReadonly"></ion-input>
+      <app-label tCode="apiaryDetail.name" [required]="!isReadonly"></app-label>
+      <ion-input formControlName="name" [readonly]="isReadonly"></ion-input>
     </ion-item>
+
+    <ion-text color="danger"
+      *ngIf="apiaryInfoForm && apiaryInfoForm.controls.name.invalid && (apiaryInfoForm.controls.name.dirty && apiaryInfoForm.controls.name.touched)">
+      <p *ngIf="apiaryInfoForm.controls.name.errors.required" class="ion-padding-start ion-text-left">
+        {{ 'apiaryDetail.name' | translate }}{{ 'basic.required' | translate }}
+      </p>
+    </ion-text>
 
     <ion-item>
       <app-label tCode="Address" [required]="!isReadonly"></app-label>
-      <ion-input formControlName="address" [required]="!isReadonly" [readonly]="isReadonly"></ion-input>
+      <ion-input formControlName="address" [readonly]="isReadonly"></ion-input>
     </ion-item>
 
     <ion-item>
       <app-label tCode="Forages" [required]="!isReadonly"></app-label>
-      <ion-input formControlName="forages" [required]="!isReadonly" [readonly]="isReadonly"></ion-input>
+      <ion-select value="dog" formControlName="forages" multiple={true}>
+        <ion-select-option *ngFor="let forage of forages">{{forage}}</ion-select-option>
+      </ion-select>
     </ion-item>
 
     <ion-item>
       <app-label tCode="Type" [required]="!isReadonly"></app-label>
-      <ion-input formControlName="type" [required]="!isReadonly" [readonly]="isReadonly"></ion-input>
+      <ion-input formControlName="type" [readonly]="isReadonly"></ion-input>
     </ion-item>
 
   </ion-list>

@@ -21,42 +21,42 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="accountData" class="ion-padding-top ion-text-center">
-    <img [src]="accountData.attributes.picture" alt="avatar" class="imgAvatar">
+  <div *ngIf="model" class="ion-padding-top ion-text-center">
+    <img [src]="model.picture" alt="avatar" class="imgAvatar">
     <br>
     <ion-button *ngIf="!readonly" style="text-transform:none" fill="clear" (click)="updatePicture()">
       {{ 'account.chgpic' | translate }}
     </ion-button>
 
-    <form [formGroup]="myform">
+    <form #accountForm="ngForm">
       <ion-list>
         <ion-grid>
           <ion-row>
             <ion-col>
               <ion-item>
                 <app-label tCode="account.firstName" [required]="!readonly"></app-label>
-                <ion-input formControlName="name" [required]="!readonly" [readonly]="readonly"></ion-input>
+                <ion-input [(ngModel)]="model.name" name="name" #name="ngModel" [required]="!readonly"
+                  [readonly]="readonly"></ion-input>
               </ion-item>
             </ion-col>
             <ion-col>
               <ion-item>
                 <app-label tCode="account.lastName" [required]="!readonly"></app-label>
-                <ion-input formControlName="family_name" [required]="!readonly" [readonly]="readonly"></ion-input>
+                <ion-input [(ngModel)]="model.family_name" name="family_name" #family_name="ngModel"
+                  [required]="!readonly" [readonly]="readonly"></ion-input>
               </ion-item>
             </ion-col>
           </ion-row>
         </ion-grid>
 
         <!-- TODO: add the warnings / errors -->
-        <ion-text color="danger"
-          *ngIf="myform.controls.name.invalid && (myform.controls.name.dirty && myform.controls.name.touched)">
-          <p *ngIf="myform.controls.name.errors.required" class="ion-padding-start ion-text-left">
+        <ion-text color="danger" *ngIf="name.invalid && (name.dirty && name.touched)">
+          <p *ngIf="name.errors.required" class="ion-padding-start ion-text-left">
             {{ 'account.firstName' | translate }}{{ 'basic.required' | translate }}
           </p>
         </ion-text>
-        <ion-text color="danger"
-          *ngIf="myform.controls.family_name.invalid && (myform.controls.family_name.dirty && myform.controls.family_name.touched)">
-          <p *ngIf="myform.controls.family_name.errors.required" class="ion-padding-start ion-text-left">
+        <ion-text color="danger" *ngIf="family_name.invalid && (family_name.dirty && family_name.touched)">
+          <p *ngIf="family_name.errors.required" class="ion-padding-start ion-text-left">
             {{ 'account.lastName' | translate }}{{ 'basic.required' | translate }}
           </p>
         </ion-text>
@@ -64,7 +64,7 @@
         <br>
         <ion-item>
           <app-label tCode="auth.email" [required]="false"></app-label>
-          <ion-input name="username" type="email" email readonly [value]="accountData.username">
+          <ion-input name="username" type="email" email readonly [value]="model.username">
           </ion-input>
         </ion-item>
 

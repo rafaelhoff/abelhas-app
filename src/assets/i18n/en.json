@@ -16,8 +16,12 @@
       "fav": "Favorites",
       "filter": "Filter"
     },
+    "hives": "hives",
     "notFound": "No apiary found.",
     "title": "Apiaries"
+  },
+  "apiaryDetail": {
+    "name": "Apiary Name"
   },
   "auth": {
     "changingPwd": "Changing password",

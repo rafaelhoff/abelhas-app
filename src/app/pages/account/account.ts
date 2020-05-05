@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AlertController, ActionSheetController, ModalController } from '@ionic/angular';
@@ -7,7 +7,7 @@ import { UserDataService, UserLoginParams } from '../../providers/userData.servi
 import { TranslateService } from '@ngx-translate/core';
 import { ChangePasswordModalPage } from '../../auth/changePassword/changePassword';
 import { PhotoService, CameraPhoto } from 'src/app/providers/photo.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { ModalsService } from 'src/app/shared/modals.service';
 
 
@@ -30,20 +30,19 @@ export class AccountPage implements OnInit {
   ) { }
 
   readonly = true;
-  accountData: UserLoginParams;
-  myform: FormGroup;
+  model: { name: string; family_name: string; username: string; picture: string; };
+  @ViewChild('accountForm', { static: false }) accountForm: NgForm;
 
   ngOnInit(): void {
-    this.userDataService.getUser().then(d => {
-      this.accountData = d;
-      this.formInit();
-    });
+    this.initForm();
   }
 
-  private formInit() {
-    this.myform = new FormGroup({
-      name: new FormControl(this.accountData.attributes.name),
-      family_name: new FormControl(this.accountData.attributes.family_name),
+  private initForm() {
+    this.userDataService.getUser().then(d => this.model = {
+      name: d.attributes.name,
+      family_name: d.attributes.family_name,
+      username: d.username,
+      picture: d.attributes.picture
     });
   }
 
@@ -62,7 +61,8 @@ export class AccountPage implements OnInit {
 
       try {
         await this.userDataService.setCustomProfilePic(photo);
-        this.accountData = await this.userDataService.getUser();
+        // TODO: fix in case of changes in the name / family_name;
+        this.initForm();
       } catch (error) {
         this.modalService.createCognitoErrorAlert(error);
       }
@@ -82,14 +82,15 @@ export class AccountPage implements OnInit {
     await this.userDataService.logout();
   }
 
-  switchEdit() {
+  async switchEdit() {
     try {
       // Saving...
-      if (!this.readonly && this.myform.valid) {
-        this.accountData.attributes.name = this.myform.value.name;
-        this.accountData.attributes.family_name = this.myform.value.family_name;
+      if (!this.readonly && this.accountForm.valid) {
+        const userData: UserLoginParams = await this.userDataService.getUser();
+        userData.attributes.name = this.accountForm.value.name;
+        userData.attributes.family_name = this.accountForm.value.family_name;
 
-        this.userDataService.save(this.accountData);
+        this.userDataService.save(userData);
       }
     } catch (error) {
       this.modalService.createCognitoErrorAlert(error);
@@ -97,9 +98,8 @@ export class AccountPage implements OnInit {
     this.readonly = !this.readonly;
   }
 
-  cancelChanges() {
-    this.myform.reset();
-    this.formInit();
+  async cancelChanges() {
+    this.initForm();
     this.readonly = !this.readonly;
   }
 }
