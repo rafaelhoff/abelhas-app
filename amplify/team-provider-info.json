@@ -1,23 +1,29 @@
 {
-    "dev": {
-        "awscloudformation": {
-            "AuthRoleName": "amplify-abelhas2-dev-92851-authRole",
-            "UnauthRoleArn": "arn:aws:iam::680003731911:role/amplify-abelhas2-dev-92851-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::680003731911:role/amplify-abelhas2-dev-92851-authRole",
-            "Region": "us-east-1",
-            "DeploymentBucketName": "amplify-abelhas2-dev-92851-deployment",
-            "UnauthRoleName": "amplify-abelhas2-dev-92851-unauthRole",
-            "StackName": "amplify-abelhas2-dev-92851",
-            "StackId": "arn:aws:cloudformation:us-east-1:680003731911:stack/amplify-abelhas2-dev-92851/ec9a9a50-7fb3-11ea-8cef-0a726edfb5e3",
-            "AmplifyAppId": "d16ck1bu4djbnp"
-        },
-        "categories": {
-            "function": {
-                "abelhasAuthCustomMessage": {}
-            },
-            "auth": {
-                "abelhasAuth": {}
-            }
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-abecare-dev-223442-authRole",
+      "UnauthRoleArn": "arn:aws:iam::680003731911:role/amplify-abecare-dev-223442-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::680003731911:role/amplify-abecare-dev-223442-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-abecare-dev-223442-deployment",
+      "UnauthRoleName": "amplify-abecare-dev-223442-unauthRole",
+      "StackName": "amplify-abecare-dev-223442",
+      "StackId": "arn:aws:cloudformation:us-east-1:680003731911:stack/amplify-abecare-dev-223442/db723d80-8f0f-11ea-9d9b-0e29088293c9",
+      "AmplifyAppId": "d2xepyqcwyjpn0"
+    },
+    "categories": {
+      "auth": {
+        "abelhasAuth": {}
+      },
+      "function": {
+        "abelhasAuthCustomMessage": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d2xepyqcwyjpn0",
+          "type": "manual"
         }
+      }
     }
+  }
 }
