@@ -29,9 +29,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production
-    }),
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {
@@ -41,10 +38,11 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
     LoggerModule.forRoot({
-      level: !environment.production ? NgxLoggerLevel.DEBUG : NgxLoggerLevel.ERROR,
+      level: environment.production ? NgxLoggerLevel.ERROR : NgxLoggerLevel.DEBUG,
       // serverLogLevel
       serverLogLevel: NgxLoggerLevel.OFF
-    })
+    }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   declarations: [AppComponent],
   providers: [BarcodeScanner],
