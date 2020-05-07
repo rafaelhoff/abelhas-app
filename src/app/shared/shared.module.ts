@@ -7,9 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { AppLabelComponent } from './appLabel.component';
 import { IconAddMediaComponent } from './iconAddMedia.component';
 import { RecordAudioComponent } from './recordAudio.component';
+import { IconShareSocialComponent } from './iconShareSocial.component';
 
 @NgModule({
-  declarations: [EqualValidator, PasswordValidator, AppLabelComponent, IconAddMediaComponent, RecordAudioComponent],
+  declarations: [
+    EqualValidator,
+    PasswordValidator,
+    AppLabelComponent,
+    IconAddMediaComponent,
+    IconShareSocialComponent,
+    RecordAudioComponent
+  ],
   imports: [
     CommonModule,
     IonicModule,
@@ -22,6 +30,7 @@ import { RecordAudioComponent } from './recordAudio.component';
     TranslateModule,
     AppLabelComponent,
     IconAddMediaComponent,
+    IconShareSocialComponent,
     RecordAudioComponent
   ]
 })

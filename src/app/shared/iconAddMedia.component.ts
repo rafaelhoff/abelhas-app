@@ -28,7 +28,7 @@ export class IconAddMediaComponent {
   @Output() clickUploadFile = new EventEmitter();
   @Output() clickRecordAudio = new EventEmitter();
 
-  private isWeb: boolean = false;
+  isWeb: boolean = false;
 
   constructor(private appPlatform: AppPlatform) {
     this.appPlatform.isWeb().then(w => this.isWeb = w);

@@ -31,7 +31,7 @@ export class AccountPage implements OnInit {
 
   readonly = true;
   model: { name: string; family_name: string; username: string; picture: string; };
-  @ViewChild('accountForm', { static: false }) accountForm: NgForm;
+  @ViewChild('accountForm') accountForm: NgForm;
 
   ngOnInit(): void {
     this.initForm();
