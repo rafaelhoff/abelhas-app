@@ -148,3 +148,9 @@ https://www.json-generator.com/
   }
 ]
 ```
+
+## Ionic for Large Screens
+
+https://ionicframework.com/blog/tips-tricks-for-ionic-on-desktop/
+https://ionicframework.com/blog/customizing-ionic-apps-for-web-mobile/
+https://ionicframework.com/docs/v3/developer-resources/desktop-support/
