@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ApiaryInfoFormComponent } from '../info/infoForm.component';
+import { ApiaryInfoFormComponent } from '../detail-info/infoForm.component';
 import { ApiaryDataService } from 'src/app/providers/apiaryData.service';
 import { Router } from '@angular/router';
 

@@ -3,14 +3,14 @@
     <ion-buttons slot="start">
       <ion-back-button [defaultHref]="defaultHref"></ion-back-button>
     </ion-buttons>
-    <ion-title>Add Apiary</ion-title>
+    <ion-title>{{ 'apiary.add' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
 
   <app-apiary-form #form></app-apiary-form>
   <div class="ion-padding">
-    <ion-button expand="block" type="submit" (click)="onSave()">Save</ion-button>
+    <ion-button expand="block" type="submit" (click)="onSave()">{{ 'basic.save' | translate }}</ion-button>
   </div>
 
 </ion-content>

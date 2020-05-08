@@ -11,12 +11,25 @@
     "username": "Nome do Usuário"
   },
   "apiary": {
+    "add": "Adicionar Apiario",
+    "filter": {
+      "title": "Filtrar Apiarios"
+    },
     "header": {
       "all": "Todos",
       "fav": "Favoritos",
       "filter": "Filtrar"
     },
+    "history": {
+      "title": "Histórico"
+    },
     "hives": "colméias",
+    "info": {
+      "title": "Informação Básica"
+    },
+    "map": {
+      "title": "Mapa"
+    },
     "notFound": "Nenhum apiário encontrado.",
     "title": "Apiários"
   },
@@ -74,6 +87,7 @@
     "change": "Alterar",
     "confirm": "Confirmar",
     "create": "Criar",
+    "deselectAll": "Desmarcar tudo",
     "done": "Concluído",
     "edit": "Editar",
     "error": "Erro",
@@ -82,7 +96,10 @@
     "pleaseWait": ", por favor espere...",
     "remove": "Remover",
     "request": "Requisitar",
-    "required": " é obrigatório"
+    "required": " é obrigatório",
+    "reset": "Redefinir",
+    "save": "Salvar",
+    "selectAll": "Selecionar tudo"
   },
   "cfg": {
     "about": {

@@ -7,36 +7,39 @@
 </ion-header>
 
 <ion-content fullscreen="true">
-  <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager="false">
-    <ion-slide>
-      <img src="assets/img/tutorial-img-1.png" class="slide-image" />
-      <h2 class="slide-title" [innerHTML]="'tut.welcome' | translate"></h2>
-      <p [innerHTML]="'tut.welcomeDesc' | translate"></p>
-    </ion-slide>
+  <ion-grid fixed>
 
-    <ion-slide>
-      <img src="assets/img/tutorial-img-2.png" class="slide-image" />
-      <h2 class="slide-title" [innerHTML]="'tut.what' | translate"></h2>
-      <p [innerHTML]="'tut.whatDesc' | translate"></p>
-    </ion-slide>
+    <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager="false">
+      <ion-slide>
+        <img src="assets/img/tutorial-img-1.png" class="slide-image" />
+        <h2 class="slide-title" [innerHTML]="'tut.welcome' | translate"></h2>
+        <p [innerHTML]="'tut.welcomeDesc' | translate"></p>
+      </ion-slide>
 
-    <ion-slide>
-      <img src="assets/img/tutorial-img-3.png" class="slide-image" />
-      <h2 class="slide-title" [innerHTML]="'tut.flow' | translate"></h2>
-      <p [innerHTML]="'tut.flowDesc' | translate"></p>
-    </ion-slide>
+      <ion-slide>
+        <img src="assets/img/tutorial-img-2.png" class="slide-image" />
+        <h2 class="slide-title" [innerHTML]="'tut.what' | translate"></h2>
+        <p [innerHTML]="'tut.whatDesc' | translate"></p>
+      </ion-slide>
 
-    <ion-slide>
-      <img src="assets/img/tutorial-img-4.png" class="slide-image" />
-      <h2 class="slide-title" [innerHTML]="'tut.ready' | translate"></h2>
-      <ion-button fill="clear" (click)="goToLogin()">
-        {{ 'tut.continue' | translate }}
-        <ion-icon slot="end" name="arrow-forward"></ion-icon>
-      </ion-button>
-    </ion-slide>
+      <ion-slide>
+        <img src="assets/img/tutorial-img-3.png" class="slide-image" />
+        <h2 class="slide-title" [innerHTML]="'tut.flow' | translate"></h2>
+        <p [innerHTML]="'tut.flowDesc' | translate"></p>
+      </ion-slide>
 
-    <ion-slide>
-      <pm-login></pm-login>
-    </ion-slide>
-  </ion-slides>
+      <ion-slide>
+        <img src="assets/img/tutorial-img-4.png" class="slide-image" />
+        <h2 class="slide-title" [innerHTML]="'tut.ready' | translate"></h2>
+        <ion-button fill="clear" (click)="goToLogin()">
+          {{ 'tut.continue' | translate }}
+          <ion-icon slot="end" name="arrow-forward"></ion-icon>
+        </ion-button>
+      </ion-slide>
+
+      <ion-slide>
+        <pm-login></pm-login>
+      </ion-slide>
+    </ion-slides>
+  </ion-grid>
 </ion-content>

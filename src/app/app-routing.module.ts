@@ -10,9 +10,24 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'login',
-    redirectTo: '/tutorial',
-    pathMatch: 'full'
+    path: 'apiary',
+    loadChildren: () => import('./pages/apiary/apiary.module').then(m => m.ApiaryModule),
+    canActivate: [LoggedInService]
+  },
+  {
+    path: 'apiary-detail',
+    loadChildren: () => import('./pages/apiary/apiaryDetail.module').then(m => m.ApiaryDetailModule),
+    canActivate: [LoggedInService]
+  },
+  {
+    path: 'hive',
+    loadChildren: () => import('./pages/apiary/apiary.module').then(m => m.ApiaryModule),
+    canActivate: [LoggedInService]
+  },
+  {
+    path: 'hive-detail',
+    loadChildren: () => import('./pages/apiary/apiaryDetail.module').then(m => m.ApiaryDetailModule),
+    canActivate: [LoggedInService]
   },
   {
     path: 'account',
@@ -20,13 +35,8 @@ const routes: Routes = [
     canActivate: [LoggedInService]
   },
   {
-    path: 'apiary',
-    loadChildren: () => import('./pages/apiary/apiary.module').then(m => m.ApiaryModule),
-    canActivate: [LoggedInService]
-  },
-  {
-    path: 'apiary-detail',
-    loadChildren: () => import('./pages/apiaryDetail/apiaryDetail.module').then(m => m.ApiaryDetailModule),
+    path: 'configuration',
+    loadChildren: () => import('./pages/configuration/configuration.module').then(m => m.ConfigurationPageModule),
     canActivate: [LoggedInService]
   },
   {
@@ -35,9 +45,9 @@ const routes: Routes = [
     canActivate: [LoggedInService]
   },
   {
-    path: 'configuration',
-    loadChildren: () => import('./pages/configuration/configuration.module').then(m => m.ConfigurationPageModule),
-    canActivate: [LoggedInService]
+    path: 'login',
+    redirectTo: '/tutorial',
+    pathMatch: 'full'
   },
   {
     path: 'signup',

@@ -11,12 +11,25 @@
     "username": "Username"
   },
   "apiary": {
+    "add": "Add Apiary",
+    "filter": {
+      "title": "Filter Apiaries"
+    },
     "header": {
       "all": "All",
       "fav": "Favorites",
       "filter": "Filter"
     },
+    "history": {
+      "title": "History"
+    },
     "hives": "hives",
+    "info": {
+      "title": "Basic Data"
+    },
+    "map": {
+      "title": "Map"
+    },
     "notFound": "No apiary found.",
     "title": "Apiaries"
   },
@@ -74,6 +87,7 @@
     "change": "Change",
     "confirm": "Confirm",
     "create": "Create",
+    "deselectAll": "Deselect All",
     "done": "Done",
     "edit": "Edit",
     "error": "Error",
@@ -82,7 +96,10 @@
     "pleaseWait": ", please wait...",
     "remove": "Remove",
     "request": "Request",
-    "required": " is required"
+    "required": " is required",
+    "reset": "Reset",
+    "save": "Save",
+    "selectAll": "Select All"
   },
   "cfg": {
     "about": {

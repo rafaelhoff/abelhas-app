@@ -3,7 +3,7 @@
     <ion-buttons *ngIf="!showSearchbar" slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-segment *ngIf="ios" [(ngModel)]="segment" (ionChange)="updateList()">
+    <ion-segment *ngIf="ios" (ionChange)="updateList()">
       <ion-segment-button value="all">
         {{ 'apiary.header.all' | translate }}
       </ion-segment-button>
@@ -27,7 +27,7 @@
     </ion-buttons>
   </ion-toolbar>
   <ion-toolbar *ngIf="!ios">
-    <ion-segment [(ngModel)]="segment" (ionChange)="updateList()">
+    <ion-segment (ionChange)="updateList()">
       <ion-segment-button value="all">
         {{ 'apiary.header.all' | translate }}
       </ion-segment-button>
@@ -67,13 +67,10 @@
           </ion-label>
         </ion-item>
         <ion-item-options>
-          <ion-item-option color="favorite" (click)="addFavorite(slidingItem, apiary)" *ngIf="segment === 'all'">
-            Favorite
+          <ion-item-option color="favorite" (click)="addFavorite(slidingItem, apiary)">
             {{ 'basic.favorite' | translate }}
           </ion-item-option>
-          <ion-item-option color="danger" (click)="removeFavorite(slidingItem, apiary, 'Remove Favorite')"
-            *ngIf="segment === 'favorites'">
-            Remove
+          <ion-item-option color="danger" (click)="removeFavorite(slidingItem, apiary, 'Remove Favorite')">
             {{ 'basic.remove' | translate }}
           </ion-item-option>
         </ion-item-options>
