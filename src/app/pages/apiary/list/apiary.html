@@ -58,7 +58,7 @@
 
       <ion-item-sliding *ngFor="let apiary of group.apiaries" #slidingItem [attr.track]="'ionic'"
         [hidden]="apiary.hide">
-        <ion-item routerLink="/apiary-detail/{{apiary.id}}/info">
+        <ion-item routerLink="/apiary/{{apiary.id}}/info">
           <ion-label>
             <h3>{{apiary.name}}</h3>
             <p>

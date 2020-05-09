@@ -34,14 +34,14 @@
           <ion-row>
             <ion-col>
               <ion-item>
-                <app-label tCode="account.firstName" [required]="!readonly"></app-label>
+                <app-label [required]="!readonly">{{ 'account.firstName' | translate }}</app-label>
                 <ion-input [(ngModel)]="model.name" name="name" #name="ngModel" [required]="!readonly"
                   [readonly]="readonly"></ion-input>
               </ion-item>
             </ion-col>
             <ion-col>
               <ion-item>
-                <app-label tCode="account.lastName" [required]="!readonly"></app-label>
+                <app-label [required]="!readonly">{{ 'account.lastName' | translate }}</app-label>
                 <ion-input [(ngModel)]="model.family_name" name="family_name" #family_name="ngModel"
                   [required]="!readonly" [readonly]="readonly"></ion-input>
               </ion-item>
@@ -63,7 +63,7 @@
 
         <br>
         <ion-item>
-          <app-label tCode="auth.email" [required]="false"></app-label>
+          <app-label [required]="false">{{ 'auth.email' | translate }}</app-label>
           <ion-input name="username" type="email" email readonly [value]="model.username">
           </ion-input>
         </ion-item>

@@ -51,10 +51,6 @@ export class ApiaryInfoPage implements OnInit {
     }
   }
 
-  shareSession() {
-    // console.log('Clicked share session');
-  }
-
   async add() {
     console.log('added');
   }
@@ -76,6 +72,12 @@ export class ApiaryInfoPage implements OnInit {
     } catch (error) {
       //this.modalService.createCognitoErrorAlert(error);
     }
+    this.form.isReadonly = !this.form.isReadonly;
+    this.readonly = !this.readonly;
+  }
+
+  async cancelChanges() {
+    this.form.init(this.apiaryData);
     this.form.isReadonly = !this.form.isReadonly;
     this.readonly = !this.readonly;
   }

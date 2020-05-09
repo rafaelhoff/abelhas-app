@@ -5,7 +5,7 @@
 <form #loginForm="ngForm" novalidate>
   <ion-list>
     <ion-item>
-      <app-label tCode="auth.email"></app-label>
+      <app-label>{{ 'auth.email' | translate }}</app-label>
       <ion-input [(ngModel)]="credentials.username" name="username" type="email" #username="ngModel" required email>
       </ion-input>
     </ion-item>
@@ -20,7 +20,7 @@
     </ion-text>
 
     <ion-item>
-      <app-label tCode="auth.pwd"></app-label>
+      <app-label>{{ 'auth.pwd' | translate }}</app-label>
       <ion-input [(ngModel)]="credentials.password" name="password" type="password" #password="ngModel" required
         clearOnEdit="false">
       </ion-input>

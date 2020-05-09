@@ -8,78 +8,81 @@
 </ion-header>
 
 <ion-content>
-  <div class="signup-logo">
-    <img src="assets/icons/appicon.svg" alt="Ionic Logo">
-  </div>
+  <ion-grid fixed>
 
-  <form #signupForm="ngForm" novalidate>
-    <ion-list>
-
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <app-label tCode="account.firstName"></app-label>
-              <ion-input [(ngModel)]="signup.attributes.name" name="firstName" #firstName="ngModel" required>
-              </ion-input>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item>
-              <app-label tCode="account.lastName"></app-label>
-              <ion-input [(ngModel)]="signup.attributes.family_name" name="lastName" #lastName="ngModel" required>
-              </ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-
-      <!-- TODO: add the warnings / errors -->
-
-      <ion-item>
-        <app-label tCode="auth.email"></app-label>
-        <ion-input [(ngModel)]="signup.username" name="username" type="email" #username="ngModel" required email>
-        </ion-input>
-      </ion-item>
-
-      <ion-text color="danger" *ngIf="username.invalid && (username.dirty && username.touched)">
-        <p *ngIf="username.errors.required" class="ion-padding-start">
-          {{ 'auth.email' | translate }}{{ 'basic.required' | translate }}
-        </p>
-        <p *ngIf="username.errors.email" class="ion-padding-start">
-          {{ 'auth.emailValid' | translate }}
-        </p>
-      </ion-text>
-
-      <ion-item>
-        <app-label tCode="auth.pwd"></app-label>
-        <ion-input [(ngModel)]="signup.password" name="password" type="password" #password="ngModel" minlength="8"
-          required app-password clearOnEdit="false">
-        </ion-input>
-      </ion-item>
-
-      <ion-text color="danger" *ngIf="password.invalid && (password.dirty && password.touched)">
-        <p *ngIf="password.errors.required" class="ion-padding-start">
-          {{ 'auth.pwd' | translate }}{{ 'basic.required' | translate }}
-        </p>
-        <p *ngIf="password.errors.password" class="ion-padding-start">
-          {{ 'auth.pwdComp' | translate }}
-        </p>
-      </ion-text>
-
-      <ion-item lines="none">
-        <p>{{ 'auth.terms.descPre' | translate }} <a [routerLink]=""
-            (click)="openTermsConditions()">{{ 'auth.terms.title' | translate }}</a>{{ 'auth.terms.descPos' | translate }}
-        </p>
-      </ion-item>
-
-    </ion-list>
-
-    <div class="ion-padding">
-      <ion-button (click)="onSignup(signupForm)" type="submit" expand="block" [disabled]="signupForm.invalid">
-        {{ 'basic.create' | translate }}
-      </ion-button>
+    <div class="signup-logo">
+      <img src="assets/icons/appicon.svg" alt="Ionic Logo">
     </div>
-  </form>
 
+    <form #signupForm="ngForm" novalidate>
+      <ion-list>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <app-label>{{ 'account.firstName' | translate }}</app-label>
+                <ion-input [(ngModel)]="signup.attributes.name" name="firstName" #firstName="ngModel" required>
+                </ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <app-label>{{ 'account.lastName' | translate }}</app-label>
+                <ion-input [(ngModel)]="signup.attributes.family_name" name="lastName" #lastName="ngModel" required>
+                </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <!-- TODO: add the warnings / errors -->
+
+        <ion-item>
+          <app-label>{{ 'auth.email' | translate }}</app-label>
+          <ion-input [(ngModel)]="signup.username" name="username" type="email" #username="ngModel" required email>
+          </ion-input>
+        </ion-item>
+
+        <ion-text color="danger" *ngIf="username.invalid && (username.dirty && username.touched)">
+          <p *ngIf="username.errors.required" class="ion-padding-start">
+            {{ 'auth.email' | translate }}{{ 'basic.required' | translate }}
+          </p>
+          <p *ngIf="username.errors.email" class="ion-padding-start">
+            {{ 'auth.emailValid' | translate }}
+          </p>
+        </ion-text>
+
+        <ion-item>
+          <app-label>{{ 'auth.pwd' | translate }}</app-label>
+          <ion-input [(ngModel)]="signup.password" name="password" type="password" #password="ngModel" minlength="8"
+            required app-password clearOnEdit="false">
+          </ion-input>
+        </ion-item>
+
+        <ion-text color="danger" *ngIf="password.invalid && (password.dirty && password.touched)">
+          <p *ngIf="password.errors.required" class="ion-padding-start">
+            {{ 'auth.pwd' | translate }}{{ 'basic.required' | translate }}
+          </p>
+          <p *ngIf="password.errors.password" class="ion-padding-start">
+            {{ 'auth.pwdComp' | translate }}
+          </p>
+        </ion-text>
+
+        <ion-item lines="none">
+          <p>{{ 'auth.terms.descPre' | translate }} <a [routerLink]=""
+              (click)="openTermsConditions()">{{ 'auth.terms.title' | translate }}</a>{{ 'auth.terms.descPos' | translate }}
+          </p>
+        </ion-item>
+
+      </ion-list>
+
+      <div class="ion-padding">
+        <ion-button (click)="onSignup(signupForm)" type="submit" expand="block" [disabled]="signupForm.invalid">
+          {{ 'basic.create' | translate }}
+        </ion-button>
+      </div>
+    </form>
+
+  </ion-grid>
 </ion-content>

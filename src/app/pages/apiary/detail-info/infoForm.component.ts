@@ -1,8 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ApiaryDataService } from 'src/app/providers/apiaryData.service';
+import { Component, Input, ViewChild } from '@angular/core';
 import { Apiary } from 'src/models';
-import { TranslateService } from '@ngx-translate/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-apiary-form',
@@ -11,38 +9,22 @@ import { TranslateService } from '@ngx-translate/core';
 export class ApiaryInfoFormComponent {
   @Input() isReadonly: boolean = false;
   // @Input() apiaryId: string;
-  private data: Apiary = {
-    id: '',
-    name: '',
-    address: '',
-    forages: [],
-    type: '',
-    hives: []
-  };
-  apiaryInfoForm: FormGroup;
-  forages = ['acacia', 'aroeira', 'outras'];
-
-  constructor(
-    private confData: ApiaryDataService,
-    private translateService: TranslateService
-  ) {
-    this.formInit();
-  }
+  model: {
+    name: string;
+    address: string;
+    forages: string[];
+    type: string;
+  } = { name: '', address: '', forages: [''], type: '' };
+  foragesList = ['acacia', 'aroeira', 'outras'];
+  @ViewChild('apiaryInfoForm') apiaryInfoForm: NgForm;
 
   public init(apiaryData: Apiary) {
-    this.data = apiaryData;
-    this.formInit();
-  }
-
-  private formInit() {
-    const validations = (this.isReadonly) ? null : [Validators.required];
-
-    this.apiaryInfoForm = new FormGroup({
-      name: new FormControl(this.data.name, validations),
-      address: new FormControl(this.data.address, validations),
-      forages: new FormControl({ value: this.data.forages, disabled: this.isReadonly }, validations),
-      type: new FormControl(this.data.type, validations)
-    });
+    this.model = {
+      name: apiaryData.name,
+      address: apiaryData.address,
+      forages: apiaryData.forages,
+      type: apiaryData.type
+    };
   }
 
   public getData(): any {

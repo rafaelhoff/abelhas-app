@@ -20,6 +20,7 @@ export class ApiaryPage implements OnInit {
 
   ios: boolean;
   queryText = '';
+  segment = 'all';
   excludeTracks: any = [];
   allApiaries: any = [];
   groups: any = [];
@@ -133,6 +134,6 @@ export class ApiaryPage implements OnInit {
   }
 
   async add() {
-    this.router.navigateByUrl('/apiary-detail/new');
+    this.router.navigateByUrl('/apiary/new');
   }
 }

@@ -15,18 +15,8 @@ const routes: Routes = [
     canActivate: [LoggedInService]
   },
   {
-    path: 'apiary-detail',
-    loadChildren: () => import('./pages/apiary/apiaryDetail.module').then(m => m.ApiaryDetailModule),
-    canActivate: [LoggedInService]
-  },
-  {
     path: 'hive',
     loadChildren: () => import('./pages/apiary/apiary.module').then(m => m.ApiaryModule),
-    canActivate: [LoggedInService]
-  },
-  {
-    path: 'hive-detail',
-    loadChildren: () => import('./pages/apiary/apiaryDetail.module').then(m => m.ApiaryDetailModule),
     canActivate: [LoggedInService]
   },
   {

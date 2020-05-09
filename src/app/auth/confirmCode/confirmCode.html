@@ -13,7 +13,7 @@
   <form #confirmForm="ngForm" novalidate>
     <ion-list>
       <ion-item>
-        <app-label tCode="auth.confirm.code"></app-label>
+        <app-label>{{ 'auth.confirm.code' | translate }}</app-label>
         <ion-input [(ngModel)]="code" name="codeCtrl" type="text" #codeCtrl="ngModel" required>
         </ion-input>
       </ion-item>

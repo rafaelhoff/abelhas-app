@@ -7,10 +7,10 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-
-  <app-apiary-form #form></app-apiary-form>
-  <div class="ion-padding">
-    <ion-button expand="block" type="submit" (click)="onSave()">{{ 'basic.save' | translate }}</ion-button>
-  </div>
-
+  <ion-grid fixed>
+    <app-apiary-form #form></app-apiary-form>
+    <div class="ion-padding">
+      <ion-button expand="block" type="submit" (click)="onSave()">{{ 'basic.save' | translate }}</ion-button>
+    </div>
+  </ion-grid>
 </ion-content>
