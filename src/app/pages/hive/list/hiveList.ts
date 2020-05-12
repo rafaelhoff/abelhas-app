@@ -5,7 +5,6 @@ import {
   ModalController, Config
 } from '@ionic/angular';
 
-import { ApiaryListFilterPage } from '../listFilter/listFilter';
 import { ApiaryDataService } from 'src/app/providers/apiaryData.service';
 
 enum Segments {
@@ -14,11 +13,11 @@ enum Segments {
 }
 
 @Component({
-  selector: 'page-apiary',
-  templateUrl: 'apiary.html',
-  styleUrls: ['./apiary.scss'],
+  selector: 'page-hive-list',
+  templateUrl: 'hiveList.html',
+  styleUrls: ['./hiveList.scss'],
 })
-export class ApiaryPage implements OnInit {
+export class HiveListPage implements OnInit {
   // Gets a reference to the list element
   @ViewChild('apiaryList', { static: true }) apiaryList: IonList;
 
@@ -69,19 +68,6 @@ export class ApiaryPage implements OnInit {
   }
 
   async presentFilter() {
-    const modal = await this.modalCtrl.create({
-      component: ApiaryListFilterPage,
-      swipeToClose: true,
-      presentingElement: this.routerOutlet.nativeEl,
-      componentProps: { excludedTracks: this.excludeTracks }
-    });
-    await modal.present();
-
-    const { data } = await modal.onWillDismiss();
-    if (data) {
-      this.excludeTracks = data;
-      this.updateList();
-    }
   }
 
   // async addFavorite(slidingItem: IonItemSliding, sessionData: any) {

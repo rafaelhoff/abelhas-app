@@ -1,10 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of, Observable, from } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 import { UserDataService } from './userData.service';
-import { environment } from 'src/environments/environment';
 import { DataStore } from '@aws-amplify/datastore';
 import { Apiary } from 'src/models';
 
@@ -12,54 +9,54 @@ import { Apiary } from 'src/models';
   providedIn: 'root'
 })
 export class ApiaryDataService {
-  mockData: Apiary[];
 
   constructor(
-    public http: HttpClient,
-    public user: UserDataService
+    private user: UserDataService
   ) { }
 
-  load(): Observable<Apiary[]> {
-    if (environment.mockData) {
-      if (this.mockData) {
-        return of(this.mockData);
-      } else {
-        return this.http
-          .get('assets/data/apiary.json')
-          .pipe(map(this.processData, this));
+  private process(apiaries: Apiary[]) {
+    const resultP: any[] = [];
+
+    const sortF = ((a, b) => {
+      const nameA = a.type.toUpperCase(); // ignore upper and lowercase
+      const nameB = b.type.toUpperCase(); // ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1;
       }
-    } else {
-      return from(DataStore.query<Apiary>(Apiary))
-        .pipe(map(this.processData, this));
-      // return from(this.appStorage.get(StorageKeys.apiaries))
-      //   .pipe(map(this.processData, this));
-    }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+
+    apiaries.forEach(a => {
+      const found = resultP.find(e => e.type === a.type);
+      if (found) {
+        found.apiaries.push(a);
+      } else {
+        resultP.push({
+          type: a.type,
+          apiaries: [a]
+        });
+      }
+    });
+    return {
+      groups: resultP.sort(sortF),
+      apiaries
+    };
   }
 
-  processData(data: any): Apiary[] {
-    if (environment.mockData) {
-      this.mockData = data;
-    }
+  public async getApiaries(queryText = null): Promise<any> {
+    const apiaries: Apiary[] = (queryText == null) ?
+      await DataStore.query<Apiary>(Apiary) :
+      await DataStore.query(Apiary, c => c.name_casei('contains', queryText.toLowerCase()));
 
-    // SO FAR, not needed.
-
-    return data;
+    return this.process(apiaries);
   }
 
-  getApiaries(
-    queryText = '',
-  ) {
-    return this.load().pipe(
-      map((data: any) => {
-        return {
-          groups: [{
-            name: 'Group 01',
-            apiaries: data
-          }],
-          apiaries: data
-        };
-      })
-    );
+  public async getFavorites(): Promise<any> {
+    const apiaries = await DataStore.query(Apiary, c => c.favorite('eq', true));
+    return this.process(apiaries);
   }
 
   async get(id: string): Promise<Apiary> {
@@ -68,29 +65,33 @@ export class ApiaryDataService {
   }
 
   public async create(newApiary: Apiary): Promise<Apiary> {
-    // TODO: add a validation - if mock or not
-
     const created: Apiary = await DataStore.save<Apiary>(new Apiary({
       hives: [],
       name: newApiary.name,
+      name_casei: newApiary.name.toLowerCase(),
       address: newApiary.address,
       forages: newApiary.forages,
-      type: newApiary.type
+      type: newApiary.type,
+      favorite: newApiary.favorite
     }));
 
     return created;
   }
 
-  public async update(id: string, dataToUpdate: any) {
-    const original = await DataStore.query<Apiary>(Apiary, id);
+  public async update(id: string, dataToUpdate: any): Promise<Apiary> {
+    const original = await this.get(id);
 
-    await DataStore.save(
+    const updatedObj: Apiary = await DataStore.save(
       Apiary.copyOf(original, updated => {
         Object.keys(dataToUpdate).forEach(key => {
           updated[key] = dataToUpdate[key];
+          if (key === 'name') {
+            updated.name_casei = (dataToUpdate[key] as string).toLowerCase();
+          }
         });
       })
     );
+    return updatedObj;
   }
 
   // TODO: delete this method.

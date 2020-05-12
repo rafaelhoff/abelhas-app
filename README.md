@@ -143,7 +143,8 @@ https://www.json-generator.com/
       '{{repeat(1,3)}}',
 	  '{{random("Acacia", "Eucalipto", "Flor qualquer")}}'      
     ],
-    hives: '{{integer(20, 40)}}'
+    hives: '{{integer(20, 40)}}',
+    favorite: '{{random(true, false)}}'
   }
 ]
 ```
@@ -153,3 +154,8 @@ https://www.json-generator.com/
 https://ionicframework.com/blog/tips-tricks-for-ionic-on-desktop/
 https://ionicframework.com/blog/customizing-ionic-apps-for-web-mobile/
 https://ionicframework.com/docs/v3/developer-resources/desktop-support/
+
+## UI Design Android vs iOS
+
+https://medium.muz.li/differences-between-designing-native-ios-apps-and-native-android-apps-e71256dfa1ca
+https://learnui.design/blog/ios-vs-android-app-ui-design-complete-guide.html

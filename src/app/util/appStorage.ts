@@ -20,7 +20,6 @@ export class AppStorage {
 }
 
 export const StorageKeys = {
-  apiaries: 'apiaries',
   configuration: 'configuration',
   photos: 'photos',
   username: 'username'

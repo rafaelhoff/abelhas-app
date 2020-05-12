@@ -6,7 +6,6 @@ import { ApiaryPage } from './list/apiary';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ApiaryListFilterPage } from './listFilter/listFilter';
-import { ApiaryAddPage } from './detail-add/add';
 import { ApiaryDetailPage } from './detail-tab/apiaryDetail';
 import { ApiaryInfoPage } from './detail-info/info';
 import { ApiaryMapPage } from './detail-map/map';
@@ -15,7 +14,7 @@ import { ApiaryInfoFormComponent } from './detail-info/infoForm.component';
 
 const routes: Routes = [
   { path: '', component: ApiaryPage },
-  { path: 'new', component: ApiaryAddPage },
+  { path: 'new', component: ApiaryInfoPage },
   {
     path: ':apiaryId',
     component: ApiaryDetailPage,
@@ -55,7 +54,6 @@ const routes: Routes = [
     ApiaryInfoPage,
     ApiaryMapPage,
     ApiaryHistoryPage,
-    ApiaryAddPage,
     ApiaryInfoFormComponent
   ],
   entryComponents: [

@@ -16,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'hive',
-    loadChildren: () => import('./pages/apiary/apiary.module').then(m => m.ApiaryModule),
+    loadChildren: () => import('./pages/hive/hive.module').then(m => m.HiveModule),
     canActivate: [LoggedInService]
   },
   {
@@ -59,8 +59,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/about/about.module').then(m => m.AboutModule)
   },
   {
-    path: 'geolocation',
-    loadChildren: () => import('./test/geolocation/geolocation.module').then(m => m.GeoLocationModule)
+    path: 'testing',
+    loadChildren: () => import('./test/general/testing.module').then(m => m.TestingModule)
   },
   {
     path: 'cameraQR',

@@ -2,16 +2,17 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
-    </ion-buttons>    
+    </ion-buttons>
     <ion-title>
-      Geo Location
+      General Testing
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+  <h1>Geo Location</h1>
   <ion-button (click)="requestPermissions()" color="primary">Geolocation.requestPermissions</ion-button>
-  <ion-button (click)="getCurrentPosition()" color="primary">Geolocation.getCurrentPosition</ion-button> 
+  <ion-button (click)="getCurrentPosition()" color="primary">Geolocation.getCurrentPosition</ion-button>
   <div>
     Lat: {{singleCoords.latitude}} Long: {{singleCoords.longitude}}
   </div>
@@ -20,4 +21,9 @@
     Lat: {{watchCoords.latitude}} Long: {{watchCoords.longitude}}
   </div>
   <ion-button (click)="clearWatch()" color="primary">Geolocation.clearWatch</ion-button>
+
+  <br><br>
+  <h1>Mock</h1>
+  <ion-button (click)="insertMock()" color="primary">Insert MockData into Datastore</ion-button>
+
 </ion-content>

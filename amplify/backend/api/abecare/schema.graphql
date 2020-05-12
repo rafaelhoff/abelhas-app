@@ -4,10 +4,12 @@ type Apiary
 {
   id: ID!
   name: String!
+  name_casei: String!
   address: String
   type: String
   hives: [Hive] @connection(name: "ApiaryHives")
   forages: [String]!
+  favorite: Boolean!
 }
 type Hive
   @model
@@ -16,4 +18,6 @@ type Hive
   id: ID!
   name: String!
   apiary: Apiary! @connection(name: "ApiaryHives")
+  longitude: Float
+  latitude: Float
 }

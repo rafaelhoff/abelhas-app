@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
 
-    <ion-title *ngIf="!showSearchbar">{{ 'apiary.title' | translate }}</ion-title>
+    <ion-title *ngIf="!showSearchbar">{{ 'hive.title' | translate }}</ion-title>
     <ion-searchbar *ngIf="showSearchbar" showCancelButton="always" [(ngModel)]="queryText" (ionChange)="updateList()"
       (ionCancel)="showSearchbar = false" placeholder="Search"></ion-searchbar>
 
@@ -41,7 +41,7 @@
     <ion-item-group *ngFor="let group of groups" [hidden]="group.hide">
       <ion-item-divider sticky>
         <ion-label>
-          {{group.type}}
+          {{group.time}}
         </ion-label>
       </ion-item-divider>
 

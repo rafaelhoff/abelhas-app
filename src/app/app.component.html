@@ -5,14 +5,14 @@
       <ion-content>
         <ion-list *ngIf="loggedIn" lines="none">
           <ion-list-header>
-            My Data
+            {{'basic.app.mydata' | translate}}
           </ion-list-header>
 
-          <ion-menu-toggle autoHide="false">
-            <ion-item routerLink="/apiary" routerLinkActive="active" routerDirection="root" detail="false">
-              <ion-icon slot="start" name="albums"></ion-icon>
+          <ion-menu-toggle autoHide="false" *ngFor="let p of appPages; let i = index">
+            <ion-item [routerLink]="p.url" routerLinkActive="selected" routerDirection="root" detail="false">
+              <ion-icon slot="start" [name]="p.icon"></ion-icon>
               <ion-label>
-                Apiaries
+                {{p.title | translate}}
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
@@ -20,15 +20,13 @@
         </ion-list>
 
         <ion-list *ngIf="loggedIn" lines="none">
-          <ion-list-header>
-            Account
-          </ion-list-header>
+          <ion-list-header>{{'basic.app.account' | translate}}</ion-list-header>
 
           <ion-menu-toggle autoHide="false">
             <ion-item routerLink="/account" routerLinkActive="active" routerDirection="root" detail="false">
               <ion-icon slot="start" name="person"></ion-icon>
               <ion-label>
-                Account
+                {{'basic.app.account' | translate}}
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
@@ -37,7 +35,7 @@
             <ion-item routerLink="/support" routerLinkActive="active" routerDirection="root" detail="false">
               <ion-icon slot="start" name="help"></ion-icon>
               <ion-label>
-                Support
+                {{'basic.app.support' | translate}}
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
@@ -45,28 +43,26 @@
         </ion-list>
 
         <ion-list lines="none">
-          <ion-list-header>
-            Configuration
-          </ion-list-header>
+          <ion-list-header>{{'cfg.title' | translate}}</ion-list-header>
 
           <ion-menu-toggle autoHide="false">
             <ion-item routerLink="/configuration" routerLinkActive="active" routerDirection="root" detail="false">
               <ion-icon slot="start" name="settings"></ion-icon>
-              <ion-label>Configuration</ion-label>
+              <ion-label>{{'cfg.title' | translate}}</ion-label>
             </ion-item>
           </ion-menu-toggle>
 
         </ion-list>
 
-        <ion-list lines="none">
+        <ion-list lines="none" *ngIf="environment.showTestMenu">
           <ion-list-header>
             Testing
           </ion-list-header>
 
           <ion-menu-toggle autoHide="false">
-            <ion-item routerLink="/geolocation" routerLinkActive="active" routerDirection="root" detail="false">
+            <ion-item routerLink="/testing" routerLinkActive="active" routerDirection="root" detail="false">
               <ion-icon slot="start" name="hammer"></ion-icon>
-              <ion-label>GeoLocation</ion-label>
+              <ion-label>General Testing</ion-label>
             </ion-item>
           </ion-menu-toggle>
 
@@ -105,14 +101,13 @@
             </ion-item>
           </ion-menu-toggle>
 
-          <ion-menu-toggle autoHide="false" *ngFor="let p of appPages; let i = index">
+          <ion-menu-toggle autoHide="false" *ngFor="let p of appPagesTest; let i = index">
             <ion-item [routerLink]="p.url" routerLinkActive="selected" routerDirection="root" detail="false">
               <ion-icon slot="start" [name]="p.icon + '-outline'"></ion-icon>
               <ion-label>
                 {{p.title}}
               </ion-label>
             </ion-item>
-
           </ion-menu-toggle>
 
         </ion-list>

@@ -9,6 +9,8 @@ import { SplashScreen } from '@capacitor/core';
 import { ConfigDataService } from './providers/configData.service';
 import { NGXLogger } from 'ngx-logger';
 
+import { environment } from '../environments/environment';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,6 +19,20 @@ import { NGXLogger } from 'ngx-logger';
 })
 export class AppComponent implements OnInit {
   appPages = [
+    {
+      title: 'apiary.title',
+      url: '/apiary',
+      icon: 'grid-outline'
+    },
+    {
+      title: 'hive.title',
+      url: '/hive',
+      icon: 'cube-outline'
+    }
+  ];
+
+  // TODO: delete these items;
+  appPagesTest = [
     {
       title: 'Schedule',
       url: '/app/tabs/schedule',
@@ -35,6 +51,7 @@ export class AppComponent implements OnInit {
   ];
   loggedIn = false;
   dark = false;
+  environment = environment;
 
   constructor(
     private logger: NGXLogger,

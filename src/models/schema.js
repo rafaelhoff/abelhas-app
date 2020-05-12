@@ -17,6 +17,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "name_casei": {
+                    "name": "name_casei",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "address": {
                     "name": "address",
                     "isArray": false,
@@ -48,6 +55,13 @@ export const schema = {
                     "name": "forages",
                     "isArray": true,
                     "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "favorite": {
+                    "name": "favorite",
+                    "isArray": false,
+                    "type": "Boolean",
                     "isRequired": true,
                     "attributes": []
                 }
@@ -108,6 +122,20 @@ export const schema = {
                         "connectionType": "BELONGS_TO",
                         "targetName": "hiveApiaryId"
                     }
+                },
+                "longitude": {
+                    "name": "longitude",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "latitude": {
+                    "name": "latitude",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -140,5 +168,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "f720cd5ab6b0dbea63b86c7c2a70e5b5"
+    "version": "d8694e33f90bf03e36b4d170c7e7ad10"
 };

@@ -1,139 +1,150 @@
 {
-  "account": {
-    "chgpic": "Change Picture",
-    "firstName": "First name",
-    "fromLibrary": "From Library",
-    "lastName": "Last Name",
-    "logout": "Logout",
-    "name": "Name",
-    "takePhoto": "Take Photo",
-    "title": "Account",
-    "username": "Username"
-  },
-  "apiary": {
-    "add": "Add Apiary",
-    "filter": {
-      "title": "Filter Apiaries"
-    },
-    "header": {
-      "all": "All",
-      "fav": "Favorites",
-      "filter": "Filter"
-    },
-    "history": {
-      "title": "History"
-    },
-    "hives": "hives",
-    "info": {
-      "title": "Basic Data"
-    },
-    "map": {
-      "title": "Map"
-    },
-    "notFound": "No apiary found.",
-    "title": "Apiaries"
-  },
-  "apiaryDetail": {
-    "name": "Apiary Name"
-  },
-  "auth": {
-    "changingPwd": "Changing password",
-    "chgPwdConfirm": "Password is changed.",
-    "chgPwdTitle": "Change Password",
-    "confirm": {
-      "code": "Code",
-      "codeSentAgain": "Confirmation code was sent again.",
-      "confirmed": "Confirm Code is valid",
-      "confirming": "Confirming",
-      "desc": "An e-mail was sent to <strong>{{email}}</strong>. Please open the e-mail, copy the security code and enter in the input below.",
-      "resend": "Resend Confirmation Code",
-      "title": "Confirm Code",
-      "warn": "You will be requested for the Confirmation Code next time during Login."
-    },
-    "email": "E-mail",
-    "emailValid": "E-mail must be valid",
-    "forgot": {
-      "changed": "Your password was changed.",
-      "desc": "An e-mail was sent to <strong>{{email}}</strong> with a security code to change the password. Please open the e-mail, copy the security code and enter in the input below.",
-      "question": "Forgot Password?",
-      "title": "Forgot Password"
-    },
-    "loggingIn": "Logging in",
-    "login": "Login",
-    "new": "New Password",
-    "new2": "Repeat new Password",
-    "newPwdMatch": "Repeat must match",
-    "old": "Old Password",
-    "pwd": "Password",
-    "pwdComp": "Minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and one special character",
-    "requesting": "Requesting",
-    "signingUp": "Signing up",
-    "signup": "Signup",
-    "terms": {
-      "descPos": ".",
-      "descPre": "By creating your account, you agree to the",
-      "title": "Terms and Conditions"
-    }
-  },
-  "aws": {
-    "CodeMismatchException": "Invalid verification code provided, please try again.",
-    "NotAuthorizedException": "Incorrect username or password.",
-    "UserNotFoundException": "Incorrect username or password.",
-    "UsernameExistsException": "An account with the given email already exists.",
-    "basicError": "An error has occurred."
-  },
-  "basic": {
-    "cancel": "Cancel",
-    "change": "Change",
-    "confirm": "Confirm",
-    "create": "Create",
-    "deselectAll": "Deselect All",
-    "done": "Done",
-    "edit": "Edit",
-    "error": "Error",
-    "favorite": "Favorite",
-    "ok": "OK",
-    "pleaseWait": ", please wait...",
-    "remove": "Remove",
-    "request": "Request",
-    "required": " is required",
-    "reset": "Reset",
-    "save": "Save",
-    "selectAll": "Select All"
-  },
-  "cfg": {
-    "about": {
-      "label": "About",
-      "title": "About"
-    },
-    "basic": {
-      "lng": "Language",
-      "title": "Basic Configuration"
-    },
-    "display": {
-      "darkMode": "Dark Mode",
-      "title": "Display"
-    },
-    "langList": {
-      "en": "English",
-      "es": "Spanish",
-      "pt": "Portuguese"
-    },
-    "title": "Configuration",
-    "tutorial": {
-      "show": "Show Tutorial",
-      "title": "Tutorial"
-    }
-  },
-  "tut": {
-    "continue": "Continue",
-    "flow": "Flow",
-    "flowDesc": "<strong>ABC</strong> is a ...",
-    "ready": "Ready to Play?",
-    "skip": "Skip",
-    "welcome": "Welcome to <strong>Apiario</strong>",
-    "welcomeDesc": "The <strong>Apiario</strong> is a ....",
-    "what": "What?",
-    "whatDesc": "<strong>XYZ</strong> is an ..."
-  }
+	"account": {
+		"chgpic": "Change Picture",
+		"firstName": "First name",
+		"fromLibrary": "From Library",
+		"lastName": "Last Name",
+		"logout": "Logout",
+		"name": "Name",
+		"takePhoto": "Take Photo",
+		"title": "Account",
+		"username": "Username"
+	},
+	"apiary": {
+		"add": "Add Apiary",
+		"filter": {
+			"title": "Filter Apiaries"
+		},
+		"header": {
+			"all": "All",
+			"fav": "Favorites",
+			"filter": "Filter"
+		},
+		"history": {
+			"title": "History"
+		},
+		"hives": "hives",
+		"info": {
+			"title": "Basic Data"
+		},
+		"map": {
+			"title": "Map"
+		},
+		"notFound": "No apiary found.",
+		"title": "Apiaries"
+	},
+	"apiaryDetail": {
+		"address": "Address",
+		"forages": "Forages",
+		"name": "Apiary Name",
+		"type": "Type"
+	},
+	"auth": {
+		"changingPwd": "Changing password",
+		"chgPwdConfirm": "Password is changed.",
+		"chgPwdTitle": "Change Password",
+		"confirm": {
+			"code": "Code",
+			"codeSentAgain": "Confirmation code was sent again.",
+			"confirmed": "Confirm Code is valid",
+			"confirming": "Confirming",
+			"desc": "An e-mail was sent to <strong>{{email}}</strong>. Please open the e-mail, copy the security code and enter in the input below.",
+			"resend": "Resend Confirmation Code",
+			"title": "Confirm Code",
+			"warn": "You will be requested for the Confirmation Code next time during Login."
+		},
+		"email": "E-mail",
+		"emailValid": "E-mail must be valid",
+		"forgot": {
+			"changed": "Your password was changed.",
+			"desc": "An e-mail was sent to <strong>{{email}}</strong> with a security code to change the password. Please open the e-mail, copy the security code and enter in the input below.",
+			"question": "Forgot Password?",
+			"title": "Forgot Password"
+		},
+		"loggingIn": "Logging in",
+		"login": "Login",
+		"new": "New Password",
+		"new2": "Repeat new Password",
+		"newPwdMatch": "Repeat must match",
+		"old": "Old Password",
+		"pwd": "Password",
+		"pwdComp": "Minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and one special character",
+		"requesting": "Requesting",
+		"signingUp": "Signing up",
+		"signup": "Signup",
+		"terms": {
+			"descPos": ".",
+			"descPre": "By creating your account, you agree to the",
+			"title": "Terms and Conditions"
+		}
+	},
+	"aws": {
+		"CodeMismatchException": "Invalid verification code provided, please try again.",
+		"NotAuthorizedException": "Incorrect username or password.",
+		"UserNotFoundException": "Incorrect username or password.",
+		"UsernameExistsException": "An account with the given email already exists.",
+		"basicError": "An error has occurred."
+	},
+	"basic": {
+		"app": {
+			"account": "Account",
+			"mydata": "My Data",
+			"support": "Support"
+		},
+		"cancel": "Cancel",
+		"change": "Change",
+		"confirm": "Confirm",
+		"create": "Create",
+		"deselectAll": "Deselect All",
+		"done": "Done",
+		"edit": "Edit",
+		"error": "Error",
+		"favorite": "Favorite",
+		"ok": "OK",
+		"pleaseWait": ", please wait...",
+		"remove": "Remove",
+		"request": "Request",
+		"required": " is required",
+		"reset": "Reset",
+		"save": "Save",
+		"selectAll": "Select All"
+	},
+	"cfg": {
+		"about": {
+			"label": "About",
+			"title": "About"
+		},
+		"basic": {
+			"lng": "Language",
+			"title": "Basic Configuration"
+		},
+		"display": {
+			"darkMode": "Dark Mode",
+			"title": "Display"
+		},
+		"langList": {
+			"en": "English",
+			"es": "Spanish",
+			"pt": "Portuguese"
+		},
+		"title": "Configuration",
+		"tutorial": {
+			"show": "Show Tutorial",
+			"title": "Tutorial"
+		}
+	},
+	"hive": {
+		"title": "Hives"
+	},
+	"tut": {
+		"continue": "Continue",
+		"flow": "Flow",
+		"flowDesc": "<strong>ABC</strong> is a ...",
+		"ready": "Ready to Play?",
+		"skip": "Skip",
+		"welcome": "Welcome to <strong>Apiario</strong>",
+		"welcomeDesc": "The <strong>Apiario</strong> is a ....",
+		"what": "What?",
+		"whatDesc": "<strong>XYZ</strong> is an ..."
+	}
 }

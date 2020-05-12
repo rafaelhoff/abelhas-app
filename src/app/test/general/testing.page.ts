@@ -4,13 +4,14 @@ import {
   CallbackID
 } from '@capacitor/core';
 import { NGXLogger } from 'ngx-logger';
+import { HttpClient } from '@angular/common/http';
+import { ApiaryDataService } from 'src/app/providers/apiaryData.service';
 
 @Component({
-  selector: 'app-geolocation',
-  templateUrl: 'geolocation.page.html',
-  styleUrls: ['geolocation.page.scss']
+  selector: 'app-testing',
+  templateUrl: 'testing.page.html'
 })
-export class GeoLocationPage {
+export class TestingPage {
 
   singleCoords = {
     latitude: 0,
@@ -25,7 +26,10 @@ export class GeoLocationPage {
 
   constructor(
     private logger: NGXLogger,
-    private zone: NgZone) {
+    private zone: NgZone,
+    public http: HttpClient,
+    private apiaryDataService: ApiaryDataService
+  ) {
   }
 
   async requestPermissions() {
@@ -66,6 +70,21 @@ export class GeoLocationPage {
     if (this.watchId != null) {
       Plugins.Geolocation.clearWatch({ id: this.watchId });
     }
+  }
+
+
+  insertMock() {
+    // TODO: insert mock data into datastore.
+    return this.http.get('assets/data/apiary.json').subscribe({
+      next: (data: any[]) => {
+        data.forEach(a => {
+          this.apiaryDataService.create(a);
+        });
+        console.log('done');
+        // console.log(data);
+      }
+    });
+
   }
 
 }

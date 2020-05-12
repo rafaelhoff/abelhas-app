@@ -15,7 +15,7 @@ export class ApiaryInfoFormComponent {
     forages: string[];
     type: string;
   } = { name: '', address: '', forages: [''], type: '' };
-  foragesList = ['acacia', 'aroeira', 'outras'];
+  foragesList = ['Eucalipto', 'Flor qualquer', 'Acacia'];
   @ViewChild('apiaryInfoForm') apiaryInfoForm: NgForm;
 
   public init(apiaryData: Apiary) {

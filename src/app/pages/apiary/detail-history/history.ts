@@ -44,4 +44,12 @@ export class ApiaryHistoryPage implements OnInit {
     });
     await actionSheet.present();
   }
+
+  addPicture() {
+    // nothign
+  }
+
+  uploadFile() {
+    // nothign
+  }
 }

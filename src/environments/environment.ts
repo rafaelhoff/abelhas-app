@@ -7,7 +7,7 @@ export const environment = {
   connectToCognito: false,
   connectToS3: false,
   defaultPicture: '/assets/img/profile.png',
-  mockData: false
+  showTestMenu: true
 };
 
 /*

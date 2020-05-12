@@ -1,22 +1,20 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button *ngIf="readonly" [defaultHref]="defaultHref"></ion-back-button>
-      <ion-button *ngIf="!readonly" (click)="cancelChanges()">
+      <ion-back-button *ngIf="mode === 'R' || mode === 'C'" [defaultHref]="defaultHref"></ion-back-button>
+      <ion-button *ngIf="mode === 'U'" (click)="cancelChanges()">
         <span>{{ 'basic.cancel' | translate }}</span>
       </ion-button>
     </ion-buttons>
-    <ion-title>{{ 'apiary.info.title' | translate }}</ion-title>
+    <ion-title>{{pageTitle}}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="toggleFavorite()">
-        <ion-icon *ngIf="!isFavorite" slot="icon-only" name="star-outline"></ion-icon>
-        <ion-icon *ngIf="isFavorite" slot="icon-only" name="star"></ion-icon>
+        <ion-icon *ngIf="!apiaryData?.favorite" slot="icon-only" name="star-outline"></ion-icon>
+        <ion-icon *ngIf="apiaryData?.favorite" slot="icon-only" name="star"></ion-icon>
       </ion-button>
-      <ion-button *ngIf="readonly" (click)="switchEdit()">
-        <span>{{ 'basic.edit' | translate }}</span>
-      </ion-button>
-      <ion-button *ngIf="!readonly" (click)="switchEdit()">
-        <span>{{ 'basic.done' | translate }}</span>
+      <ion-button (click)="switchEdit()">
+        <span *ngIf="mode === 'R'">{{ 'basic.edit' | translate }}</span>
+        <span *ngIf="mode === 'U'">{{ 'basic.done' | translate }}</span>
       </ion-button>
 
     </ion-buttons>
@@ -34,8 +32,10 @@
       <app-apiary-form #form [isReadonly]="readonly"></app-apiary-form>
     </ion-card-content>
   </ion-card-->
-    <app-apiary-form #form [isReadonly]="readonly"></app-apiary-form>
+    <app-apiary-form #form [isReadonly]="mode === 'R'"></app-apiary-form>
+    <div class="ion-padding" *ngIf="mode === 'C'">
+      <ion-button expand="block" type="submit" (click)="onSave()">{{ 'basic.save' | translate }}</ion-button>
+    </div>
 
-    <app-icon-addmedia (clickPicture)="addPicture()" (clickUploadFile)="uploadFile()"></app-icon-addmedia>
   </ion-grid>
 </ion-content>

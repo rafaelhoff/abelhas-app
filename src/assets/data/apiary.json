@@ -7,7 +7,8 @@
     "forages": [
       "Acacia"
     ],
-    "hives": 30
+    "hives": 30,
+    "favorite": true
   },
   {
     "id": "5ea6d9e63b30021c9e69c54e",
@@ -17,7 +18,8 @@
     "forages": [
       "Acacia"
     ],
-    "hives": 35
+    "hives": 35,
+    "favorite": false
   },
   {
     "id": "5ea6d9e611cdb463ae09a0c8",
@@ -29,7 +31,8 @@
       "Acacia",
       "Flor qualquer"
     ],
-    "hives": 36
+    "hives": 36,
+    "favorite": true
   },
   {
     "id": "5ea6d9e6ae11665e18e50238",
@@ -40,7 +43,8 @@
       "Eucalipto",
       "Eucalipto"
     ],
-    "hives": 37
+    "hives": 37,
+    "favorite": false
   },
   {
     "id": "5ea6d9e60b13c42709d25f12",
@@ -50,7 +54,8 @@
     "forages": [
       "Flor qualquer"
     ],
-    "hives": 38
+    "hives": 38,
+    "favorite": true
   },
   {
     "id": "5ea6d9e665e396b385b4a3d6",
@@ -60,7 +65,8 @@
     "forages": [
       "Flor qualquer"
     ],
-    "hives": 32
+    "hives": 32,
+    "favorite": false
   },
   {
     "id": "5ea6d9e6c2b9280013d7fc59",
@@ -71,6 +77,7 @@
       "Acacia",
       "Eucalipto"
     ],
-    "hives": 29
+    "hives": 29,
+    "favorite": true
   }
 ]
