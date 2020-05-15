@@ -28,7 +28,7 @@ export class IconAddMediaComponent {
   @Output() clickUploadFile = new EventEmitter();
   @Output() clickRecordAudio = new EventEmitter();
 
-  isWeb: boolean = false;
+  isWeb = false;
 
   constructor(private appPlatform: AppPlatform) {
     this.appPlatform.isWeb().then(w => this.isWeb = w);
@@ -45,7 +45,7 @@ export class IconAddMediaComponent {
   async uploadFile(fileInput) {
     const a = fileInput.click(); // this work
     fileInput.addEventListener('change', e => {
-      let fileName = e.target.files[0].name;
+      const fileName = e.target.files[0].name;
       console.log('The file "' + fileName + '" has been selected.');
 
       this.clickUploadFile.emit();

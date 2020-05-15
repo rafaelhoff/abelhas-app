@@ -5,7 +5,8 @@ import {
   ModalController, Config
 } from '@ionic/angular';
 
-import { ApiaryDataService } from 'src/app/providers/apiaryData.service';
+import { HiveDataService } from 'src/app/providers/hiveData.service';
+import { Hive } from 'src/models';
 
 enum Segments {
   All = 'all',
@@ -24,15 +25,11 @@ export class HiveListPage implements OnInit {
   ios: boolean;
   queryText = '';
   segment: Segments = Segments.All;
-  excludeTracks: any = [];
-  allApiaries: any = [];
-  groups: any = [];
-  confDate: string;
-  showSearchbar: boolean = false;
+  allHives: Hive[] = [];
+  showSearchbar = false;
 
   constructor(
-    public apiaryDataService: ApiaryDataService,
-    public modalCtrl: ModalController,
+    public hiveDataService: HiveDataService,
     public router: Router,
     public routerOutlet: IonRouterOutlet,
     public config: Config
@@ -54,17 +51,9 @@ export class HiveListPage implements OnInit {
       this.apiaryList.closeSlidingItems();
     }
 
-    if (this.segment === Segments.All) {
-      this.apiaryDataService.getApiaries(this.queryText).then((data: any) => {
-        this.allApiaries = data.apiaries;
-        this.groups = data.groups;
-      });
-    } else {
-      this.apiaryDataService.getFavorites().then((data: any) => {
-        this.allApiaries = data.apiaries;
-        this.groups = data.groups;
-      });
-    }
+    this.hiveDataService.getAll().then((data: Hive[]) => {
+      this.allHives = data;
+    });
   }
 
   async presentFilter() {
@@ -77,6 +66,6 @@ export class HiveListPage implements OnInit {
   // }
 
   async add() {
-    this.router.navigateByUrl('/apiary/new');
+    this.router.navigateByUrl('/hive/new');
   }
 }

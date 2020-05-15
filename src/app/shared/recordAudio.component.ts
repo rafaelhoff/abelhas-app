@@ -35,12 +35,12 @@ declare var MediaRecorder: any;
   `
 })
 export class RecordAudioComponent {
-  recording: boolean = false;
+  recording = false;
   mediaRecorder: any = null;
-  saveAudio: boolean = false;
+  saveAudio = false;
   timerString = '00:00';
   intervalObj: any;
-  isWeb: boolean = false;
+  isWeb = false;
 
   @Output() newRecord = new EventEmitter<AudioRecord>();
 

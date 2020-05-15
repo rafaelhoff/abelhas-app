@@ -7,6 +7,7 @@ export const onCreateApiary = /* GraphQL */ `
     onCreateApiary(owner: $owner) {
       id
       name
+      name_casei
       address
       type
       hives {
@@ -14,6 +15,7 @@ export const onCreateApiary = /* GraphQL */ `
         startedAt
       }
       forages
+      favorite
       _version
       _deleted
       _lastChangedAt
@@ -26,6 +28,7 @@ export const onUpdateApiary = /* GraphQL */ `
     onUpdateApiary(owner: $owner) {
       id
       name
+      name_casei
       address
       type
       hives {
@@ -33,6 +36,7 @@ export const onUpdateApiary = /* GraphQL */ `
         startedAt
       }
       forages
+      favorite
       _version
       _deleted
       _lastChangedAt
@@ -45,6 +49,7 @@ export const onDeleteApiary = /* GraphQL */ `
     onDeleteApiary(owner: $owner) {
       id
       name
+      name_casei
       address
       type
       hives {
@@ -52,6 +57,7 @@ export const onDeleteApiary = /* GraphQL */ `
         startedAt
       }
       forages
+      favorite
       _version
       _deleted
       _lastChangedAt
@@ -67,14 +73,18 @@ export const onCreateHive = /* GraphQL */ `
       apiary {
         id
         name
+        name_casei
         address
         type
         forages
+        favorite
         _version
         _deleted
         _lastChangedAt
         owner
       }
+      longitude
+      latitude
       _version
       _deleted
       _lastChangedAt
@@ -90,14 +100,18 @@ export const onUpdateHive = /* GraphQL */ `
       apiary {
         id
         name
+        name_casei
         address
         type
         forages
+        favorite
         _version
         _deleted
         _lastChangedAt
         owner
       }
+      longitude
+      latitude
       _version
       _deleted
       _lastChangedAt
@@ -113,14 +127,18 @@ export const onDeleteHive = /* GraphQL */ `
       apiary {
         id
         name
+        name_casei
         address
         type
         forages
+        favorite
         _version
         _deleted
         _lastChangedAt
         owner
       }
+      longitude
+      latitude
       _version
       _deleted
       _lastChangedAt

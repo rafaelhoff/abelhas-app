@@ -1,20 +1,15 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 
-import { UserDataService } from './userData.service';
 import { DataStore } from '@aws-amplify/datastore';
-import { Apiary } from 'src/models';
+import { Apiary, Hive } from 'src/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiaryDataService {
 
-  constructor(
-    private user: UserDataService
-  ) { }
-
-  private process(apiaries: Apiary[]) {
+  private process(apiaries: Apiary[]): ApiaryResults {
     const resultP: any[] = [];
 
     const sortF = ((a, b) => {
@@ -40,15 +35,16 @@ export class ApiaryDataService {
         });
       }
     });
+
     return {
       groups: resultP.sort(sortF),
       apiaries
     };
   }
 
-  public async getApiaries(queryText = null): Promise<any> {
+  public async getApiaries(queryText = null): Promise<ApiaryResults> {
     const apiaries: Apiary[] = (queryText == null) ?
-      await DataStore.query<Apiary>(Apiary) :
+      await DataStore.query(Apiary) :
       await DataStore.query(Apiary, c => c.name_casei('contains', queryText.toLowerCase()));
 
     return this.process(apiaries);
@@ -60,7 +56,7 @@ export class ApiaryDataService {
   }
 
   async get(id: string): Promise<Apiary> {
-    const result: Apiary = await DataStore.query<Apiary>(Apiary, id);
+    const result: Apiary = await DataStore.query(Apiary, id);
     return result;
   }
 
@@ -115,4 +111,12 @@ export class ApiaryDataService {
       }
     ]);
   }
+}
+
+export interface ApiaryResults {
+  groups: {
+    type: string;
+    apiaries: Apiary[];
+  }[];
+  apiaries: Apiary[];
 }

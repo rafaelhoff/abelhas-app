@@ -37,37 +37,22 @@
 
 <ion-content fullscreen="true">
 
-  <ion-list #apiaryList *ngIf="allApiaries.length > 0">
-    <ion-item-group *ngFor="let group of groups" [hidden]="group.hide">
-      <ion-item-divider sticky>
-        <ion-label>
-          {{group.time}}
-        </ion-label>
-      </ion-item-divider>
+  <ion-list #hiveList *ngIf="allHives.length > 0">
 
-      <ion-item-sliding *ngFor="let apiary of group.apiaries" #slidingItem [attr.track]="'ionic'"
-        [hidden]="apiary.hide">
-        <ion-item routerLink="/apiary/{{apiary.id}}/info">
-          <ion-label>
-            <h3>{{apiary.name}}</h3>
-            <p>
-              {{apiary.hives ? apiary.hives.length : 0}} {{ 'apiary.hives' | translate }}
-            </p>
-          </ion-label>
-        </ion-item>
-        <!--ion-item-options>
-          <ion-item-option color="favorite" (click)="addFavorite(slidingItem, apiary)">
-            {{ 'basic.favorite' | translate }}
-          </ion-item-option>
-          <ion-item-option color="danger" (click)="removeFavorite(slidingItem, apiary, 'Remove Favorite')">
-            {{ 'basic.remove' | translate }}
-          </ion-item-option>
-        </ion-item-options-->
-      </ion-item-sliding>
-    </ion-item-group>
+    <ion-item-sliding *ngFor="let hive of allHives" #slidingItem>
+      <ion-item routerLink="/hive/{{hive.id}}/">
+        <ion-label>
+          <h3>{{hive.name}}</h3>
+          <p>
+            {{hive.apiary?.name}}
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-item-sliding>
+
   </ion-list>
 
-  <ion-list-header *ngIf="allApiaries.length === 0">
+  <ion-list-header *ngIf="allHives.length === 0">
     {{ 'apiary.notFound' | translate }}
   </ion-list-header>
 

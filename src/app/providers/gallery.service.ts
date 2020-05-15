@@ -12,7 +12,7 @@ import { AppPlatform } from '../util/appPlatform';
 })
 export class GalleryService {
   public photos: CameraPhoto[] = [];
-  isWeb: boolean = false;
+  isWeb = false;
 
   constructor(
     private appPlatform: AppPlatform,

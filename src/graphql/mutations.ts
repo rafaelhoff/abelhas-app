@@ -10,6 +10,7 @@ export const createApiary = /* GraphQL */ `
     createApiary(input: $input, condition: $condition) {
       id
       name
+      name_casei
       address
       type
       hives {
@@ -17,6 +18,7 @@ export const createApiary = /* GraphQL */ `
         startedAt
       }
       forages
+      favorite
       _version
       _deleted
       _lastChangedAt
@@ -32,6 +34,7 @@ export const updateApiary = /* GraphQL */ `
     updateApiary(input: $input, condition: $condition) {
       id
       name
+      name_casei
       address
       type
       hives {
@@ -39,6 +42,7 @@ export const updateApiary = /* GraphQL */ `
         startedAt
       }
       forages
+      favorite
       _version
       _deleted
       _lastChangedAt
@@ -54,6 +58,7 @@ export const deleteApiary = /* GraphQL */ `
     deleteApiary(input: $input, condition: $condition) {
       id
       name
+      name_casei
       address
       type
       hives {
@@ -61,6 +66,7 @@ export const deleteApiary = /* GraphQL */ `
         startedAt
       }
       forages
+      favorite
       _version
       _deleted
       _lastChangedAt
@@ -79,14 +85,18 @@ export const createHive = /* GraphQL */ `
       apiary {
         id
         name
+        name_casei
         address
         type
         forages
+        favorite
         _version
         _deleted
         _lastChangedAt
         owner
       }
+      longitude
+      latitude
       _version
       _deleted
       _lastChangedAt
@@ -105,14 +115,18 @@ export const updateHive = /* GraphQL */ `
       apiary {
         id
         name
+        name_casei
         address
         type
         forages
+        favorite
         _version
         _deleted
         _lastChangedAt
         owner
       }
+      longitude
+      latitude
       _version
       _deleted
       _lastChangedAt
@@ -131,14 +145,18 @@ export const deleteHive = /* GraphQL */ `
       apiary {
         id
         name
+        name_casei
         address
         type
         forages
+        favorite
         _version
         _deleted
         _lastChangedAt
         owner
       }
+      longitude
+      latitude
       _version
       _deleted
       _lastChangedAt

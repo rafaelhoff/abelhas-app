@@ -6,7 +6,8 @@ import {
 } from '@ionic/angular';
 
 import { ApiaryListFilterPage } from '../listFilter/listFilter';
-import { ApiaryDataService } from 'src/app/providers/apiaryData.service';
+import { ApiaryDataService, ApiaryResults } from 'src/app/providers/apiaryData.service';
+import { HiveDataService } from 'src/app/providers/hiveData.service';
 
 enum Segments {
   All = 'all',
@@ -27,12 +28,13 @@ export class ApiaryPage implements OnInit {
   segment: Segments = Segments.All;
   excludeTracks: any = [];
   allApiaries: any = [];
+  allHives: any[] = [];
   groups: any = [];
-  confDate: string;
-  showSearchbar: boolean = false;
+  showSearchbar = false;
 
   constructor(
-    public apiaryDataService: ApiaryDataService,
+    private apiaryDataService: ApiaryDataService,
+    private hiveDataService: HiveDataService,
     public modalCtrl: ModalController,
     public router: Router,
     public routerOutlet: IonRouterOutlet,
@@ -55,16 +57,27 @@ export class ApiaryPage implements OnInit {
       this.apiaryList.closeSlidingItems();
     }
 
+    const process = (data: ApiaryResults) => {
+      this.allHives = [];
+      const hivePromises = [];
+      data.apiaries.forEach(a => hivePromises.push(this.hiveDataService.getAllByApiary(a.id)));
+
+      Promise.all(hivePromises).then((hiveData: any[]) => {
+        hiveData.forEach((hd, index) => {
+          this.allHives.push({
+            apiaryId: data.apiaries[index].id,
+            data: hd
+          });
+        });
+        this.allApiaries = data.apiaries;
+        this.groups = data.groups;
+      });
+    };
+
     if (this.segment === Segments.All) {
-      this.apiaryDataService.getApiaries(this.queryText).then((data: any) => {
-        this.allApiaries = data.apiaries;
-        this.groups = data.groups;
-      });
+      this.apiaryDataService.getApiaries(this.queryText).then(process);
     } else {
-      this.apiaryDataService.getFavorites().then((data: any) => {
-        this.allApiaries = data.apiaries;
-        this.groups = data.groups;
-      });
+      this.apiaryDataService.getFavorites().then(process);
     }
   }
 
@@ -92,5 +105,10 @@ export class ApiaryPage implements OnInit {
 
   async add() {
     this.router.navigateByUrl('/apiary/new');
+  }
+
+  getHiveCount(apiaryId: string) {
+    const result = this.allHives.find(e => e.apiaryId === apiaryId);
+    return (result) ? result.data.length : 0;
   }
 }

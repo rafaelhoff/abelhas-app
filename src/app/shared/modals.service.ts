@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ToastController, LoadingController, ActionSheetController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Modals } from '@capacitor/core';
+import { AppLogger } from '../util/appLogger';
 
 
 @Injectable({
@@ -11,6 +12,7 @@ export class ModalsService {
 
   constructor(
     public actionSheetController: ActionSheetController,
+    private logger: AppLogger,
     private loadingController: LoadingController,
     private toastController: ToastController,
     private translateService: TranslateService,
@@ -39,7 +41,7 @@ export class ModalsService {
     let errorMsg: string = this.translateService.instant(translateCode);
     if (errorMsg === translateCode) {
       errorMsg = this.translateService.instant('aws.basicError');
-      console.log(JSON.stringify(error));
+      this.logger.error(JSON.stringify(error));
     }
 
     const alertRet = await Modals.alert({

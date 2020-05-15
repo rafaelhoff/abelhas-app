@@ -133,19 +133,28 @@ https://www.json-generator.com/
 
 ```js
 [
-  '{{repeat(6, 8)}}',
+  '{{repeat(6)}}',
   {
-    id: '{{objectId()}}',
-    name: '{{firstName()}} {{surname()}}',
+    id: '{{index()}}',
+    name: 'Apiário {{surname()}}',
     address: '{{street()}}',
     type: '{{random("tipo1", "tipo2", "tipo3")}}',
     forages: [
       '{{repeat(1,3)}}',
-	  '{{random("Acacia", "Eucalipto", "Flor qualquer")}}'      
+	    '{{random("Acacia", "Eucalipto", "Flor qualquer")}}'      
     ],
     hives: '{{integer(20, 40)}}',
     favorite: '{{random(true, false)}}'
   }
+]
+
+[
+  '{{repeat(10)}}',
+  {
+    id: '{{objectId()}}',
+    name: 'Colméia {{surname()}}',
+    apiary: '{{random(0,1,2,3,4,5)}}'
+  }  
 ]
 ```
 

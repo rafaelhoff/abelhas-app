@@ -23,6 +23,7 @@ export declare class Hive {
   readonly apiary: Apiary;
   readonly longitude?: number;
   readonly latitude?: number;
+  readonly favorite: boolean;
   constructor(init: ModelInit<Hive>);
   static copyOf(source: Hive, mutator: (draft: MutableModel<Hive>) => MutableModel<Hive> | void): Hive;
 }

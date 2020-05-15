@@ -18,9 +18,11 @@ export const syncApiaries = /* GraphQL */ `
       items {
         id
         name
+        name_casei
         address
         type
         forages
+        favorite
         _version
         _deleted
         _lastChangedAt
@@ -36,6 +38,7 @@ export const getApiary = /* GraphQL */ `
     getApiary(id: $id) {
       id
       name
+      name_casei
       address
       type
       hives {
@@ -43,6 +46,7 @@ export const getApiary = /* GraphQL */ `
         startedAt
       }
       forages
+      favorite
       _version
       _deleted
       _lastChangedAt
@@ -60,9 +64,11 @@ export const listApiarys = /* GraphQL */ `
       items {
         id
         name
+        name_casei
         address
         type
         forages
+        favorite
         _version
         _deleted
         _lastChangedAt
@@ -89,6 +95,8 @@ export const syncHives = /* GraphQL */ `
       items {
         id
         name
+        longitude
+        latitude
         _version
         _deleted
         _lastChangedAt
@@ -107,14 +115,18 @@ export const getHive = /* GraphQL */ `
       apiary {
         id
         name
+        name_casei
         address
         type
         forages
+        favorite
         _version
         _deleted
         _lastChangedAt
         owner
       }
+      longitude
+      latitude
       _version
       _deleted
       _lastChangedAt
@@ -132,6 +144,8 @@ export const listHives = /* GraphQL */ `
       items {
         id
         name
+        longitude
+        latitude
         _version
         _deleted
         _lastChangedAt

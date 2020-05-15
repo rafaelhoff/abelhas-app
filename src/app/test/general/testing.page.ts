@@ -6,6 +6,8 @@ import {
 import { NGXLogger } from 'ngx-logger';
 import { HttpClient } from '@angular/common/http';
 import { ApiaryDataService } from 'src/app/providers/apiaryData.service';
+import { Apiary, Hive } from 'src/models';
+import { HiveDataService } from 'src/app/providers/hiveData.service';
 
 @Component({
   selector: 'app-testing',
@@ -28,7 +30,8 @@ export class TestingPage {
     private logger: NGXLogger,
     private zone: NgZone,
     public http: HttpClient,
-    private apiaryDataService: ApiaryDataService
+    private apiaryDataService: ApiaryDataService,
+    private hiveDataService: HiveDataService
   ) {
   }
 
@@ -73,15 +76,25 @@ export class TestingPage {
   }
 
 
-  insertMock() {
-    // TODO: insert mock data into datastore.
+  async insertMock() {
     return this.http.get('assets/data/apiary.json').subscribe({
-      next: (data: any[]) => {
-        data.forEach(a => {
-          this.apiaryDataService.create(a);
+      next: (data: any) => {
+        const apiaries: Promise<any>[] = [];
+
+        data.apiary.forEach(async a => {
+          apiaries.push(this.apiaryDataService.create(a));
         });
+
+        Promise.all(apiaries).then(objs => {
+          data.hive.forEach(async h => {
+            h.apiary = objs[h.apiary];
+            h.latitude = null;
+            h.longitude = null;
+            const r: Hive = await this.hiveDataService.create(h);
+          });
+        });
+
         console.log('done');
-        // console.log(data);
       }
     });
 

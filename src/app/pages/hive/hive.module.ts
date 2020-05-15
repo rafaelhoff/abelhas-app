@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HiveListPage } from './list/hiveList';
+import { HiveDetailInfoPage } from './detail-info/hiveDetailInfo';
+import { HiveInfoFormComponent } from './detail-info/hiveDetailInfo.component';
 
 const routes: Routes = [
   { path: '', component: HiveListPage },
-  // { path: 'new', component: ApiaryInfoPage },
+  { path: 'new', component: HiveDetailInfoPage },
+  { path: ':hiveId', component: HiveDetailInfoPage }
   // {
   //   path: ':apiaryId',
   //   component: ApiaryDetailPage,
@@ -42,9 +45,10 @@ const routes: Routes = [
     IonicModule
   ],
   declarations: [
-    HiveListPage
+    HiveListPage,
+    HiveDetailInfoPage,
+    HiveInfoFormComponent
   ],
-  entryComponents: [
-  ]
+  entryComponents: [HiveInfoFormComponent]
 })
 export class HiveModule { }

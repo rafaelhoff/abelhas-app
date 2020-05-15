@@ -136,6 +136,13 @@ export const schema = {
                     "type": "Float",
                     "isRequired": false,
                     "attributes": []
+                },
+                "favorite": {
+                    "name": "favorite",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": true,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -168,5 +175,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "d8694e33f90bf03e36b4d170c7e7ad10"
+    "version": "52e064106ff39a265367ef9584f89a57"
 };

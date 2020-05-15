@@ -7,7 +7,7 @@ import { NgForm } from '@angular/forms';
   templateUrl: 'infoForm.component.html'
 })
 export class ApiaryInfoFormComponent {
-  @Input() isReadonly: boolean = false;
+  @Input() isReadonly = false;
   // @Input() apiaryId: string;
   model: {
     name: string;

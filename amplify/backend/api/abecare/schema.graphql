@@ -20,4 +20,5 @@ type Hive
   apiary: Apiary! @connection(name: "ApiaryHives")
   longitude: Float
   latitude: Float
+  favorite: Boolean!
 }

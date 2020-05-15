@@ -51,7 +51,7 @@
           <ion-label>
             <h3>{{apiary.name}}</h3>
             <p>
-              {{apiary.hives ? apiary.hives.length : 0}} {{ 'apiary.hives' | translate }}
+              {{getHiveCount(apiary.id)}} {{ 'apiary.hives' | translate }}
             </p>
           </ion-label>
         </ion-item>
