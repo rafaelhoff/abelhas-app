@@ -19,6 +19,8 @@ export const onCreateApiary = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -40,6 +42,8 @@ export const onUpdateApiary = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -61,6 +65,8 @@ export const onDeleteApiary = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -81,13 +87,18 @@ export const onCreateHive = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        createdAt
+        updatedAt
         owner
       }
       longitude
       latitude
+      favorite
       _version
       _deleted
       _lastChangedAt
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -108,13 +119,18 @@ export const onUpdateHive = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        createdAt
+        updatedAt
         owner
       }
       longitude
       latitude
+      favorite
       _version
       _deleted
       _lastChangedAt
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -135,13 +151,18 @@ export const onDeleteHive = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        createdAt
+        updatedAt
         owner
       }
       longitude
       latitude
+      favorite
       _version
       _deleted
       _lastChangedAt
+      createdAt
+      updatedAt
       owner
     }
   }

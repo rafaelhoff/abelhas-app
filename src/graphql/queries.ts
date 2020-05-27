@@ -26,6 +26,8 @@ export const syncApiaries = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        createdAt
+        updatedAt
         owner
       }
       nextToken
@@ -50,6 +52,8 @@ export const getApiary = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -72,6 +76,8 @@ export const listApiarys = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        createdAt
+        updatedAt
         owner
       }
       nextToken
@@ -97,9 +103,12 @@ export const syncHives = /* GraphQL */ `
         name
         longitude
         latitude
+        favorite
         _version
         _deleted
         _lastChangedAt
+        createdAt
+        updatedAt
         owner
       }
       nextToken
@@ -123,13 +132,18 @@ export const getHive = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        createdAt
+        updatedAt
         owner
       }
       longitude
       latitude
+      favorite
       _version
       _deleted
       _lastChangedAt
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -146,9 +160,12 @@ export const listHives = /* GraphQL */ `
         name
         longitude
         latitude
+        favorite
         _version
         _deleted
         _lastChangedAt
+        createdAt
+        updatedAt
         owner
       }
       nextToken
