@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { AppPlatform } from '../util/appPlatform';
+import { AppLogger } from '../util/appLogger';
 
 @Component({
   selector: 'app-icon-addmedia',
@@ -30,7 +31,10 @@ export class IconAddMediaComponent {
 
   isWeb = false;
 
-  constructor(private appPlatform: AppPlatform) {
+  constructor(
+    private appPlatform: AppPlatform,
+    private logger: AppLogger
+  ) {
     this.appPlatform.isWeb().then(w => this.isWeb = w);
   }
 
@@ -46,7 +50,7 @@ export class IconAddMediaComponent {
     const a = fileInput.click(); // this work
     fileInput.addEventListener('change', e => {
       const fileName = e.target.files[0].name;
-      console.log('The file "' + fileName + '" has been selected.');
+      this.logger.trace(`The file "${fileName}" has been selected.`);
 
       this.clickUploadFile.emit();
     }, false);

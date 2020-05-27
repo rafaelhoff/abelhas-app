@@ -52,6 +52,7 @@ export class PhotoService {
   }
 }
 
+// tslint:disable-next-line: no-empty-interface
 export interface CameraPhoto extends CameraPhotoCapacitor {
 
 }

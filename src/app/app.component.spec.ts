@@ -10,6 +10,7 @@ import { UserDataService } from './providers/userData.service';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { LoggerModule, NGXLogger } from 'ngx-logger';
+import { TranslatePipeMock } from './util/translatePipe.mock';
 
 describe('AppComponent', () => {
   let menuSpy,
@@ -34,7 +35,7 @@ describe('AppComponent', () => {
     const loggerSpy = jasmine.createSpyObj('NGXLogger', ['log']);
 
     TestBed.configureTestingModule({
-      declarations: [AppComponent],
+      declarations: [AppComponent, TranslatePipeMock],
       imports: [LoggerModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [

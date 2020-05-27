@@ -45,7 +45,8 @@ export class HiveInfoFormComponent {
 
   private getUpdatedValues(): any {
     const updatedFormValues = {};
-    this.hiveInfoForm['_forEachChild']((control, name) => {
+    const key = '_forEachChild';
+    this.hiveInfoForm[key]((control, name) => {
       if (control.dirty) {
         updatedFormValues[name] = control.value;
       }

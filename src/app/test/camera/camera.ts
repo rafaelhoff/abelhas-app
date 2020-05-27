@@ -6,6 +6,7 @@ import {
   CameraSource,
   FilesystemDirectory
 } from '@capacitor/core';
+import { AppLogger } from 'src/app/util/appLogger';
 
 const { Filesystem } = Plugins;
 
@@ -24,11 +25,12 @@ export class CameraPage {
   image: SafeResourceUrl;
 
   constructor(
-    private sanitizer: DomSanitizer) {
-  }
+    private sanitizer: DomSanitizer,
+    private logger: AppLogger
+  ) { }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CameraPage');
+    this.logger.log('ionViewDidLoad CameraPage');
   }
 
   async getPhoto() {
@@ -37,7 +39,7 @@ export class CameraPage {
       // allowEditing: true,
       resultType: CameraResultType.DataUrl,
     });
-    console.log('Got image back', image.path, image.webPath, image.format, image.exif);
+    this.logger.log('Got image back', image.path, image.webPath, image.format, image.exif);
     this.image = this.sanitizer.bypassSecurityTrustResourceUrl(image && (image.dataUrl));
   }
 
@@ -48,7 +50,7 @@ export class CameraPage {
       resultType: CameraResultType.DataUrl,
       source: CameraSource.Camera
     });
-    console.log('Got image back', image.path, image.webPath, image.format, image.exif);
+    this.logger.log('Got image back', image.path, image.webPath, image.format, image.exif);
     this.image = this.sanitizer.bypassSecurityTrustResourceUrl(image && (image.dataUrl));
   }
 
@@ -59,7 +61,7 @@ export class CameraPage {
       resultType: CameraResultType.DataUrl,
       source: CameraSource.Photos
     });
-    console.log('Got image back', image.path, image.webPath, image.format, image.exif);
+    this.logger.log('Got image back', image.path, image.webPath, image.format, image.exif);
     this.image = this.sanitizer.bypassSecurityTrustResourceUrl(image && (image.dataUrl));
   }
 
@@ -70,7 +72,7 @@ export class CameraPage {
       resultType: CameraResultType.DataUrl,
       width: 128
     });
-    console.log('Got image back', image.path, image.webPath, image.format, image.exif);
+    this.logger.log('Got image back', image.path, image.webPath, image.format, image.exif);
     this.image = this.sanitizer.bypassSecurityTrustResourceUrl(image && (image.dataUrl));
   }
 
@@ -82,7 +84,7 @@ export class CameraPage {
       width: 128,
       correctOrientation: true
     });
-    console.log('Got image back', image.path, image.webPath, image.format, image.exif);
+    this.logger.log('Got image back', image.path, image.webPath, image.format, image.exif);
     this.image = this.sanitizer.bypassSecurityTrustResourceUrl(image && (image.dataUrl));
   }
 
@@ -92,7 +94,7 @@ export class CameraPage {
       // allowEditing: true,
       resultType: CameraResultType.Uri
     });
-    console.log('Got image back', image.path, image.webPath, image.format, image.exif);
+    this.logger.log('Got image back', image.path, image.webPath, image.format, image.exif);
 
 
     const imageData = await Filesystem.readFile({
@@ -110,7 +112,7 @@ export class CameraPage {
       directory: FilesystemDirectory.Data
     });
 
-    console.log(stat);
+    this.logger.log(stat);
 
     // this.image = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpeg;base64," + imageData.data);
     const imageUrl = image.webPath;
@@ -131,7 +133,7 @@ export class CameraPage {
       resultType: CameraResultType.DataUrl,
       saveToGallery: false
     });
-    console.log('Got image back', image.path, image.webPath, image.format, image.exif);
+    this.logger.log('Got image back', image.path, image.webPath, image.format, image.exif);
     this.image = this.sanitizer.bypassSecurityTrustResourceUrl(image && (image.dataUrl));
   }
 
@@ -146,7 +148,7 @@ export class CameraPage {
       saveToGallery: false,
       source: CameraSource.Photos
     });
-    console.log('Got image back', image.path, image.webPath, image.format, image.exif);
+    this.logger.log('Got image back', image.path, image.webPath, image.format, image.exif);
     this.image = this.sanitizer.bypassSecurityTrustResourceUrl(image && (image.dataUrl));
   }
 }

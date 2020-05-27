@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AppMediaStorage } from 'src/app/util/appMediaStorage';
 import { AudioRecord } from 'src/app/shared/recordAudio.component';
+import { AppLogger } from 'src/app/util/appLogger';
 
 
 @Component({
@@ -11,7 +12,8 @@ export class VoiceRecordingPage {
   records: AudioRecord[] = [];
 
   constructor(
-    private appMediaStorage: AppMediaStorage
+    private appMediaStorage: AppMediaStorage,
+    private logger: AppLogger
   ) { }
 
   play(audio: HTMLAudioElement) {
@@ -24,7 +26,7 @@ export class VoiceRecordingPage {
     try {
       this.appMediaStorage.saveAudioToS3(record.audio, record.recordedAt.toISOString() + '.ogg');
     } catch (error) {
-      console.log(error);
+      this.logger.log(error);
     }
   }
 

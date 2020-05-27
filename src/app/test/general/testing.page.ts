@@ -3,11 +3,11 @@ import {
   Plugins,
   CallbackID
 } from '@capacitor/core';
-import { NGXLogger } from 'ngx-logger';
 import { HttpClient } from '@angular/common/http';
 import { ApiaryDataService } from 'src/app/providers/apiaryData.service';
-import { Apiary, Hive } from 'src/models';
+import { Hive } from 'src/models';
 import { HiveDataService } from 'src/app/providers/hiveData.service';
+import { AppLogger } from 'src/app/util/appLogger';
 
 @Component({
   selector: 'app-testing',
@@ -27,7 +27,7 @@ export class TestingPage {
   watchId: CallbackID;
 
   constructor(
-    private logger: NGXLogger,
+    private logger: AppLogger,
     private zone: NgZone,
     public http: HttpClient,
     private apiaryDataService: ApiaryDataService,
@@ -94,7 +94,7 @@ export class TestingPage {
           });
         });
 
-        console.log('done');
+        this.logger.log('done');
       }
     });
 

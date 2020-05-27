@@ -37,7 +37,8 @@ export class ApiaryInfoFormComponent {
 
   private getUpdatedValues(): any {
     const updatedFormValues = {};
-    this.apiaryInfoForm['_forEachChild']((control, name) => {
+    const key = '_forEachChild';
+    this.apiaryInfoForm[key]((control, name) => {
       if (control.dirty) {
         updatedFormValues[name] = control.value;
       }
