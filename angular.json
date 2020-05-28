@@ -138,7 +138,8 @@
           "configurations": {
             "ci": {
               "progress": false,
-              "watch": false
+              "watch": false,
+              "browsers": "ChromeHeadlessCI"
             }
           }
         },
