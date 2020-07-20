@@ -56,7 +56,7 @@ jobs:
         run: yarn build -- --prod
 
       - name: Upload the results
-      - uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v2
         with:
           name: build-artifact
           path: www/
