@@ -95,4 +95,6 @@ jobs:
           java-version: 1.8
 
       - name: Build debug apk
-        run: ./android/gradlew clean assembleDebug
+        run: |
+          cd android
+          ./gradlew clean assembleDebug
