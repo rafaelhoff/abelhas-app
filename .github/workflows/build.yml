@@ -52,7 +52,9 @@ jobs:
           AMPLIFY: '{ "envName": "dev" }'
           AWSCLOUDFORMATIONCONFIG: '{"configLevel": "project", "useProfile": false, "accessKeyId": "$AWS_ACCESS_KEY_ID", "secretAccessKey": "$AWS_SECRET_ACCESS_KEY", "region": "$AWS_REGION" }'
           PROVIDERS: '{"awscloudformation": $AWSCLOUDFORMATIONCONFIG }'
-        run: yarn amplify:configure
+        run: |
+          echo '{"projectPath": "'"$(pwd)"'","defaultEditor":"code","envName":"'$6'"}' > ./amplify/.config/local-env-info.json
+          yarn amplify:configure
 
       # - name: configure amplify
       #   uses: ambientlight/amplify-cli-action@0.2.1
