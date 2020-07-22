@@ -51,6 +51,7 @@ jobs:
           echo '{"projectPath": "'"$(pwd)"'","defaultEditor":"code","envName":"'dev'"}' > ./amplify/.config/local-env-info.json
           amplify env pull --yes dev
 
+      ## https://github.com/ambientlight/amplify-cli-action
       # - name: configure amplify
       #   uses: ambientlight/amplify-cli-action@0.2.1
       #   with:
@@ -85,12 +86,13 @@ jobs:
         with:
           java-version: 1.8
 
-      - name: Build debug apk
+      - name: Build release apk
         run: |
           cd android
           ./gradlew clean assembleRelease
 
       - name: Sign Release APK
+        id: sign-android-app
         uses: r0adkll/sign-android-release@v1
         with:
           releaseDirectory: android/app/build/outputs/apk/release
@@ -113,4 +115,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: artifact-apk
-          path: $SIGNED_RELEASE_FILE
+          path: ${{ steps.sign-android-app.outputs.signedReleaseFile }}
