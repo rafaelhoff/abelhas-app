@@ -82,12 +82,13 @@ jobs:
       # - name: E2E
       #   run: yarn e2e -- --configuration=ci
 
-  buildAndroid:
-    name: Validate and Build
-    runs-on: ubuntu-latest
-    needs: buildJS
+      # buildAndroid:
+      #   name: Validate and Build Android APK
+      #   runs-on: ubuntu-latest
+      #   needs: buildJS
 
-    steps:
+      #   steps:
+
       - name: Use Java8
         uses: actions/setup-java@v1
         with:
