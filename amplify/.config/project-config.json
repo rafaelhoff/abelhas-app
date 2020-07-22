@@ -7,7 +7,7 @@
     "config": {
       "SourceDir": "src",
       "DistributionDir": "www",
-      "BuildCommand": "npm run-script build:prod",
+      "BuildCommand": "yarn build:skip",
       "StartCommand": "ionic serve"
     }
   },
