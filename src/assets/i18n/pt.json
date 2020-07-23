@@ -30,6 +30,7 @@
     "map": {
       "title": "Mapa"
     },
+    "name": "Apiário",
     "notFound": "Nenhum apiário encontrado.",
     "title": "Apiários"
   },
@@ -139,6 +140,9 @@
       "title": "Dados Básicos"
     },
     "title": "Colméias"
+  },
+  "hiveDetail": {
+    "name": "Nome"
   },
   "tut": {
     "continue": "Continuar",

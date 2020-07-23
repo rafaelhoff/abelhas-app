@@ -19,8 +19,8 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Runs a single command using the runners shell
-      - name: Send greeting
-        run: echo "Hello ${{ github.event.inputs.name }}"
+      # - name: Send greeting
+      #   run: echo "Hello ${{ github.event.inputs.name }}"
 
       - uses: actions/checkout@v1
 
@@ -32,11 +32,6 @@ jobs:
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Download Build
-        uses: actions/download-artifact@v2
-        with:
-          name: build-artifact
 
       - uses: actions/cache@v2
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
@@ -62,6 +57,9 @@ jobs:
           sudo npm i -g @aws-amplify/cli
           echo '{"projectPath": "'"$(pwd)"'","defaultEditor":"code","envName":"'dev'"}' > ./amplify/.config/local-env-info.json
           amplify env pull --yes dev
+
+      - name: Build
+        run: yarn build:prod
 
       - name: Publish to Amplify
         id: publish-amplify

@@ -1,19 +1,19 @@
 <form #hiveInfoForm="ngForm">
   <ion-list lines="full" class="ion-no-margin ion-no-padding">
     <ion-item>
-      <app-label [required]="!isReadonly">{{ 'apiaryDetail.name' | translate }}</app-label>
+      <app-label [required]="!isReadonly">{{ 'hiveDetail.name' | translate }}</app-label>
       <ion-input [(ngModel)]="model.name" name="name" #name="ngModel" [required]="!isReadonly" [readonly]="isReadonly">
       </ion-input>
     </ion-item>
 
     <ion-text color="danger" *ngIf="name.invalid && (name.dirty && name.touched)">
       <p *ngIf="name.errors.required" class="ion-padding-start ion-text-left">
-        {{ 'apiaryDetail.name' | translate }}{{ 'basic.required' | translate }}
+        {{ 'hiveDetail.name' | translate }}{{ 'basic.required' | translate }}
       </p>
     </ion-text>
 
     <ion-item>
-      <app-label [required]="!isReadonly">Apiário</app-label>
+      <app-label [required]="!isReadonly">{{ 'apiary.name' | translate }}</app-label>
       <ion-select [(ngModel)]="model.apiaryId" name="apiaryId" #apiaryId="ngModel">
         <ion-select-option *ngFor="let a of apiaryList" [value]="a.id">{{a.name}}</ion-select-option>
       </ion-select>
