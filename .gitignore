@@ -55,3 +55,4 @@ amplifyxc.config
 
 #others
 .temp/
+.certificate/

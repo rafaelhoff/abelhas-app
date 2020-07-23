@@ -69,7 +69,7 @@ jobs:
         run: yarn test -- --configuration=ci
 
       - name: Build
-        run: yarn build -- --prod
+        run: yarn build:prod
 
       - name: Capacitor Sync
         run: yarn capacitor:sync
@@ -91,6 +91,7 @@ jobs:
           cd android
           ./gradlew clean assembleRelease
 
+      # https://github.com/marketplace/actions/sign-android-release
       - name: Sign Release APK
         id: sign-android-app
         uses: r0adkll/sign-android-release@v1
@@ -116,3 +117,5 @@ jobs:
         with:
           name: artifact-apk
           path: ${{ steps.sign-android-app.outputs.signedReleaseFile }}
+    # TODO: upload to PlayStore
+    # https://github.com/marketplace/actions/upload-android-release-to-play-store

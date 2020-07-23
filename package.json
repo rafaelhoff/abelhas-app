@@ -6,8 +6,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "build:prod": "ng build --prod",
+    "build": "npx jetifier && ng build",
+    "build:prod": "npx jetifier && ng build --prod",
     "build:skip": "echo 'Skip Build'",
     "test": "ng test",
     "lint": "ng lint",
