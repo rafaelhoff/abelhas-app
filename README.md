@@ -97,7 +97,6 @@ See [CONTRIBUTING.md](https://github.com/ionic-team/ionic-conference-app/blob/ma
 [ ] Fix Geolocation Problem
 [ ] Disabled Apiary Form not working correctly.
 
-
 ## Good Links
 
 - Angular Forms: https://codecraft.tv/courses/angular/forms/template-driven/
