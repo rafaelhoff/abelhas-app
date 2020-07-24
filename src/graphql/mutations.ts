@@ -185,3 +185,60 @@ export const deleteHive = /* GraphQL */ `
     }
   }
 `;
+export const createLogger = /* GraphQL */ `
+  mutation CreateLogger(
+    $input: CreateLoggerInput!
+    $condition: ModelLoggerConditionInput
+  ) {
+    createLogger(input: $input, condition: $condition) {
+      id
+      level
+      message
+      stack
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateLogger = /* GraphQL */ `
+  mutation UpdateLogger(
+    $input: UpdateLoggerInput!
+    $condition: ModelLoggerConditionInput
+  ) {
+    updateLogger(input: $input, condition: $condition) {
+      id
+      level
+      message
+      stack
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteLogger = /* GraphQL */ `
+  mutation DeleteLogger(
+    $input: DeleteLoggerInput!
+    $condition: ModelLoggerConditionInput
+  ) {
+    deleteLogger(input: $input, condition: $condition) {
+      id
+      level
+      message
+      stack
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;

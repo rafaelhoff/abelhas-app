@@ -173,3 +173,73 @@ export const listHives = /* GraphQL */ `
     }
   }
 `;
+export const syncLoggers = /* GraphQL */ `
+  query SyncLoggers(
+    $filter: ModelLoggerFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncLoggers(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        level
+        message
+        stack
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getLogger = /* GraphQL */ `
+  query GetLogger($id: ID!) {
+    getLogger(id: $id) {
+      id
+      level
+      message
+      stack
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listLoggers = /* GraphQL */ `
+  query ListLoggers(
+    $filter: ModelLoggerFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listLoggers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        level
+        message
+        stack
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;

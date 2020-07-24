@@ -167,3 +167,51 @@ export const onDeleteHive = /* GraphQL */ `
     }
   }
 `;
+export const onCreateLogger = /* GraphQL */ `
+  subscription OnCreateLogger($owner: String!) {
+    onCreateLogger(owner: $owner) {
+      id
+      level
+      message
+      stack
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateLogger = /* GraphQL */ `
+  subscription OnUpdateLogger($owner: String!) {
+    onUpdateLogger(owner: $owner) {
+      id
+      level
+      message
+      stack
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteLogger = /* GraphQL */ `
+  subscription OnDeleteLogger($owner: String!) {
+    onDeleteLogger(owner: $owner) {
+      id
+      level
+      message
+      stack
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;

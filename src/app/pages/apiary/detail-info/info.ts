@@ -92,9 +92,11 @@ export class ApiaryInfoPage implements OnInit {
   onSave() {
     try {
       const data: any = this.form.getData();
+      data.favorite = false;
       this.apiaryDataService.create(data);
       this.router.navigateByUrl(this.defaultHref);
     } catch (error) {
+      this.logger.error(error);
       // TODO: add error;
     }
   }

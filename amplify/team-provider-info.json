@@ -1,15 +1,15 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-abecare-dev-223442-authRole",
-      "UnauthRoleArn": "arn:aws:iam::680003731911:role/amplify-abecare-dev-223442-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::680003731911:role/amplify-abecare-dev-223442-authRole",
+      "AuthRoleName": "amplify-abecare-dev-105701-authRole",
+      "UnauthRoleArn": "arn:aws:iam::680003731911:role/amplify-abecare-dev-105701-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::680003731911:role/amplify-abecare-dev-105701-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-abecare-dev-223442-deployment",
-      "UnauthRoleName": "amplify-abecare-dev-223442-unauthRole",
-      "StackName": "amplify-abecare-dev-223442",
-      "StackId": "arn:aws:cloudformation:us-east-1:680003731911:stack/amplify-abecare-dev-223442/db723d80-8f0f-11ea-9d9b-0e29088293c9",
-      "AmplifyAppId": "d2xepyqcwyjpn0"
+      "DeploymentBucketName": "amplify-abecare-dev-105701-deployment",
+      "UnauthRoleName": "amplify-abecare-dev-105701-unauthRole",
+      "StackName": "amplify-abecare-dev-105701",
+      "StackId": "arn:aws:cloudformation:us-east-1:680003731911:stack/amplify-abecare-dev-105701/a57f6800-cd8b-11ea-952c-0e30fc137e69",
+      "AmplifyAppId": "d3nky2lhg2fn3k"
     },
     "categories": {
       "auth": {
@@ -20,7 +20,34 @@
       },
       "hosting": {
         "amplifyhosting": {
-          "appId": "d2xepyqcwyjpn0",
+          "appId": "d3nky2lhg2fn3k",
+          "type": "manual"
+        }
+      }
+    }
+  },
+  "stag": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-abecare-stag-114958-authRole",
+      "UnauthRoleArn": "arn:aws:iam::680003731911:role/amplify-abecare-stag-114958-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::680003731911:role/amplify-abecare-stag-114958-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-abecare-stag-114958-deployment",
+      "UnauthRoleName": "amplify-abecare-stag-114958-unauthRole",
+      "StackName": "amplify-abecare-stag-114958",
+      "StackId": "arn:aws:cloudformation:us-east-1:680003731911:stack/amplify-abecare-stag-114958/0a813d30-cd93-11ea-adfd-0a279eeb3bc1",
+      "AmplifyAppId": "d3nky2lhg2fn3k"
+    },
+    "categories": {
+      "auth": {
+        "abelhasAuth": {}
+      },
+      "function": {
+        "abelhasAuthCustomMessage": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d3nky2lhg2fn3k",
           "type": "manual"
         }
       }

@@ -22,3 +22,15 @@ type Hive
   latitude: Float
   favorite: Boolean!
 }
+
+enum LoggerLevel { warn error }
+
+type Logger
+  @model
+  @auth(rules: [{allow: owner}])
+{
+  id: ID!
+  level: LoggerLevel!
+  message: String!
+  stack: String!
+}

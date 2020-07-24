@@ -135,6 +135,47 @@ export type DeleteHiveInput = {
   _version?: number | null,
 };
 
+export type CreateLoggerInput = {
+  id?: string | null,
+  level: LoggerLevel,
+  message: string,
+  stack: string,
+  _version?: number | null,
+};
+
+export enum LoggerLevel {
+  warn = "warn",
+  error = "error",
+}
+
+
+export type ModelLoggerConditionInput = {
+  level?: ModelLoggerLevelInput | null,
+  message?: ModelStringInput | null,
+  stack?: ModelStringInput | null,
+  and?: Array< ModelLoggerConditionInput | null > | null,
+  or?: Array< ModelLoggerConditionInput | null > | null,
+  not?: ModelLoggerConditionInput | null,
+};
+
+export type ModelLoggerLevelInput = {
+  eq?: LoggerLevel | null,
+  ne?: LoggerLevel | null,
+};
+
+export type UpdateLoggerInput = {
+  id: string,
+  level?: LoggerLevel | null,
+  message?: string | null,
+  stack?: string | null,
+  _version?: number | null,
+};
+
+export type DeleteLoggerInput = {
+  id?: string | null,
+  _version?: number | null,
+};
+
 export type ModelApiaryFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
@@ -173,6 +214,16 @@ export type ModelHiveFilterInput = {
   and?: Array< ModelHiveFilterInput | null > | null,
   or?: Array< ModelHiveFilterInput | null > | null,
   not?: ModelHiveFilterInput | null,
+};
+
+export type ModelLoggerFilterInput = {
+  id?: ModelIDInput | null,
+  level?: ModelLoggerLevelInput | null,
+  message?: ModelStringInput | null,
+  stack?: ModelStringInput | null,
+  and?: Array< ModelLoggerFilterInput | null > | null,
+  or?: Array< ModelLoggerFilterInput | null > | null,
+  not?: ModelLoggerFilterInput | null,
 };
 
 export type CreateApiaryMutationVariables = {
@@ -376,6 +427,69 @@ export type DeleteHiveMutation = {
   } | null,
 };
 
+export type CreateLoggerMutationVariables = {
+  input: CreateLoggerInput,
+  condition?: ModelLoggerConditionInput | null,
+};
+
+export type CreateLoggerMutation = {
+  createLogger:  {
+    __typename: "Logger",
+    id: string,
+    level: LoggerLevel,
+    message: string,
+    stack: string,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner: string | null,
+  } | null,
+};
+
+export type UpdateLoggerMutationVariables = {
+  input: UpdateLoggerInput,
+  condition?: ModelLoggerConditionInput | null,
+};
+
+export type UpdateLoggerMutation = {
+  updateLogger:  {
+    __typename: "Logger",
+    id: string,
+    level: LoggerLevel,
+    message: string,
+    stack: string,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner: string | null,
+  } | null,
+};
+
+export type DeleteLoggerMutationVariables = {
+  input: DeleteLoggerInput,
+  condition?: ModelLoggerConditionInput | null,
+};
+
+export type DeleteLoggerMutation = {
+  deleteLogger:  {
+    __typename: "Logger",
+    id: string,
+    level: LoggerLevel,
+    message: string,
+    stack: string,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner: string | null,
+  } | null,
+};
+
 export type SyncApiariesQueryVariables = {
   filter?: ModelApiaryFilterInput | null,
   limit?: number | null,
@@ -547,6 +661,81 @@ export type ListHivesQuery = {
       longitude: number | null,
       latitude: number | null,
       favorite: boolean,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string | null,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type SyncLoggersQueryVariables = {
+  filter?: ModelLoggerFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncLoggersQuery = {
+  syncLoggers:  {
+    __typename: "ModelLoggerConnection",
+    items:  Array< {
+      __typename: "Logger",
+      id: string,
+      level: LoggerLevel,
+      message: string,
+      stack: string,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string | null,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type GetLoggerQueryVariables = {
+  id: string,
+};
+
+export type GetLoggerQuery = {
+  getLogger:  {
+    __typename: "Logger",
+    id: string,
+    level: LoggerLevel,
+    message: string,
+    stack: string,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner: string | null,
+  } | null,
+};
+
+export type ListLoggersQueryVariables = {
+  filter?: ModelLoggerFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListLoggersQuery = {
+  listLoggers:  {
+    __typename: "ModelLoggerConnection",
+    items:  Array< {
+      __typename: "Logger",
+      id: string,
+      level: LoggerLevel,
+      message: string,
+      stack: string,
       _version: number,
       _deleted: boolean | null,
       _lastChangedAt: number,
@@ -745,6 +934,66 @@ export type OnDeleteHiveSubscription = {
     longitude: number | null,
     latitude: number | null,
     favorite: boolean,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner: string | null,
+  } | null,
+};
+
+export type OnCreateLoggerSubscriptionVariables = {
+  owner: string,
+};
+
+export type OnCreateLoggerSubscription = {
+  onCreateLogger:  {
+    __typename: "Logger",
+    id: string,
+    level: LoggerLevel,
+    message: string,
+    stack: string,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner: string | null,
+  } | null,
+};
+
+export type OnUpdateLoggerSubscriptionVariables = {
+  owner: string,
+};
+
+export type OnUpdateLoggerSubscription = {
+  onUpdateLogger:  {
+    __typename: "Logger",
+    id: string,
+    level: LoggerLevel,
+    message: string,
+    stack: string,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner: string | null,
+  } | null,
+};
+
+export type OnDeleteLoggerSubscriptionVariables = {
+  owner: string,
+};
+
+export type OnDeleteLoggerSubscription = {
+  onDeleteLogger:  {
+    __typename: "Logger",
+    id: string,
+    level: LoggerLevel,
+    message: string,
+    stack: string,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
