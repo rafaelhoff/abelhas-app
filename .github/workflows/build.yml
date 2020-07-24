@@ -4,7 +4,11 @@
 
 name: Build
 
-on: [push]
+on:
+  push:
+    paths-ignore:
+      - ".github/**"
+      - "docs/**"
 
 jobs:
   buildJS:
@@ -37,30 +41,21 @@ jobs:
       - name: Install Dependencies
         run: yarn
 
+      ## Original: https://github.com/ambientlight/amplify-cli-action
       - name: Configure Amplify
         id: configure-amplify
         env:
+          AMPLIFY_ENV: dev
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-east-1
-          AMPLIFY: '{ "envName": "dev" }'
+          AMPLIFY: '{ "envName": "$AMPLIFY_ENV" }'
           AWSCLOUDFORMATIONCONFIG: '{"configLevel": "project", "useProfile": false, "accessKeyId": "$AWS_ACCESS_KEY_ID", "secretAccessKey": "$AWS_SECRET_ACCESS_KEY", "region": "$AWS_REGION" }'
           PROVIDERS: '{"awscloudformation": $AWSCLOUDFORMATIONCONFIG }'
         run: |
           npm i -g @aws-amplify/cli
-          echo '{"projectPath": "'"$(pwd)"'","defaultEditor":"code","envName":"'dev'"}' > ./amplify/.config/local-env-info.json
-          amplify env pull --yes dev
-
-      ## https://github.com/ambientlight/amplify-cli-action
-      # - name: configure amplify
-      #   uses: ambientlight/amplify-cli-action@0.2.1
-      #   with:
-      #     amplify_command: configure
-      #     amplify_env: dev
-      #   env:
-      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #     AWS_REGION: us-east-1
+          echo '{"projectPath": "'"$(pwd)"'","defaultEditor":"code","envName":"'$AMPLIFY_ENV'"}' > ./amplify/.config/local-env-info.json
+          amplify env pull --yes $AMPLIFY_ENV
 
       - name: Lint
         run: yarn lint
