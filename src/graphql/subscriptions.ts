@@ -94,6 +94,10 @@ export const onCreateHive = /* GraphQL */ `
       longitude
       latitude
       favorite
+      activities {
+        nextToken
+        startedAt
+      }
       _version
       _deleted
       _lastChangedAt
@@ -126,6 +130,10 @@ export const onUpdateHive = /* GraphQL */ `
       longitude
       latitude
       favorite
+      activities {
+        nextToken
+        startedAt
+      }
       _version
       _deleted
       _lastChangedAt
@@ -158,6 +166,91 @@ export const onDeleteHive = /* GraphQL */ `
       longitude
       latitude
       favorite
+      activities {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateHiveActivity = /* GraphQL */ `
+  subscription OnCreateHiveActivity($owner: String!) {
+    onCreateHiveActivity(owner: $owner) {
+      id
+      message
+      hive {
+        id
+        name
+        longitude
+        latitude
+        favorite
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateHiveActivity = /* GraphQL */ `
+  subscription OnUpdateHiveActivity($owner: String!) {
+    onUpdateHiveActivity(owner: $owner) {
+      id
+      message
+      hive {
+        id
+        name
+        longitude
+        latitude
+        favorite
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteHiveActivity = /* GraphQL */ `
+  subscription OnDeleteHiveActivity($owner: String!) {
+    onDeleteHiveActivity(owner: $owner) {
+      id
+      message
+      hive {
+        id
+        name
+        longitude
+        latitude
+        favorite
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
       _version
       _deleted
       _lastChangedAt

@@ -139,6 +139,10 @@ export const getHive = /* GraphQL */ `
       longitude
       latitude
       favorite
+      activities {
+        nextToken
+        startedAt
+      }
       _version
       _deleted
       _lastChangedAt
@@ -161,6 +165,83 @@ export const listHives = /* GraphQL */ `
         longitude
         latitude
         favorite
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncHiveActivities = /* GraphQL */ `
+  query SyncHiveActivities(
+    $filter: ModelHiveActivityFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncHiveActivities(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        message
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getHiveActivity = /* GraphQL */ `
+  query GetHiveActivity($id: ID!) {
+    getHiveActivity(id: $id) {
+      id
+      message
+      hive {
+        id
+        name
+        longitude
+        latitude
+        favorite
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listHiveActivitys = /* GraphQL */ `
+  query ListHiveActivitys(
+    $filter: ModelHiveActivityFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listHiveActivitys(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        message
         _version
         _deleted
         _lastChangedAt

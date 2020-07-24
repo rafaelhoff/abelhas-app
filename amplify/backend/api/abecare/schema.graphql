@@ -21,6 +21,16 @@ type Hive
   longitude: Float
   latitude: Float
   favorite: Boolean!
+  activities: [HiveActivity] @connection(name: "HiveActivities")
+}
+
+type HiveActivity
+  @model
+  @auth(rules: [{allow: owner}])
+{
+  id: ID!
+  message: String!
+  hive: Hive! @connection(name: "HiveActivities")
 }
 
 enum LoggerLevel { warn error }

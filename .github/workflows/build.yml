@@ -105,13 +105,13 @@ jobs:
       - name: Upload results - JS Results
         uses: actions/upload-artifact@v2
         with:
-          name: artifact-js
+          name: ${{ matrix.environments }}-js
           path: www/
 
       - name: Upload results - APK
         uses: actions/upload-artifact@v2
         with:
-          name: artifact-apk
+          name: ${{ matrix.environments }}-apk
           path: ${{ steps.sign-android-app.outputs.signedReleaseFile }}
     # TODO: upload to PlayStore
     # https://github.com/marketplace/actions/upload-android-release-to-play-store

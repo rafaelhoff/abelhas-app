@@ -106,6 +106,10 @@ export const createHive = /* GraphQL */ `
       longitude
       latitude
       favorite
+      activities {
+        nextToken
+        startedAt
+      }
       _version
       _deleted
       _lastChangedAt
@@ -141,6 +145,10 @@ export const updateHive = /* GraphQL */ `
       longitude
       latitude
       favorite
+      activities {
+        nextToken
+        startedAt
+      }
       _version
       _deleted
       _lastChangedAt
@@ -176,6 +184,100 @@ export const deleteHive = /* GraphQL */ `
       longitude
       latitude
       favorite
+      activities {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const createHiveActivity = /* GraphQL */ `
+  mutation CreateHiveActivity(
+    $input: CreateHiveActivityInput!
+    $condition: ModelHiveActivityConditionInput
+  ) {
+    createHiveActivity(input: $input, condition: $condition) {
+      id
+      message
+      hive {
+        id
+        name
+        longitude
+        latitude
+        favorite
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateHiveActivity = /* GraphQL */ `
+  mutation UpdateHiveActivity(
+    $input: UpdateHiveActivityInput!
+    $condition: ModelHiveActivityConditionInput
+  ) {
+    updateHiveActivity(input: $input, condition: $condition) {
+      id
+      message
+      hive {
+        id
+        name
+        longitude
+        latitude
+        favorite
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteHiveActivity = /* GraphQL */ `
+  mutation DeleteHiveActivity(
+    $input: DeleteHiveActivityInput!
+    $condition: ModelHiveActivityConditionInput
+  ) {
+    deleteHiveActivity(input: $input, condition: $condition) {
+      id
+      message
+      hive {
+        id
+        name
+        longitude
+        latitude
+        favorite
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
       _version
       _deleted
       _lastChangedAt

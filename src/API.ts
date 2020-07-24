@@ -135,6 +135,32 @@ export type DeleteHiveInput = {
   _version?: number | null,
 };
 
+export type CreateHiveActivityInput = {
+  id?: string | null,
+  message: string,
+  _version?: number | null,
+  hiveActivityHiveId: string,
+};
+
+export type ModelHiveActivityConditionInput = {
+  message?: ModelStringInput | null,
+  and?: Array< ModelHiveActivityConditionInput | null > | null,
+  or?: Array< ModelHiveActivityConditionInput | null > | null,
+  not?: ModelHiveActivityConditionInput | null,
+};
+
+export type UpdateHiveActivityInput = {
+  id: string,
+  message?: string | null,
+  _version?: number | null,
+  hiveActivityHiveId?: string | null,
+};
+
+export type DeleteHiveActivityInput = {
+  id?: string | null,
+  _version?: number | null,
+};
+
 export type CreateLoggerInput = {
   id?: string | null,
   level: LoggerLevel,
@@ -214,6 +240,14 @@ export type ModelHiveFilterInput = {
   and?: Array< ModelHiveFilterInput | null > | null,
   or?: Array< ModelHiveFilterInput | null > | null,
   not?: ModelHiveFilterInput | null,
+};
+
+export type ModelHiveActivityFilterInput = {
+  id?: ModelIDInput | null,
+  message?: ModelStringInput | null,
+  and?: Array< ModelHiveActivityFilterInput | null > | null,
+  or?: Array< ModelHiveActivityFilterInput | null > | null,
+  not?: ModelHiveActivityFilterInput | null,
 };
 
 export type ModelLoggerFilterInput = {
@@ -342,6 +376,11 @@ export type CreateHiveMutation = {
     longitude: number | null,
     latitude: number | null,
     favorite: boolean,
+    activities:  {
+      __typename: "ModelHiveActivityConnection",
+      nextToken: string | null,
+      startedAt: number | null,
+    } | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -380,6 +419,11 @@ export type UpdateHiveMutation = {
     longitude: number | null,
     latitude: number | null,
     favorite: boolean,
+    activities:  {
+      __typename: "ModelHiveActivityConnection",
+      nextToken: string | null,
+      startedAt: number | null,
+    } | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -418,6 +462,110 @@ export type DeleteHiveMutation = {
     longitude: number | null,
     latitude: number | null,
     favorite: boolean,
+    activities:  {
+      __typename: "ModelHiveActivityConnection",
+      nextToken: string | null,
+      startedAt: number | null,
+    } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner: string | null,
+  } | null,
+};
+
+export type CreateHiveActivityMutationVariables = {
+  input: CreateHiveActivityInput,
+  condition?: ModelHiveActivityConditionInput | null,
+};
+
+export type CreateHiveActivityMutation = {
+  createHiveActivity:  {
+    __typename: "HiveActivity",
+    id: string,
+    message: string,
+    hive:  {
+      __typename: "Hive",
+      id: string,
+      name: string,
+      longitude: number | null,
+      latitude: number | null,
+      favorite: boolean,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string | null,
+    },
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner: string | null,
+  } | null,
+};
+
+export type UpdateHiveActivityMutationVariables = {
+  input: UpdateHiveActivityInput,
+  condition?: ModelHiveActivityConditionInput | null,
+};
+
+export type UpdateHiveActivityMutation = {
+  updateHiveActivity:  {
+    __typename: "HiveActivity",
+    id: string,
+    message: string,
+    hive:  {
+      __typename: "Hive",
+      id: string,
+      name: string,
+      longitude: number | null,
+      latitude: number | null,
+      favorite: boolean,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string | null,
+    },
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner: string | null,
+  } | null,
+};
+
+export type DeleteHiveActivityMutationVariables = {
+  input: DeleteHiveActivityInput,
+  condition?: ModelHiveActivityConditionInput | null,
+};
+
+export type DeleteHiveActivityMutation = {
+  deleteHiveActivity:  {
+    __typename: "HiveActivity",
+    id: string,
+    message: string,
+    hive:  {
+      __typename: "Hive",
+      id: string,
+      name: string,
+      longitude: number | null,
+      latitude: number | null,
+      favorite: boolean,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string | null,
+    },
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -636,6 +784,11 @@ export type GetHiveQuery = {
     longitude: number | null,
     latitude: number | null,
     favorite: boolean,
+    activities:  {
+      __typename: "ModelHiveActivityConnection",
+      nextToken: string | null,
+      startedAt: number | null,
+    } | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -661,6 +814,89 @@ export type ListHivesQuery = {
       longitude: number | null,
       latitude: number | null,
       favorite: boolean,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string | null,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type SyncHiveActivitiesQueryVariables = {
+  filter?: ModelHiveActivityFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncHiveActivitiesQuery = {
+  syncHiveActivities:  {
+    __typename: "ModelHiveActivityConnection",
+    items:  Array< {
+      __typename: "HiveActivity",
+      id: string,
+      message: string,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string | null,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type GetHiveActivityQueryVariables = {
+  id: string,
+};
+
+export type GetHiveActivityQuery = {
+  getHiveActivity:  {
+    __typename: "HiveActivity",
+    id: string,
+    message: string,
+    hive:  {
+      __typename: "Hive",
+      id: string,
+      name: string,
+      longitude: number | null,
+      latitude: number | null,
+      favorite: boolean,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string | null,
+    },
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner: string | null,
+  } | null,
+};
+
+export type ListHiveActivitysQueryVariables = {
+  filter?: ModelHiveActivityFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListHiveActivitysQuery = {
+  listHiveActivitys:  {
+    __typename: "ModelHiveActivityConnection",
+    items:  Array< {
+      __typename: "HiveActivity",
+      id: string,
+      message: string,
       _version: number,
       _deleted: boolean | null,
       _lastChangedAt: number,
@@ -860,6 +1096,11 @@ export type OnCreateHiveSubscription = {
     longitude: number | null,
     latitude: number | null,
     favorite: boolean,
+    activities:  {
+      __typename: "ModelHiveActivityConnection",
+      nextToken: string | null,
+      startedAt: number | null,
+    } | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -897,6 +1138,11 @@ export type OnUpdateHiveSubscription = {
     longitude: number | null,
     latitude: number | null,
     favorite: boolean,
+    activities:  {
+      __typename: "ModelHiveActivityConnection",
+      nextToken: string | null,
+      startedAt: number | null,
+    } | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -934,6 +1180,107 @@ export type OnDeleteHiveSubscription = {
     longitude: number | null,
     latitude: number | null,
     favorite: boolean,
+    activities:  {
+      __typename: "ModelHiveActivityConnection",
+      nextToken: string | null,
+      startedAt: number | null,
+    } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner: string | null,
+  } | null,
+};
+
+export type OnCreateHiveActivitySubscriptionVariables = {
+  owner: string,
+};
+
+export type OnCreateHiveActivitySubscription = {
+  onCreateHiveActivity:  {
+    __typename: "HiveActivity",
+    id: string,
+    message: string,
+    hive:  {
+      __typename: "Hive",
+      id: string,
+      name: string,
+      longitude: number | null,
+      latitude: number | null,
+      favorite: boolean,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string | null,
+    },
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner: string | null,
+  } | null,
+};
+
+export type OnUpdateHiveActivitySubscriptionVariables = {
+  owner: string,
+};
+
+export type OnUpdateHiveActivitySubscription = {
+  onUpdateHiveActivity:  {
+    __typename: "HiveActivity",
+    id: string,
+    message: string,
+    hive:  {
+      __typename: "Hive",
+      id: string,
+      name: string,
+      longitude: number | null,
+      latitude: number | null,
+      favorite: boolean,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string | null,
+    },
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner: string | null,
+  } | null,
+};
+
+export type OnDeleteHiveActivitySubscriptionVariables = {
+  owner: string,
+};
+
+export type OnDeleteHiveActivitySubscription = {
+  onDeleteHiveActivity:  {
+    __typename: "HiveActivity",
+    id: string,
+    message: string,
+    hive:  {
+      __typename: "Hive",
+      id: string,
+      name: string,
+      longitude: number | null,
+      latitude: number | null,
+      favorite: boolean,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string | null,
+    },
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
