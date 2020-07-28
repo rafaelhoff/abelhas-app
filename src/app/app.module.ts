@@ -38,7 +38,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
     LoggerModule.forRoot({
-      level: environment.production ? NgxLoggerLevel.ERROR : NgxLoggerLevel.DEBUG,
+      level: environment.loggerLevel,
       // serverLogLevel
       serverLogLevel: NgxLoggerLevel.OFF
     }),

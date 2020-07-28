@@ -19,6 +19,12 @@ export const createApiary = /* GraphQL */ `
       }
       forages
       favorite
+      activities {
+        type
+        createdAt
+        message
+        s3ID
+      }
       _version
       _deleted
       _lastChangedAt
@@ -45,6 +51,12 @@ export const updateApiary = /* GraphQL */ `
       }
       forages
       favorite
+      activities {
+        type
+        createdAt
+        message
+        s3ID
+      }
       _version
       _deleted
       _lastChangedAt
@@ -71,6 +83,12 @@ export const deleteApiary = /* GraphQL */ `
       }
       forages
       favorite
+      activities {
+        type
+        createdAt
+        message
+        s3ID
+      }
       _version
       _deleted
       _lastChangedAt
@@ -87,7 +105,11 @@ export const createHive = /* GraphQL */ `
   ) {
     createHive(input: $input, condition: $condition) {
       id
+      apiaryID
       name
+      longitude
+      latitude
+      favorite
       apiary {
         id
         name
@@ -102,13 +124,6 @@ export const createHive = /* GraphQL */ `
         createdAt
         updatedAt
         owner
-      }
-      longitude
-      latitude
-      favorite
-      activities {
-        nextToken
-        startedAt
       }
       _version
       _deleted
@@ -126,7 +141,11 @@ export const updateHive = /* GraphQL */ `
   ) {
     updateHive(input: $input, condition: $condition) {
       id
+      apiaryID
       name
+      longitude
+      latitude
+      favorite
       apiary {
         id
         name
@@ -141,13 +160,6 @@ export const updateHive = /* GraphQL */ `
         createdAt
         updatedAt
         owner
-      }
-      longitude
-      latitude
-      favorite
-      activities {
-        nextToken
-        startedAt
       }
       _version
       _deleted
@@ -165,7 +177,11 @@ export const deleteHive = /* GraphQL */ `
   ) {
     deleteHive(input: $input, condition: $condition) {
       id
+      apiaryID
       name
+      longitude
+      latitude
+      favorite
       apiary {
         id
         name
@@ -173,103 +189,6 @@ export const deleteHive = /* GraphQL */ `
         address
         type
         forages
-        favorite
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
-      longitude
-      latitude
-      favorite
-      activities {
-        nextToken
-        startedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const createHiveActivity = /* GraphQL */ `
-  mutation CreateHiveActivity(
-    $input: CreateHiveActivityInput!
-    $condition: ModelHiveActivityConditionInput
-  ) {
-    createHiveActivity(input: $input, condition: $condition) {
-      id
-      message
-      hive {
-        id
-        name
-        longitude
-        latitude
-        favorite
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const updateHiveActivity = /* GraphQL */ `
-  mutation UpdateHiveActivity(
-    $input: UpdateHiveActivityInput!
-    $condition: ModelHiveActivityConditionInput
-  ) {
-    updateHiveActivity(input: $input, condition: $condition) {
-      id
-      message
-      hive {
-        id
-        name
-        longitude
-        latitude
-        favorite
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const deleteHiveActivity = /* GraphQL */ `
-  mutation DeleteHiveActivity(
-    $input: DeleteHiveActivityInput!
-    $condition: ModelHiveActivityConditionInput
-  ) {
-    deleteHiveActivity(input: $input, condition: $condition) {
-      id
-      message
-      hive {
-        id
-        name
-        longitude
-        latitude
         favorite
         _version
         _deleted
@@ -302,45 +221,6 @@ export const createLogger = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-      owner
-    }
-  }
-`;
-export const updateLogger = /* GraphQL */ `
-  mutation UpdateLogger(
-    $input: UpdateLoggerInput!
-    $condition: ModelLoggerConditionInput
-  ) {
-    updateLogger(input: $input, condition: $condition) {
-      id
-      level
-      message
-      stack
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const deleteLogger = /* GraphQL */ `
-  mutation DeleteLogger(
-    $input: DeleteLoggerInput!
-    $condition: ModelLoggerConditionInput
-  ) {
-    deleteLogger(input: $input, condition: $condition) {
-      id
-      level
-      message
-      stack
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
     }
   }
 `;

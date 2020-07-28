@@ -115,3 +115,5 @@ jobs:
           path: ${{ steps.sign-android-app.outputs.signedReleaseFile }}
     # TODO: upload to PlayStore
     # https://github.com/marketplace/actions/upload-android-release-to-play-store
+    # TODO: upload to S3
+    # https://github.com/marketplace/actions/upload-s3

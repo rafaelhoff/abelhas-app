@@ -10,8 +10,23 @@ export type CreateApiaryInput = {
   type?: string | null,
   forages: Array< string | null >,
   favorite: boolean,
+  activities?: Array< HiveActivityInput | null > | null,
   _version?: number | null,
 };
+
+export type HiveActivityInput = {
+  type: ActivityType,
+  createdAt: string,
+  message?: string | null,
+  s3ID?: string | null,
+};
+
+export enum ActivityType {
+  photo = "photo",
+  text = "text",
+  audio = "audio",
+}
+
 
 export type ModelApiaryConditionInput = {
   name?: ModelStringInput | null,
@@ -80,6 +95,7 @@ export type UpdateApiaryInput = {
   type?: string | null,
   forages?: Array< string | null > | null,
   favorite?: boolean | null,
+  activities?: Array< HiveActivityInput | null > | null,
   _version?: number | null,
 };
 
@@ -90,15 +106,16 @@ export type DeleteApiaryInput = {
 
 export type CreateHiveInput = {
   id?: string | null,
+  apiaryID: string,
   name: string,
   longitude?: number | null,
   latitude?: number | null,
   favorite: boolean,
   _version?: number | null,
-  hiveApiaryId: string,
 };
 
 export type ModelHiveConditionInput = {
+  apiaryID?: ModelIDInput | null,
   name?: ModelStringInput | null,
   longitude?: ModelFloatInput | null,
   latitude?: ModelFloatInput | null,
@@ -106,6 +123,22 @@ export type ModelHiveConditionInput = {
   and?: Array< ModelHiveConditionInput | null > | null,
   or?: Array< ModelHiveConditionInput | null > | null,
   not?: ModelHiveConditionInput | null,
+};
+
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
 };
 
 export type ModelFloatInput = {
@@ -122,41 +155,15 @@ export type ModelFloatInput = {
 
 export type UpdateHiveInput = {
   id: string,
+  apiaryID?: string | null,
   name?: string | null,
   longitude?: number | null,
   latitude?: number | null,
   favorite?: boolean | null,
   _version?: number | null,
-  hiveApiaryId?: string | null,
 };
 
 export type DeleteHiveInput = {
-  id?: string | null,
-  _version?: number | null,
-};
-
-export type CreateHiveActivityInput = {
-  id?: string | null,
-  message: string,
-  _version?: number | null,
-  hiveActivityHiveId: string,
-};
-
-export type ModelHiveActivityConditionInput = {
-  message?: ModelStringInput | null,
-  and?: Array< ModelHiveActivityConditionInput | null > | null,
-  or?: Array< ModelHiveActivityConditionInput | null > | null,
-  not?: ModelHiveActivityConditionInput | null,
-};
-
-export type UpdateHiveActivityInput = {
-  id: string,
-  message?: string | null,
-  _version?: number | null,
-  hiveActivityHiveId?: string | null,
-};
-
-export type DeleteHiveActivityInput = {
   id?: string | null,
   _version?: number | null,
 };
@@ -189,19 +196,6 @@ export type ModelLoggerLevelInput = {
   ne?: LoggerLevel | null,
 };
 
-export type UpdateLoggerInput = {
-  id: string,
-  level?: LoggerLevel | null,
-  message?: string | null,
-  stack?: string | null,
-  _version?: number | null,
-};
-
-export type DeleteLoggerInput = {
-  id?: string | null,
-  _version?: number | null,
-};
-
 export type ModelApiaryFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
@@ -215,24 +209,9 @@ export type ModelApiaryFilterInput = {
   not?: ModelApiaryFilterInput | null,
 };
 
-export type ModelIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
 export type ModelHiveFilterInput = {
   id?: ModelIDInput | null,
+  apiaryID?: ModelIDInput | null,
   name?: ModelStringInput | null,
   longitude?: ModelFloatInput | null,
   latitude?: ModelFloatInput | null,
@@ -240,14 +219,6 @@ export type ModelHiveFilterInput = {
   and?: Array< ModelHiveFilterInput | null > | null,
   or?: Array< ModelHiveFilterInput | null > | null,
   not?: ModelHiveFilterInput | null,
-};
-
-export type ModelHiveActivityFilterInput = {
-  id?: ModelIDInput | null,
-  message?: ModelStringInput | null,
-  and?: Array< ModelHiveActivityFilterInput | null > | null,
-  or?: Array< ModelHiveActivityFilterInput | null > | null,
-  not?: ModelHiveActivityFilterInput | null,
 };
 
 export type ModelLoggerFilterInput = {
@@ -280,6 +251,13 @@ export type CreateApiaryMutation = {
     } | null,
     forages: Array< string | null >,
     favorite: boolean,
+    activities:  Array< {
+      __typename: "HiveActivity",
+      type: ActivityType,
+      createdAt: string,
+      message: string | null,
+      s3ID: string | null,
+    } | null > | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -309,6 +287,13 @@ export type UpdateApiaryMutation = {
     } | null,
     forages: Array< string | null >,
     favorite: boolean,
+    activities:  Array< {
+      __typename: "HiveActivity",
+      type: ActivityType,
+      createdAt: string,
+      message: string | null,
+      s3ID: string | null,
+    } | null > | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -338,6 +323,13 @@ export type DeleteApiaryMutation = {
     } | null,
     forages: Array< string | null >,
     favorite: boolean,
+    activities:  Array< {
+      __typename: "HiveActivity",
+      type: ActivityType,
+      createdAt: string,
+      message: string | null,
+      s3ID: string | null,
+    } | null > | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -356,7 +348,11 @@ export type CreateHiveMutation = {
   createHive:  {
     __typename: "Hive",
     id: string,
+    apiaryID: string,
     name: string,
+    longitude: number | null,
+    latitude: number | null,
+    favorite: boolean,
     apiary:  {
       __typename: "Apiary",
       id: string,
@@ -373,14 +369,6 @@ export type CreateHiveMutation = {
       updatedAt: string,
       owner: string | null,
     },
-    longitude: number | null,
-    latitude: number | null,
-    favorite: boolean,
-    activities:  {
-      __typename: "ModelHiveActivityConnection",
-      nextToken: string | null,
-      startedAt: number | null,
-    } | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -399,7 +387,11 @@ export type UpdateHiveMutation = {
   updateHive:  {
     __typename: "Hive",
     id: string,
+    apiaryID: string,
     name: string,
+    longitude: number | null,
+    latitude: number | null,
+    favorite: boolean,
     apiary:  {
       __typename: "Apiary",
       id: string,
@@ -416,14 +408,6 @@ export type UpdateHiveMutation = {
       updatedAt: string,
       owner: string | null,
     },
-    longitude: number | null,
-    latitude: number | null,
-    favorite: boolean,
-    activities:  {
-      __typename: "ModelHiveActivityConnection",
-      nextToken: string | null,
-      startedAt: number | null,
-    } | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -442,7 +426,11 @@ export type DeleteHiveMutation = {
   deleteHive:  {
     __typename: "Hive",
     id: string,
+    apiaryID: string,
     name: string,
+    longitude: number | null,
+    latitude: number | null,
+    favorite: boolean,
     apiary:  {
       __typename: "Apiary",
       id: string,
@@ -451,113 +439,6 @@ export type DeleteHiveMutation = {
       address: string | null,
       type: string | null,
       forages: Array< string | null >,
-      favorite: boolean,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner: string | null,
-    },
-    longitude: number | null,
-    latitude: number | null,
-    favorite: boolean,
-    activities:  {
-      __typename: "ModelHiveActivityConnection",
-      nextToken: string | null,
-      startedAt: number | null,
-    } | null,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner: string | null,
-  } | null,
-};
-
-export type CreateHiveActivityMutationVariables = {
-  input: CreateHiveActivityInput,
-  condition?: ModelHiveActivityConditionInput | null,
-};
-
-export type CreateHiveActivityMutation = {
-  createHiveActivity:  {
-    __typename: "HiveActivity",
-    id: string,
-    message: string,
-    hive:  {
-      __typename: "Hive",
-      id: string,
-      name: string,
-      longitude: number | null,
-      latitude: number | null,
-      favorite: boolean,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner: string | null,
-    },
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner: string | null,
-  } | null,
-};
-
-export type UpdateHiveActivityMutationVariables = {
-  input: UpdateHiveActivityInput,
-  condition?: ModelHiveActivityConditionInput | null,
-};
-
-export type UpdateHiveActivityMutation = {
-  updateHiveActivity:  {
-    __typename: "HiveActivity",
-    id: string,
-    message: string,
-    hive:  {
-      __typename: "Hive",
-      id: string,
-      name: string,
-      longitude: number | null,
-      latitude: number | null,
-      favorite: boolean,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner: string | null,
-    },
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner: string | null,
-  } | null,
-};
-
-export type DeleteHiveActivityMutationVariables = {
-  input: DeleteHiveActivityInput,
-  condition?: ModelHiveActivityConditionInput | null,
-};
-
-export type DeleteHiveActivityMutation = {
-  deleteHiveActivity:  {
-    __typename: "HiveActivity",
-    id: string,
-    message: string,
-    hive:  {
-      __typename: "Hive",
-      id: string,
-      name: string,
-      longitude: number | null,
-      latitude: number | null,
       favorite: boolean,
       _version: number,
       _deleted: boolean | null,
@@ -592,49 +473,6 @@ export type CreateLoggerMutation = {
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
-    owner: string | null,
-  } | null,
-};
-
-export type UpdateLoggerMutationVariables = {
-  input: UpdateLoggerInput,
-  condition?: ModelLoggerConditionInput | null,
-};
-
-export type UpdateLoggerMutation = {
-  updateLogger:  {
-    __typename: "Logger",
-    id: string,
-    level: LoggerLevel,
-    message: string,
-    stack: string,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner: string | null,
-  } | null,
-};
-
-export type DeleteLoggerMutationVariables = {
-  input: DeleteLoggerInput,
-  condition?: ModelLoggerConditionInput | null,
-};
-
-export type DeleteLoggerMutation = {
-  deleteLogger:  {
-    __typename: "Logger",
-    id: string,
-    level: LoggerLevel,
-    message: string,
-    stack: string,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner: string | null,
   } | null,
 };
 
@@ -688,6 +526,13 @@ export type GetApiaryQuery = {
     } | null,
     forages: Array< string | null >,
     favorite: boolean,
+    activities:  Array< {
+      __typename: "HiveActivity",
+      type: ActivityType,
+      createdAt: string,
+      message: string | null,
+      s3ID: string | null,
+    } | null > | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -740,6 +585,7 @@ export type SyncHivesQuery = {
     items:  Array< {
       __typename: "Hive",
       id: string,
+      apiaryID: string,
       name: string,
       longitude: number | null,
       latitude: number | null,
@@ -764,7 +610,11 @@ export type GetHiveQuery = {
   getHive:  {
     __typename: "Hive",
     id: string,
+    apiaryID: string,
     name: string,
+    longitude: number | null,
+    latitude: number | null,
+    favorite: boolean,
     apiary:  {
       __typename: "Apiary",
       id: string,
@@ -781,14 +631,6 @@ export type GetHiveQuery = {
       updatedAt: string,
       owner: string | null,
     },
-    longitude: number | null,
-    latitude: number | null,
-    favorite: boolean,
-    activities:  {
-      __typename: "ModelHiveActivityConnection",
-      nextToken: string | null,
-      startedAt: number | null,
-    } | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -810,93 +652,11 @@ export type ListHivesQuery = {
     items:  Array< {
       __typename: "Hive",
       id: string,
+      apiaryID: string,
       name: string,
       longitude: number | null,
       latitude: number | null,
       favorite: boolean,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner: string | null,
-    } | null > | null,
-    nextToken: string | null,
-    startedAt: number | null,
-  } | null,
-};
-
-export type SyncHiveActivitiesQueryVariables = {
-  filter?: ModelHiveActivityFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncHiveActivitiesQuery = {
-  syncHiveActivities:  {
-    __typename: "ModelHiveActivityConnection",
-    items:  Array< {
-      __typename: "HiveActivity",
-      id: string,
-      message: string,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner: string | null,
-    } | null > | null,
-    nextToken: string | null,
-    startedAt: number | null,
-  } | null,
-};
-
-export type GetHiveActivityQueryVariables = {
-  id: string,
-};
-
-export type GetHiveActivityQuery = {
-  getHiveActivity:  {
-    __typename: "HiveActivity",
-    id: string,
-    message: string,
-    hive:  {
-      __typename: "Hive",
-      id: string,
-      name: string,
-      longitude: number | null,
-      latitude: number | null,
-      favorite: boolean,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner: string | null,
-    },
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner: string | null,
-  } | null,
-};
-
-export type ListHiveActivitysQueryVariables = {
-  filter?: ModelHiveActivityFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListHiveActivitysQuery = {
-  listHiveActivitys:  {
-    __typename: "ModelHiveActivityConnection",
-    items:  Array< {
-      __typename: "HiveActivity",
-      id: string,
-      message: string,
       _version: number,
       _deleted: boolean | null,
       _lastChangedAt: number,
@@ -930,54 +690,6 @@ export type SyncLoggersQuery = {
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
-      owner: string | null,
-    } | null > | null,
-    nextToken: string | null,
-    startedAt: number | null,
-  } | null,
-};
-
-export type GetLoggerQueryVariables = {
-  id: string,
-};
-
-export type GetLoggerQuery = {
-  getLogger:  {
-    __typename: "Logger",
-    id: string,
-    level: LoggerLevel,
-    message: string,
-    stack: string,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner: string | null,
-  } | null,
-};
-
-export type ListLoggersQueryVariables = {
-  filter?: ModelLoggerFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListLoggersQuery = {
-  listLoggers:  {
-    __typename: "ModelLoggerConnection",
-    items:  Array< {
-      __typename: "Logger",
-      id: string,
-      level: LoggerLevel,
-      message: string,
-      stack: string,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner: string | null,
     } | null > | null,
     nextToken: string | null,
     startedAt: number | null,
@@ -1003,6 +715,13 @@ export type OnCreateApiarySubscription = {
     } | null,
     forages: Array< string | null >,
     favorite: boolean,
+    activities:  Array< {
+      __typename: "HiveActivity",
+      type: ActivityType,
+      createdAt: string,
+      message: string | null,
+      s3ID: string | null,
+    } | null > | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -1031,6 +750,13 @@ export type OnUpdateApiarySubscription = {
     } | null,
     forages: Array< string | null >,
     favorite: boolean,
+    activities:  Array< {
+      __typename: "HiveActivity",
+      type: ActivityType,
+      createdAt: string,
+      message: string | null,
+      s3ID: string | null,
+    } | null > | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -1059,6 +785,13 @@ export type OnDeleteApiarySubscription = {
     } | null,
     forages: Array< string | null >,
     favorite: boolean,
+    activities:  Array< {
+      __typename: "HiveActivity",
+      type: ActivityType,
+      createdAt: string,
+      message: string | null,
+      s3ID: string | null,
+    } | null > | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -1076,7 +809,11 @@ export type OnCreateHiveSubscription = {
   onCreateHive:  {
     __typename: "Hive",
     id: string,
+    apiaryID: string,
     name: string,
+    longitude: number | null,
+    latitude: number | null,
+    favorite: boolean,
     apiary:  {
       __typename: "Apiary",
       id: string,
@@ -1093,14 +830,6 @@ export type OnCreateHiveSubscription = {
       updatedAt: string,
       owner: string | null,
     },
-    longitude: number | null,
-    latitude: number | null,
-    favorite: boolean,
-    activities:  {
-      __typename: "ModelHiveActivityConnection",
-      nextToken: string | null,
-      startedAt: number | null,
-    } | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -1118,7 +847,11 @@ export type OnUpdateHiveSubscription = {
   onUpdateHive:  {
     __typename: "Hive",
     id: string,
+    apiaryID: string,
     name: string,
+    longitude: number | null,
+    latitude: number | null,
+    favorite: boolean,
     apiary:  {
       __typename: "Apiary",
       id: string,
@@ -1135,14 +868,6 @@ export type OnUpdateHiveSubscription = {
       updatedAt: string,
       owner: string | null,
     },
-    longitude: number | null,
-    latitude: number | null,
-    favorite: boolean,
-    activities:  {
-      __typename: "ModelHiveActivityConnection",
-      nextToken: string | null,
-      startedAt: number | null,
-    } | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -1160,7 +885,11 @@ export type OnDeleteHiveSubscription = {
   onDeleteHive:  {
     __typename: "Hive",
     id: string,
+    apiaryID: string,
     name: string,
+    longitude: number | null,
+    latitude: number | null,
+    favorite: boolean,
     apiary:  {
       __typename: "Apiary",
       id: string,
@@ -1177,170 +906,6 @@ export type OnDeleteHiveSubscription = {
       updatedAt: string,
       owner: string | null,
     },
-    longitude: number | null,
-    latitude: number | null,
-    favorite: boolean,
-    activities:  {
-      __typename: "ModelHiveActivityConnection",
-      nextToken: string | null,
-      startedAt: number | null,
-    } | null,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner: string | null,
-  } | null,
-};
-
-export type OnCreateHiveActivitySubscriptionVariables = {
-  owner: string,
-};
-
-export type OnCreateHiveActivitySubscription = {
-  onCreateHiveActivity:  {
-    __typename: "HiveActivity",
-    id: string,
-    message: string,
-    hive:  {
-      __typename: "Hive",
-      id: string,
-      name: string,
-      longitude: number | null,
-      latitude: number | null,
-      favorite: boolean,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner: string | null,
-    },
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner: string | null,
-  } | null,
-};
-
-export type OnUpdateHiveActivitySubscriptionVariables = {
-  owner: string,
-};
-
-export type OnUpdateHiveActivitySubscription = {
-  onUpdateHiveActivity:  {
-    __typename: "HiveActivity",
-    id: string,
-    message: string,
-    hive:  {
-      __typename: "Hive",
-      id: string,
-      name: string,
-      longitude: number | null,
-      latitude: number | null,
-      favorite: boolean,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner: string | null,
-    },
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner: string | null,
-  } | null,
-};
-
-export type OnDeleteHiveActivitySubscriptionVariables = {
-  owner: string,
-};
-
-export type OnDeleteHiveActivitySubscription = {
-  onDeleteHiveActivity:  {
-    __typename: "HiveActivity",
-    id: string,
-    message: string,
-    hive:  {
-      __typename: "Hive",
-      id: string,
-      name: string,
-      longitude: number | null,
-      latitude: number | null,
-      favorite: boolean,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner: string | null,
-    },
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner: string | null,
-  } | null,
-};
-
-export type OnCreateLoggerSubscriptionVariables = {
-  owner: string,
-};
-
-export type OnCreateLoggerSubscription = {
-  onCreateLogger:  {
-    __typename: "Logger",
-    id: string,
-    level: LoggerLevel,
-    message: string,
-    stack: string,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner: string | null,
-  } | null,
-};
-
-export type OnUpdateLoggerSubscriptionVariables = {
-  owner: string,
-};
-
-export type OnUpdateLoggerSubscription = {
-  onUpdateLogger:  {
-    __typename: "Logger",
-    id: string,
-    level: LoggerLevel,
-    message: string,
-    stack: string,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner: string | null,
-  } | null,
-};
-
-export type OnDeleteLoggerSubscriptionVariables = {
-  owner: string,
-};
-
-export type OnDeleteLoggerSubscription = {
-  onDeleteLogger:  {
-    __typename: "Logger",
-    id: string,
-    level: LoggerLevel,
-    message: string,
-    stack: string,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,

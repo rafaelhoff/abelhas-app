@@ -23,8 +23,8 @@ export class ApiaryInfoPage implements OnInit {
   mode: PageMode = PageMode.Read;
 
   apiaryData: Apiary;
-  defaultHref = '';
   apiaryId = '';
+  defaultHref = '';
 
   @ViewChild('form', { static: true }) form: ApiaryInfoFormComponent;
 

@@ -63,10 +63,6 @@ const routes: Routes = [
     loadChildren: () => import('./test/general/testing.module').then(m => m.TestingModule)
   },
   {
-    path: 'cameraQR',
-    loadChildren: () => import('./test/cameraQR/cameraQR.module').then(m => m.CameraQRModule)
-  },
-  {
     path: 'camera',
     loadChildren: () => import('./test/camera/camera.module').then(m => m.CameraPageModule)
   },

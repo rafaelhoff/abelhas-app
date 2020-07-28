@@ -1,18 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { GalleryService } from 'src/app/providers/gallery.service';
+import { Apiary } from 'src/models';
+import { ActivatedRoute } from '@angular/router';
+import { ApiaryDataService } from 'src/app/providers/apiaryData.service';
 
 @Component({
-  selector: 'app-picture',
-  templateUrl: 'history.html'
+  selector: 'app-apiary-activity',
+  templateUrl: 'activity.html'
 })
-export class ApiaryHistoryPage implements OnInit {
+export class ApiaryActivityPage implements OnInit {
 
   constructor(
-    public galleryService: GalleryService,
-    public actionSheetController: ActionSheetController
+    private apiaryDataService: ApiaryDataService,
+    private activatedRoute: ActivatedRoute,
+    private galleryService: GalleryService,
+    private actionSheetController: ActionSheetController
   ) { }
 
+  apiaryData: Apiary;
+  apiaryId = '';
   defaultHref = '';
 
   ngOnInit() {
@@ -21,6 +28,15 @@ export class ApiaryHistoryPage implements OnInit {
 
   ionViewDidEnter() {
     this.defaultHref = `/apiary`;
+  }
+
+  ionViewWillEnter() {
+    this.apiaryId = this.activatedRoute.snapshot.parent.parent.paramMap.get('apiaryId');
+    if (this.apiaryId) {
+      this.apiaryDataService.get(this.apiaryId).then((data: Apiary) => {
+        this.apiaryData = data;
+      });
+    }
   }
 
   public async showActionSheet(photo, position) {

@@ -16,6 +16,12 @@ export const onCreateApiary = /* GraphQL */ `
       }
       forages
       favorite
+      activities {
+        type
+        createdAt
+        message
+        s3ID
+      }
       _version
       _deleted
       _lastChangedAt
@@ -39,6 +45,12 @@ export const onUpdateApiary = /* GraphQL */ `
       }
       forages
       favorite
+      activities {
+        type
+        createdAt
+        message
+        s3ID
+      }
       _version
       _deleted
       _lastChangedAt
@@ -62,6 +74,12 @@ export const onDeleteApiary = /* GraphQL */ `
       }
       forages
       favorite
+      activities {
+        type
+        createdAt
+        message
+        s3ID
+      }
       _version
       _deleted
       _lastChangedAt
@@ -75,7 +93,11 @@ export const onCreateHive = /* GraphQL */ `
   subscription OnCreateHive($owner: String!) {
     onCreateHive(owner: $owner) {
       id
+      apiaryID
       name
+      longitude
+      latitude
+      favorite
       apiary {
         id
         name
@@ -90,13 +112,6 @@ export const onCreateHive = /* GraphQL */ `
         createdAt
         updatedAt
         owner
-      }
-      longitude
-      latitude
-      favorite
-      activities {
-        nextToken
-        startedAt
       }
       _version
       _deleted
@@ -111,7 +126,11 @@ export const onUpdateHive = /* GraphQL */ `
   subscription OnUpdateHive($owner: String!) {
     onUpdateHive(owner: $owner) {
       id
+      apiaryID
       name
+      longitude
+      latitude
+      favorite
       apiary {
         id
         name
@@ -126,13 +145,6 @@ export const onUpdateHive = /* GraphQL */ `
         createdAt
         updatedAt
         owner
-      }
-      longitude
-      latitude
-      favorite
-      activities {
-        nextToken
-        startedAt
       }
       _version
       _deleted
@@ -147,7 +159,11 @@ export const onDeleteHive = /* GraphQL */ `
   subscription OnDeleteHive($owner: String!) {
     onDeleteHive(owner: $owner) {
       id
+      apiaryID
       name
+      longitude
+      latitude
+      favorite
       apiary {
         id
         name
@@ -163,142 +179,6 @@ export const onDeleteHive = /* GraphQL */ `
         updatedAt
         owner
       }
-      longitude
-      latitude
-      favorite
-      activities {
-        nextToken
-        startedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onCreateHiveActivity = /* GraphQL */ `
-  subscription OnCreateHiveActivity($owner: String!) {
-    onCreateHiveActivity(owner: $owner) {
-      id
-      message
-      hive {
-        id
-        name
-        longitude
-        latitude
-        favorite
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onUpdateHiveActivity = /* GraphQL */ `
-  subscription OnUpdateHiveActivity($owner: String!) {
-    onUpdateHiveActivity(owner: $owner) {
-      id
-      message
-      hive {
-        id
-        name
-        longitude
-        latitude
-        favorite
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onDeleteHiveActivity = /* GraphQL */ `
-  subscription OnDeleteHiveActivity($owner: String!) {
-    onDeleteHiveActivity(owner: $owner) {
-      id
-      message
-      hive {
-        id
-        name
-        longitude
-        latitude
-        favorite
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onCreateLogger = /* GraphQL */ `
-  subscription OnCreateLogger($owner: String!) {
-    onCreateLogger(owner: $owner) {
-      id
-      level
-      message
-      stack
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onUpdateLogger = /* GraphQL */ `
-  subscription OnUpdateLogger($owner: String!) {
-    onUpdateLogger(owner: $owner) {
-      id
-      level
-      message
-      stack
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onDeleteLogger = /* GraphQL */ `
-  subscription OnDeleteLogger($owner: String!) {
-    onDeleteLogger(owner: $owner) {
-      id
-      level
-      message
-      stack
       _version
       _deleted
       _lastChangedAt

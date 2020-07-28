@@ -167,3 +167,15 @@ https://ionicframework.com/docs/v3/developer-resources/desktop-support/
 
 https://medium.muz.li/differences-between-designing-native-ios-apps-and-native-android-apps-e71256dfa1ca
 https://learnui.design/blog/ios-vs-android-app-ui-design-complete-guide.html
+
+
+## Examples
+
+- https://github.com/mrhieu
+
+
+### Amplify
+
+- https://github.com/dabit3/awesome-aws-amplify
+- https://docs.amplify.aws/lib/graphqlapi/advanced-workflows/q/platform/js#delta-sync
+

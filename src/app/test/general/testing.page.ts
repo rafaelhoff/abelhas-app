@@ -8,6 +8,8 @@ import { ApiaryDataService } from 'src/app/providers/apiaryData.service';
 import { Hive } from 'src/models';
 import { HiveDataService } from 'src/app/providers/hiveData.service';
 import { AppLogger } from 'src/app/util/appLogger';
+import { BarcodeScanner, BarcodeScanResult, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
+import { ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-testing',
@@ -31,7 +33,9 @@ export class TestingPage {
     private zone: NgZone,
     public http: HttpClient,
     private apiaryDataService: ApiaryDataService,
-    private hiveDataService: HiveDataService
+    private hiveDataService: HiveDataService,
+    private actionSheetController: ActionSheetController,
+    public barcodeScanner: BarcodeScanner
   ) {
   }
 
@@ -77,7 +81,7 @@ export class TestingPage {
 
 
   async insertMock() {
-    return this.http.get('assets/data/apiary.json').subscribe({
+    return this.http.get('assets/test/apiary-mock.json').subscribe({
       next: (data: any) => {
         const apiaries: Promise<any>[] = [];
 
@@ -98,6 +102,52 @@ export class TestingPage {
       }
     });
 
+  }
+
+  // TEST-QR
+  // Example found here: https://enappd.com/blog/ionic-4-qr-code-barcode-scanning/82/
+
+  public async testQR() {
+    try {
+      const options: BarcodeScannerOptions = {
+        preferFrontCamera: false,
+        showFlipCameraButton: true,
+        showTorchButton: true,
+        torchOn: false,
+        prompt: 'Place a barcode inside the scan area',
+        resultDisplayDuration: 500,
+        formats: 'QR_CODE ',
+        // orientation: 'landscape',
+      };
+
+      const barcodeData: BarcodeScanResult = await this.barcodeScanner.scan(options);
+      this.logger.log('Barcode data', JSON.stringify(barcodeData));
+    } catch (error) {
+      this.logger.log('Error is', error);
+    }
+    return true;
+  }
+
+  public async showActionSheet(photo, position) {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Photos',
+      buttons: [{
+        text: 'Delete',
+        role: 'destructive',
+        icon: 'trash',
+        handler: () => {
+          // ..
+        }
+      }, {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          // Nothing to do, action sheet is automatically closed
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 
 }

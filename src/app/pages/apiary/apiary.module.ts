@@ -9,7 +9,7 @@ import { ApiaryListFilterPage } from './listFilter/listFilter';
 import { ApiaryDetailPage } from './detail-tab/apiaryDetail';
 import { ApiaryInfoPage } from './detail-info/info';
 import { ApiaryMapPage } from './detail-map/map';
-import { ApiaryHistoryPage } from './detail-history/history';
+import { ApiaryActivityPage } from './detail-activity/activity';
 import { ApiaryInfoFormComponent } from './detail-info/infoForm.component';
 
 const routes: Routes = [
@@ -29,7 +29,7 @@ const routes: Routes = [
       },
       {
         path: 'history',
-        children: [{ path: '', component: ApiaryHistoryPage }]
+        children: [{ path: '', component: ApiaryActivityPage }]
       },
       {
         path: '',
@@ -53,7 +53,7 @@ const routes: Routes = [
     ApiaryDetailPage,
     ApiaryInfoPage,
     ApiaryMapPage,
-    ApiaryHistoryPage,
+    ApiaryActivityPage,
     ApiaryInfoFormComponent
   ],
   entryComponents: [
