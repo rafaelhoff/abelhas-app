@@ -52,7 +52,7 @@ export class IconAddMediaComponent {
       const fileName = e.target.files[0].name;
       this.logger.trace(`The file "${fileName}" has been selected.`);
 
-      this.clickUploadFile.emit();
+      this.clickUploadFile.emit({ fileName });
     }, false);
 
     // TODO: handle reading the file: https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications

@@ -3,6 +3,7 @@ import { ToastController, LoadingController, ActionSheetController } from '@ioni
 import { TranslateService } from '@ngx-translate/core';
 import { Modals } from '@capacitor/core';
 import { AppLogger } from '../util/appLogger';
+import { PhotoService, CameraPhoto } from '../providers/photo.service';
 
 
 @Injectable({
@@ -12,6 +13,7 @@ export class ModalsService {
 
   constructor(
     public actionSheetController: ActionSheetController,
+    private photoService: PhotoService,
     private logger: AppLogger,
     private loadingController: LoadingController,
     private toastController: ToastController,
@@ -68,13 +70,17 @@ export class ModalsService {
         text: this.translateService.instant('account.takePhoto'),
         icon: 'share',
         handler: async () => {
-          handler(true);
+          const photo: CameraPhoto = await this.photoService.capturePhoto();
+          handler(photo);
+          return null;
         }
       }, {
         text: this.translateService.instant('account.fromLibrary'),
         icon: 'arrow-dropright-circle',
-        handler: () => {
-          handler(false);
+        handler: async () => {
+          const photo: CameraPhoto = await this.photoService.getFromLibrary();
+          handler(photo);
+          return null;
         }
       }, {
         text: this.translateService.instant('basic.cancel'),

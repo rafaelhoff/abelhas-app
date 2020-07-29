@@ -28,7 +28,7 @@ const routes: Routes = [
         children: [{ path: '', component: ApiaryMapPage }]
       },
       {
-        path: 'history',
+        path: 'activity',
         children: [{ path: '', component: ApiaryActivityPage }]
       },
       {

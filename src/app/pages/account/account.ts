@@ -6,7 +6,7 @@ import { AlertController, ActionSheetController, ModalController } from '@ionic/
 import { UserDataService, UserLoginParams } from '../../providers/userData.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ChangePasswordModalPage } from '../../auth/changePassword/changePassword';
-import { PhotoService, CameraPhoto } from 'src/app/providers/photo.service';
+import { CameraPhoto } from 'src/app/providers/photo.service';
 import { NgForm } from '@angular/forms';
 import { ModalsService } from 'src/app/shared/modals.service';
 
@@ -23,7 +23,6 @@ export class AccountPage implements OnInit {
     public alertCtrl: AlertController,
     public modalController: ModalController,
     private modalService: ModalsService,
-    public photoService: PhotoService,
     public router: Router,
     public userDataService: UserDataService,
     public translateService: TranslateService
@@ -48,12 +47,7 @@ export class AccountPage implements OnInit {
 
   async updatePicture() {
 
-    const actionSheet = await this.modalService.createPictureActionSheet(async (isCapture: boolean) => {
-      // TODO: deal with the Picture.
-      const photo: CameraPhoto = (isCapture) ?
-        await this.photoService.capturePhoto() :
-        await this.photoService.getFromLibrary();
-
+    const actionSheet = await this.modalService.createPictureActionSheet(async (photo: CameraPhoto) => {
       // TODO: validate what happens when user cancels.
       if (photo == null) {
         return;
