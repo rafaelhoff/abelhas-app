@@ -23,5 +23,5 @@ jobs:
     steps:
       - uses: kolpav/purge-artifacts-action@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PERSONAL_GT_TOKEN }}
           expire-in: ${{ github.event.inputs.days }}days # Setting this to 0 will delete all artifacts
