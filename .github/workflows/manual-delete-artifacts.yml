@@ -1,0 +1,27 @@
+# This is a basic workflow that is manually triggered
+
+name: Manual Delete Artifacts
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      days:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'Number of days to delete - Setting this to 0 will delete all artifacts'
+        # Default value if no value is explicitly provided
+        default: '7'
+        # Input has to be provided for the workflow to run
+        required: true
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  delete-artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: kolpav/purge-artifacts-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          expire-in: ${{ github.event.inputs.days }}days # Setting this to 0 will delete all artifacts
