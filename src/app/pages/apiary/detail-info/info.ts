@@ -52,6 +52,7 @@ export class ApiaryInfoPage implements OnInit {
     if (this.apiaryId) {
       this.apiaryDataService.get(this.apiaryId).then((data: Apiary) => {
         this.apiaryData = data;
+        this.logger.trace('Apiary Object', this.apiaryData);
         this.form.init(this.apiaryData);
       });
     }

@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { AppLabelComponent } from './appLabel.component';
 import { IconAddMediaComponent } from './iconAddMedia.component';
 import { RecordAudioComponent } from './recordAudio.component';
-import { IconShareSocialComponent } from './iconShareSocial.component';
+import { IconShareSocialComponent } from '../test/iconShareSocial.component';
 
 @NgModule({
   declarations: [

@@ -24,9 +24,9 @@ export class VoiceRecordingPage {
 
   save(record: AudioRecord) {
     try {
-      this.appMediaStorage.saveAudioToS3(record.audio, record.recordedAt.toISOString() + '.ogg');
+      this.appMediaStorage.putAudio(record);
     } catch (error) {
-      this.logger.log(error);
+      this.logger.error(error);
     }
   }
 

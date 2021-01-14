@@ -42,8 +42,15 @@ export class UserDataService {
     let attributesObj = { name: '', family_name: '', picture: '', locale: '' };
 
     if (environment.connectToCognito) {
-      this.cognitoUser = await Auth.signIn(user);
+      const userRes = await Auth.signIn(user);
       this.logger.trace(this.cognitoUser);
+
+      // On how to handle challenges: https://docs.amplify.aws/lib/auth/mfa/q/platform/js#allow-users-to-select-mfa-type
+      if (userRes.challengeName === 'NEW_PASSWORD_REQUIRED') {
+        throw new Error()
+      } else {
+        this.cognitoUser = userRes;
+      }
 
       const attributes: CognitoUserAttribute[] = await this.readCognitoUserAttributes(this.cognitoUser);
       attributes.forEach(element => {

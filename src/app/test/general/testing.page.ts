@@ -86,6 +86,7 @@ export class TestingPage {
         const apiaries: Promise<any>[] = [];
 
         data.apiary.forEach(async a => {
+          this.logger.trace(a);
           apiaries.push(this.apiaryDataService.create(a));
         });
 

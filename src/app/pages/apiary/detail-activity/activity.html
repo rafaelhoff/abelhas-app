@@ -30,17 +30,28 @@
 
     <ion-list>
       <ion-list-header>
-        Recent Conversations
+        Recent Activities
       </ion-list-header>
 
-      <ion-item *ngFor="let activity of activities">
-        <ion-avatar slot="start">
-          <img src="./avatar-finn.png">
-        </ion-avatar>
+      <ion-item *ngFor="let activity of apiaryData?.activities">
+        <ion-button *ngIf="activity.type==='audio'" slot="end" (click)="play(activity)" color="primary">
+          <ion-icon name="play"></ion-icon>
+        </ion-button>
+        <ion-icon *ngIf="activity.type==='audio'" slot="end" name="mic"></ion-icon>
+
+        <ion-button *ngIf="activity.type==='photo'" slot="end" (click)="presentPic(activity)" color="primary">
+          <ion-icon name="information-circle"></ion-icon>
+        </ion-button>
+        <ion-icon *ngIf="activity.type==='photo'" slot="end" name="camera"></ion-icon>
+
+        <ion-button *ngIf="activity.type==='text'" slot="end" (click)="play(activity)" color="primary">
+          <ion-icon name="information-circle"></ion-icon>
+        </ion-button>
+        <ion-icon *ngIf="activity.type==='text'" slot="end" name="text"></ion-icon>
+
         <ion-label>
-          <h2>{{activity.type}}</h2>
-          <h3>I'm a big deal</h3>
-          <p>{{activity.message}}</p>
+          {{activity.type}}
+          {{activity.createdAt}}
         </ion-label>
       </ion-item>
 
@@ -55,6 +66,10 @@
       </ion-row>
     </ion-grid>
 
-    <app-icon-addmedia (clickPicture)="addPicture()" (clickUploadFile)="uploadFile($event)"></app-icon-addmedia>
+    <app-icon-addmedia (clickPicture)="addPicture()" (clickUploadFile)="uploadFile($event)"
+      (clickRecordAudio)="addAudio($event)"></app-icon-addmedia>
+
+    <app-record-audio (newRecord)="newRecord($event)"></app-record-audio>
+
   </ion-grid>
 </ion-content>

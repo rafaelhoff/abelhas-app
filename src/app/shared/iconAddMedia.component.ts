@@ -30,6 +30,7 @@ export class IconAddMediaComponent {
   @Output() clickRecordAudio = new EventEmitter();
 
   isWeb = false;
+  validMimeTypes: string[] = ['image/png', 'image/jpeg', 'image/jpg'];
 
   constructor(
     private appPlatform: AppPlatform,
@@ -49,10 +50,16 @@ export class IconAddMediaComponent {
   async uploadFile(fileInput) {
     const a = fileInput.click(); // this work
     fileInput.addEventListener('change', e => {
-      const fileName = e.target.files[0].name;
-      this.logger.trace(`The file "${fileName}" has been selected.`);
+      const file: File = e.target.files[0];
+      this.logger.trace('Details:', file);
 
-      this.clickUploadFile.emit({ fileName });
+      if (this.validMimeTypes.findIndex((mime: string) => mime === file.type) >= 0) {
+        this.clickUploadFile.emit({ file });
+      } else {
+        // TODO: inform the user.
+        this.logger.info('invalid file selected', file.type);
+      }
+
     }, false);
 
     // TODO: handle reading the file: https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications
