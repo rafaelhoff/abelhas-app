@@ -9,6 +9,13 @@ import { Apiary, Hive } from 'src/models';
 })
 export class ApiaryDataService {
 
+  constructor() {
+    // const subscription = DataStore.observe(Apiary).subscribe(msg => {
+    //   console.log('subscription: apiary');
+    //   console.log(msg.model, msg.opType, msg.element);
+    // });
+  }
+
   private process(apiaries: Apiary[]): ApiaryResults {
     const resultP: any[] = [];
 
@@ -16,6 +23,7 @@ export class ApiaryDataService {
       const nameA = a.type.toUpperCase(); // ignore upper and lowercase
       const nameB = b.type.toUpperCase(); // ignore upper and lowercase
       if (nameA < nameB) {
+        console.log('ad');
         return -1;
       }
       if (nameA > nameB) {
@@ -61,16 +69,11 @@ export class ApiaryDataService {
   }
 
   public async create(newApiary: Apiary): Promise<Apiary> {
-    const created: Apiary = await DataStore.save<Apiary>(new Apiary({
-      hives: [],
-      name: newApiary.name,
-      name_casei: newApiary.name.toLowerCase(),
-      address: newApiary.address,
-      forages: newApiary.forages,
-      type: newApiary.type,
-      favorite: newApiary.favorite
-    }));
+    const objApiary: any = Object.assign({}, newApiary);
+    objApiary.name_casei = newApiary.name.toLowerCase();
+    objApiary.hives = [];
 
+    const created: Apiary = await DataStore.save<Apiary>(new Apiary(objApiary));
     return created;
   }
 
